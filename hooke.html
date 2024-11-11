@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ley de Hooke</title>
+    <link rel="stylesheet" href="css/hooke.css">
+</head>
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="#">Temas</a>
+            <a href="conversiones.html">Calculadora de Conversiones</a>
+            <a href="#">Definiciones</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Ley de Hooke</h1>
+        
+        <section class="hallar">
+            <label for="hallar">Hallar:</label>
+            <select id="hallar">
+                <option value="modulo_elastico">Módulo elástico</option>
+                <option value="esfuerzo">Esfuerzo</option>
+                <option value="deformacion">Deformación</option>
+            </select>
+        </section>
+
+        <section class="datos">
+            <h2>Datos proporcionados:</h2>
+            <label><input type="checkbox" id="esfuerzoCheck"> Esfuerzo</label>
+            <label><input type="checkbox" id="deformacionCheck"> Deformación</label>
+            <button>Enviar</button>
+        </section>
+
+        <section class="valores">
+            <label for="esfuerzo">Esfuerzo:</label>
+            <input type="text" id="esfuerzo" placeholder="N/m²">
+            <label for="deformacion">Deformación:</label>
+            <input type="text" id="deformacion" placeholder="m/m">
+            <button>Enviar</button>
+        </section>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
