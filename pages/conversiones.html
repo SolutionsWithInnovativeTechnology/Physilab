@@ -67,7 +67,19 @@
                             <option value="Area" class="text-center">Área</option>                
                         </select>
                     </div>
-                </div>                
+                </div>    
+                <div class="row d-flex justify-content-center align-items-center mt-3">
+                    <div class="col-5 col-md-5 col-lg-3 mb-2 mb-md-0">
+                        <input type="number" name="medida1" id="medida1" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="col-2 col-md-1 col-lg-1 mb-2 mb-md-0">
+                        <label for="" class="form-label text-center"> -> </label>
+                    </div>
+                    <div class="col-5 col-md-5 col-lg-3 mb-2 mb-md-0">
+                        <input type="number" name="medida2" id="medida2" class="form-control" step="0.01" required>
+                    </div>
+                </div> 
+                           
 
                 <!--Opciones para Distancia-->
                 <div id="distancia" class="conversion-opciones" style="display:none;">
@@ -140,7 +152,7 @@
                 </div>
 
                 <!--Opciones para Distancia-->
-                <div id="distancia" class="conversion-opciones" style="display:none;">
+                <div id="area" class="conversion-opciones" style="display:none;">
                     <div class="container">
                         <br>
                         <div class="row d-flex align-items-center justify-content-center">
@@ -148,7 +160,7 @@
                                 <label for="" class="form-label text-center">Selecciona una conversión:</label>
                             </div>
                             <div class="col-10 col-md-5 col-lg-3 mb-2 mb-md-0">
-                                <select id="distancia_select" name="distancia_select" class="form-select">
+                                <select id="area_select" name="area_select" class="form-select">
                                     <option value="" disabled selected class="text-center">Seleccionar conversión</option>
                                     <option value="M2" class="text-center">Metros(s)²</option>
                                     <option value="Km2" class="text-center">Kilometro(s)²</option>
@@ -162,7 +174,7 @@
                                 <label for="" class="form-label">a</label>
                             </div>
                             <div class="col-10 col-md-5 col-lg-3 ">
-                                <select id="distancia_select2" name="distancia_select2" class="form-select">
+                                <select id="area_select2" name="area_select2" class="form-select">
                                     <option value="" disabled selected class="text-center">Seleccionar conversión</option>
                                     <option value="M2" class="text-center">Metros(s)²</option>
                                     <option value="Km2" class="text-center">Kilometro(s)²</option>
@@ -467,6 +479,8 @@
                 document.getElementById('presion').style.display = 'block';
             }else if(categoriaSeleccionada=='Distancia'){
                 document.getElementById('distancia').style.display = 'block';
+            }else if(categoriaSeleccionada=='Area'){
+                document.getElementById('area').style.display = 'block';
             }
         });
 
