@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"> 
+    <title>Calculadora de Conversiones</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
           
                 <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,13 +27,13 @@
                         <!-- Aquí se coloca la lista de enlaces -->
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
                         <li class="nav-item me-3">
-                            <a class="nav-link active text-white" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link text-secondary" href="../index.html">Inicio</a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="pages/temas.html">Temas</a>
+                            <a class="nav-link text-secondary" href="temas.html">Temas</a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="pages/conversiones.html">Conversiones</a>
+                            <a class="nav-link active text-white" aria-current="page" href="#">Conversiones</a>
                         </li>
                         <li class="nav-item me-3">
                             <a class="nav-link text-secondary" href="#">Definiciones</a>
@@ -45,9 +45,35 @@
           </nav>
     </header>
 
+    <main>
+        <div class="container">
+
+            <h1 class="mt-5 text-center text-black" style="font-weight: bold;">Calculadora de Conversiones</h1>
+
+            <form name="formu" action="" method="post">
+                <label for="">Unidades: </label>
+                <select name="unidades">
+                    <option value=""></option>
+                    <option value="Tiempo">Tiempo</option>
+                    <option value="Velocidad">Velocidad</option>
+                    <option value="Peso">Peso</option>
+                    <option value="Volumen">Volumen</option>
+                    <option value="Masa">Masa</option>
+                    <option value="Presion">Presión</option>                    
+                </select>
+
+                <div id="formularioAdicional">
+
+                </div>
+            </form>
+
+        </div>
+    </main>
+
+    <footer class="mt-5">
+
+    </footer>
 
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
