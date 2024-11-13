@@ -58,7 +58,6 @@
                             <option value="" disabled selected class="text-center">Selecciona una unidad de conversión</option>
                             <option value="Tiempo" class="text-center">Tiempo</option>
                             <option value="Velocidad" class="text-center">Velocidad</option>
-                            <option value="Peso" class="text-center">Peso</option>
                             <option value="Volumen" class="text-center">Volumen</option>
                             <option value="Masa" class="text-center">Masa</option>
                             <option value="Presion" class="text-center">Presión</option>   
@@ -70,13 +69,13 @@
                 </div>    
                 <div class="row d-flex justify-content-center align-items-center mt-3">
                     <div class="col-5 col-md-5 col-lg-3 mb-2 mb-md-0">
-                        <input type="number" name="medida1" id="medida1" class="form-control" step="0.01" required>
+                        <input type="number" name="medida1" id="medida1" class="form-control text-center" step="0.01" required placeholder="Primer Numero">
                     </div>
                     <div class="col-2 col-md-1 col-lg-1 mb-2 mb-md-0">
                         <label for="" class="form-label text-center"> -> </label>
                     </div>
                     <div class="col-5 col-md-5 col-lg-3 mb-2 mb-md-0">
-                        <input type="number" name="medida2" id="medida2" class="form-control" step="0.01" required>
+                        <input type="number" name="medida2" id="medida2" class="form-control text-center" step="0.01" required placeholder="Segundo Numero">
                     </div>
                 </div> 
                            
@@ -151,7 +150,7 @@
                     </div>
                 </div>
 
-                <!--Opciones para Distancia-->
+                <!--Opciones para Área-->
                 <div id="area" class="conversion-opciones" style="display:none;">
                     <div class="container">
                         <br>
@@ -229,7 +228,7 @@
                             </div>
                             <div class="row d-flex align-items-center justify-content-center">
                                 <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="tiempo_select1A" name="tiempo_select1A" class="form-select">
+                                    <select id="velocidad_select1A" name="velocidad_select1A" class="form-select">
                                         <option value="" disabled selected class="text-center">Seleccionar conversión</option>
                                         <option value="M" class="text-center">Metros(s)</option>
                                         <option value="Km" class="text-center">Kilometro(s)</option>
@@ -243,7 +242,7 @@
                                     <label for="">/</label>
                                 </div>
                                 <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="tiempo_select1B" name="tiempo_select1B" class="form-select">
+                                    <select id="velocidad_select1B" name="velocidad_select1B" class="form-select">
                                         <option value="" disabled selected class="text-center">Seleccionar conversión</option>
                                         <option value="Kg" class="text-center">Segundo(s)</option>
                                         <option value="Lb" class="text-center">Minuto(s)</option>
@@ -258,7 +257,7 @@
                             </div>
                             <div class="row d-flex align-items-center justify-content-center">
                                 <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="tiempo_select2A" name="tiempo_select2A" class="form-select">
+                                    <select id="velocidad_select2A" name="velocidad_select2A" class="form-select">
                                         <option value="" disabled selected class="text-center">Seleccionar conversión</option>
                                         <option value="M" class="text-center">Metros(s)</option>
                                         <option value="Km" class="text-center">Kilometro(s)</option>
@@ -272,7 +271,7 @@
                                     <label for="">/</label>
                                 </div>    
                                 <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="tiempo_select2B" name="tiempo_select2B" class="form-select">
+                                    <select id="velocidad_select2B" name="velocidad_select2B" class="form-select">
                                         <option value="" disabled selected class="text-center">Seleccionar conversión</option>
                                         <option value="Kg" class="text-center">Segundo(s)</option>
                                         <option value="Lb" class="text-center">Minuto(s)</option>
@@ -290,7 +289,7 @@
                         <br>
                         <div class="row d-flex align-items-center justify-content-center">
                             <div class="mb-2">
-                                <label for="densidad_select" class="form-label text-center">Selecciona una conversión:</label>
+                                <label for="" class="form-label text-center">Selecciona una conversión:</label>
                             </div>
                             <div class="row d-flex align-items-center justify-content-center">
                                 <div class="col-5 col-md-5 col-lg-4">
@@ -357,7 +356,7 @@
                         <br>
                         <div class="row d-flex align-items-center justify-content-center">
                             <div class="mb-2">
-                                <label for="presion_select" class="form-label text-center">Selecciona una conversión:</label>
+                                <label for="" class="form-label text-center">Selecciona una conversión:</label>
                             </div>
                             <div class="row d-flex align-items-center justify-content-center">
                                 <div class="col-5 col-md-5 col-lg-4">
@@ -429,7 +428,7 @@
                                 <label for="" class="form-label">a</label>
                             </div>
                             <div class="col-10 col-md-5 col-lg-3 ">
-                                <select id="volumen_select2" name="volumen_select2" class="form-select">
+                                <select id="volumen_select1" name="volumen_select1" class="form-select">
                                     <option value="" disabled selected class="text-center">Seleccionar conversión</option>
                                     <option value="M3" class="text-center">Metro(s)³</option>
                                     <option value="L" class="text-center">Litro(s)</option>
@@ -444,8 +443,14 @@
                 </div>
 
                 <br>
-
-                <input type="submit" name="Enviar">
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="col-4 col-md-auto text-center">
+                            <input type="submit" name="Enviar" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                
             </form>
 
         </div>
@@ -461,26 +466,122 @@
 
             const conversiones = document.querySelectorAll('.conversion-opciones');
 
+            const masa_select = document.getElementById('masa_select');
+            const masa_select2 = document.getElementById('masa_select2');
+
+            const distancia_select = document.getElementById('distancia_select');
+            const distancia_select2 = document.getElementById('distancia_select2');
+
+            const area_select = document.getElementById('area_select');
+            const area_select2 = document.getElementById('area_select2');
+
+            const tiempo_select = document.getElementById('tiempo_select');
+            const tiempo_select2 = document.getElementById('tiempo_select2');
+
+            const velocidad_select1A = document.getElementById('velocidad_select1A');
+            const velocidad_select1B = document.getElementById('velocidad_select1B');
+            const velocidad_select2A = document.getElementById('velocidad_select2A');
+            const velocidad_select2B = document.getElementById('velocidad_select2B');
+
+            const volumen_select = document.getElementById('volumen_select');
+            const volumen_select1 = document.getElementById('volumen_select1');
+
+            const densidad_select1A = document.getElementById('densidad_select1A');
+            const densidad_select1B = document.getElementById('densidad_select1B');
+            const densidad_select2A = document.getElementById('densidad_select2A');
+            const densidad_select2B = document.getElementById('densidad_select2B');
+
+            const presion_select1A = document.getElementById('presion_select1A');
+            const presion_select1B = document.getElementById('presion_select1B');
+            const presion_select2A = document.getElementById('presion_select2A');
+            const presion_select2B = document.getElementById('presion_select2B');
+
             conversiones.forEach(function(conversion){
                 conversion.style.display = 'none';
             });
 
             if(categoriaSeleccionada==='Masa'){
                 document.getElementById('masa').style.display = 'block';
-            }else if(categoriaSeleccionada=='Tiempo'){
+                masa_select.setAttribute('required', 'required');
+                masa_select2.setAttribute('required', 'required');
+            }else{
+                masa_select.removeAttribute('required');
+                masa_select2.removeAttribute('required');
+            }
+            
+            if(categoriaSeleccionada=='Tiempo'){
                 document.getElementById('tiempo').style.display = 'block';
-            }else if(categoriaSeleccionada=='Velocidad'){
+                tiempo_select.setAttribute('required', 'required');
+                tiempo_select2.setAttribute('required', 'required');
+            }else{
+                tiempo_select.removeAttribute('required');
+                tiempo_select2.removeAttribute('required');
+            }
+            
+            if(categoriaSeleccionada=='Velocidad'){
                 document.getElementById('velocidad').style.display = 'block';
-            }else if(categoriaSeleccionada=='Volumen'){
+                velocidad_select1A.setAttribute('required', 'required');
+                velocidad_select1B.setAttribute('required', 'required');
+                velocidad_select2A.setAttribute('required', 'required');
+                velocidad_select2B.setAttribute('required', 'required');
+            }else{
+                velocidad_select1A.removeAttribute('required');
+                velocidad_select1B.removeAttribute('required');
+                velocidad_select2A.removeAttribute('required');
+                velocidad_select2B.removeAttribute('required');
+            }
+            
+            if(categoriaSeleccionada=='Volumen'){
                 document.getElementById('volumen').style.display = 'block';
-            }else if(categoriaSeleccionada=='Densidad'){
+                volumen_select.setAttribute('required', 'required');
+                volumen_select1.setAttribute('required', 'required');
+            }else{
+                volumen_select.removeAttribute('required');
+                volumen_select1.removeAttribute('required');
+            }
+            
+            if(categoriaSeleccionada=='Densidad'){
                 document.getElementById('densidad').style.display = 'block';
-            }else if(categoriaSeleccionada=='Presion'){
+                densidad_select1A.setAttribute('required', 'required');
+                densidad_select1B.setAttribute('required', 'required');
+                densidad_select2A.setAttribute('required', 'required');
+                densidad_select2B.setAttribute('required', 'required');
+            }else{
+                densidad_select1A.removeAttribute('required');
+                densidad_select1B.removeAttribute('required');
+                densidad_select2A.removeAttribute('required');
+                densidad_select2B.removeAttribute('required');
+            }
+            
+            if(categoriaSeleccionada=='Presion'){
                 document.getElementById('presion').style.display = 'block';
-            }else if(categoriaSeleccionada=='Distancia'){
+                presion_select1A.setAttribute('required', 'required');
+                presion_select1B.setAttribute('required', 'required');
+                presion_select2A.setAttribute('required', 'required');
+                presion_select2B.setAttribute('required', 'required');
+            }else{
+                presion_select1A.removeAttribute('required');
+                presion_select1B.removeAttribute('required');
+                presion_select2A.removeAttribute('required');
+                presion_select2B.removeAttribute('required');
+            } 
+            
+            if(categoriaSeleccionada=='Distancia'){
                 document.getElementById('distancia').style.display = 'block';
-            }else if(categoriaSeleccionada=='Area'){
+                distancia_select.setAttribute('required', 'required');
+                distancia_select2.setAttribute('required', 'required');
+            }else{
+                distancia_select.removeAttribute('required');
+                distancia_select2.removeAttribute('required');
+            } 
+            
+            if(categoriaSeleccionada=='Area'){
                 document.getElementById('area').style.display = 'block';
+                area_select.setAttribute('required', 'required');
+                area_select2.setAttribute('required', 'required');
+            }else{
+                area_select.removeAttribute('required');
+                area_select2.removeAttribute('required');
             }
         });
 

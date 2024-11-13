@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"> 
+</head>
+<body>
+    <!--header de la pagina-->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+          
+                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <!-- El offcanvas en sí -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Aquí se coloca la lista de enlaces -->
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/temas.html">Temas</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/conversiones.html">Conversiones</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="#">Definiciones</a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Presiones</h1>
+            <form name="formu" action="" method="post" class="text-center mt-5">
+                <label for="incognita" class="form-label mb-2">Dato que deseas encontrar: </label>
+                <div class="row justify-content-center">
+                    <div class="col-10 col-md-auto mb-2">
+                        <!--Los datos que se pueden llegar a pedir de los respectivos temas-->
+                        <select name="incognita" id="incognita" required class="form-select">
+                            <option value="" disabled selected class="text-center">Selecciona el dato que requieras encontrar</option>
+                            <option value="Presion" class="text-center">Presión</option>
+                            <option value="Hidrostatica" class="text-center">Presión Hidrostatica</option>
+                            <option value="Atmosferica" class="text-center">Presión Atmosferica</option>
+                            <option value="Absoluta" class="text-center">Presión Absoluta</option>
+                            <option value="Manometrica" class="text-center">Presión Manometrica</option>                
+                        </select>
+                    </div>
+                </div>  <br>
+                <!--Checkboxs para revisar los datos con los que cuentas-->
+                <div id="presion" class="presionOpciones" style="display: none;">
+                    <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                <div>
+                    <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input" type="checkbox" value="presion" name="datosOb">
+                            <label class="form-check-label" for="presion">Presión</label>
+                        </div> 
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
+                            <label class="form-check-label" for="fuerza">Fuerza</label>
+                        </div> 
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input" type="checkbox" value="area" name="datosOb">
+                            <label class="form-check-label" for="area">Area</label>
+                        </div> 
+                    </div>  
+                    <button class="btn btn-primary mt-3" id="checkButton">Verificar Checkboxes</button>
+                    </div><br>
+                    <!--Checkboxs para revisar los datos que quieres encontrar-->
+                    <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                <div>
+                    <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input" type="checkbox" value="presion" name="datosEnc">
+                            <label class="form-check-label" for="presion">Presión</label>
+                        </div> 
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc">
+                            <label class="form-check-label" for="fuerza">Fuerza</label>
+                        </div> 
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input" type="checkbox" value="area" name="datosEnc">
+                            <label class="form-check-label" for="area">Area</label>
+                        </div>      
+                    </div>
+                    <button class="btn btn-primary mt-3" id="checkButton">Verificar Checkboxes</button>
+                    </div>
+                </div>
+
+                <div>
+                <input type="submit" name="enviar" id="" value="Enviar">
+            </div>
+            </form>
+
+            
+        </div>
+        
+        
+        
+
+    </main>
+    <!--Footer de la pagina-->
+    <footer class="mt-5">
+
+    </footer>
+
+    <!--Funcionamiento general de la pagina(presiones)-->
+    <script>
+        //muestra o culta tus div segun la eleccion del select
+        document.getElementById('incognita').addEventListener('change', function(event){
+            const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
+
+            const opcion = document.querySelectorAll('.presionOpciones');
+
+            opcion.forEach(function(opciones){
+                opciones.style.display = 'none';
+            });
+            
+            if(categoriaSeleccionada=='Presion'){
+                document.getElementById('presion').style.display = 'block';
+            }
+         });
+
+        //funcion para validar el numero de datos
+        document.getElementById('enviarBoton').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    contador++;
+                    datosCheckboxes.push(checkbox); //guardar los datos seleccionados
+                }
+            });
+            
+            if (contador < 2) {//revisa que se seleccionen minimo dos datos
+                alert('¡Necesitas seleccionar mínimo dos datos!');
+            } else if(contador==3){//revisa que no se selccionen todos los dato
+                alert('¡No puedes seleccionar todos los datos!');
+            }
+            else { //deshabilita los checkboxes al cumpliar las condiciones
+                datosCheckboxes.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+            });
+            }
+        });
+    </script>
+    <!--Script necesario para usar el bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
