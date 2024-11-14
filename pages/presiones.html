@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Presiones</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"> 
 </head>
 <body>
@@ -66,47 +66,131 @@
                 <!--Checkboxs para revisar los datos con los que cuentas-->
                 <div id="presion" class="presionOpciones" style="display: none;">
                     <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
-                <div>
-                    <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
-                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                            <input class="form-check-input" type="checkbox" value="presion" name="datosOb">
-                            <label class="form-check-label" for="presion">Presión</label>
-                        </div> 
-                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                            <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
-                            <label class="form-check-label" for="fuerza">Fuerza</label>
-                        </div> 
-                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                            <input class="form-check-input" type="checkbox" value="area" name="datosOb">
-                            <label class="form-check-label" for="area">Area</label>
-                        </div> 
-                    </div>  
-                    <button class="btn btn-primary mt-3" id="checkButton">Verificar Checkboxes</button>
+                    <div>
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="presion" name="datosOb">
+                                <label class="form-check-label" for="presion">Presión</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
+                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="area" name="datosOb">
+                                <label class="form-check-label" for="area">Area</label>
+                            </div> 
+                        </div>  
+                        <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
                     </div><br>
-                    <!--Checkboxs para revisar los datos que quieres encontrar-->
+                        <!--Checkboxs para revisar los datos que quieres encontrar-->
                     <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                    <div class="container">
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="presion" name="datosEnc" disabled>
+                                <label class="form-check-label" for="presion">Presión</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc" disabled>
+                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="area" name="datosEnc" disabled>
+                                <label class="form-check-label" for="area">Area</label>
+                            </div>      
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc">Verificar Checkboxes</button>
+                    </div><br>
+                    <!--Habilitar la parte de formulario para ingresar los valores-->
                 <div>
-                    <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
-                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                            <input class="form-check-input" type="checkbox" value="presion" name="datosEnc">
-                            <label class="form-check-label" for="presion">Presión</label>
+                    <div class="container">
+                        <!--Contenedor para ingresar el valor de presion junto con sus respectivas unidades de medida-->
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-12 mb-2 text-center">
+                            <label for="" class="form-label text-center">Presión:</label>
+                        </div>
+                        <!--Contenedor del input (Presion)-->
+                        <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorPresion" class="form-control text-center" placeholder="Presión">
+                        </div>
+                        <!--Primera unidad de medida-->
+                         <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaPresion1" name="unidadMedidaPresion1" class="form-select text-center">
+                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                <option value="N" class="text-center">Newton(s)</option>
+                                <option value="Lb" class="text-center">Libra(s)</option>
+                            </select>
+                        </div>
+                        <!--label que contiene el divisor--> 
+                        <div class="col-1 col-sm-1 mb-2 text-center">
+                            <label for="">/</label>
+                        </div>
+                        <!--Segunda unidad de medida-->
+                        <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaPresion2" name="unidadMedidaPresion2" class="form-select text-center">
+                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                <option value="In2" class="text-center">Pulgada(s)²</option>
+                                <option value="M2" class="text-center">Metro(s)²</option>
+                            </select>
                         </div> 
-                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                            <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc">
-                            <label class="form-check-label" for="fuerza">Fuerza</label>
-                        </div> 
-                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                            <input class="form-check-input" type="checkbox" value="area" name="datosEnc">
-                            <label class="form-check-label" for="area">Area</label>
-                        </div>      
                     </div>
-                    <button class="btn btn-primary mt-3" id="checkButton">Verificar Checkboxes</button>
+                    <br>
+                </div>
+                    <!--Contenedor para ingresar el valor de FUERZA junto con sus unidades de medidas-->
+                <div class="container">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-12 mb-2 text-center">
+                            <label for="" class="form-label text-center">Fuerza:</label>
+                        </div>
+                            <!--Contenedor del input(Fuerza)-->
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Fuerza">
+                            </div>
+                            <!--Unidad de medida-->
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaFuerza" class="form-select text-center" >
+                                <option value="" disabled selected class="text-center">Newton(s)</option>
+                            </select>
+                            </div>
                     </div>
                 </div>
-
-                <div>
-                <input type="submit" name="enviar" id="" value="Enviar">
+            <!--Contenedor para ingresar el valor de AREA junto con sus unidades de medidas-->
+            <div class="container">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Área:</label>
+                    </div>
+                        <!--Contenedor del input(Area)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorArea" class="form-control text-center"  placeholder="Área">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidArea" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M2" class="text-center">Metros(s)²</option>
+                            <option value="Km2" class="text-center">Kilometro(s)²</option>
+                            <option value="Cm2" class="text-center">Centimetro(s)²</option>
+                            <option value="Mm2" class="text-center">Milimetro(s)²</option>
+                            <option value="Ft2" class="text-center">Pie(s)²</option>
+                            <option value="In2" class="text-center">Pulgada(s)²</option>
+                        </select>
+                        </div>
+                </div>
             </div>
+                </div>
+
+                </div>
+
+                <!--Boton para enviar-->
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="col-6 col-md-auto text-center">
+                            <input type="submit" name="Enviar" class="form-control">
+                        </div>
+                    </div>
+                </div>
             </form>
 
             
@@ -123,7 +207,7 @@
 
     <!--Funcionamiento general de la pagina(presiones)-->
     <script>
-        //muestra o culta tus div segun la eleccion del select
+        //muestra tus div segun la eleccion del select
         document.getElementById('incognita').addEventListener('change', function(event){
             const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
 
@@ -138,19 +222,22 @@
             }
          });
 
-        //funcion para validar el numero de datos
-        document.getElementById('enviarBoton').addEventListener('click', function(event) {
+         var datosComprobar = [];
+
+        //funcion para validar el numero de datos con los que cuentas
+        document.getElementById('verificarOb').addEventListener('click', function(event) {
             event.preventDefault();
-            const checkboxes = document.querySelectorAll('.form-check-input');
+            const checkboxes = document.querySelectorAll('input[name="datosOb"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosOb"]');
+            const checkboxes3 = document.querySelectorAll('input[name="datosEnc"]');
+
             let contador = 0;
             const datosCheckboxes = [];
 
             //Cuenta el numero de checkboxs seleccionados
-            checkboxes.forEach(function(checkbox) {
-                if (checkbox.checked) {
+            checkboxes.forEach(checkbox=>  {
                     contador++;
-                    datosCheckboxes.push(checkbox); //guardar los datos seleccionados
-                }
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
             });
             
             if (contador < 2) {//revisa que se seleccionen minimo dos datos
@@ -159,9 +246,89 @@
                 alert('¡No puedes seleccionar todos los datos!');
             }
             else { //deshabilita los checkboxes al cumpliar las condiciones
-                datosCheckboxes.forEach(function(checkbox) {
+                checkboxes2.forEach(function(checkbox) {
                     checkbox.disabled = true;
             });
+            datosComprobar = [...datosCheckboxes];
+
+            checkboxes3.forEach(function(checkbox) {
+                    checkbox.disabled = false;
+            });
+
+            const botonDesactivado = document.getElementById("verificarOb");
+            botonDesactivado.disabled = true;
+
+            }
+            //console.log('Datos seleccionados:', datosComprobar);
+
+        });
+
+
+        //funcion para validar que solo se elija un dato para encontrar
+        document.getElementById('verificarEnc').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosEnc"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosEnc"]');
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador > 1) {//revisa que se seleccionen minimo dos datos
+                alert('¡Solo puedes buscar un dato a la vez!');
+            }
+            else{ //deshabilita los checkboxes al cumpliar las condiciones
+                let contador2 = 0;
+                let salir = false;
+                for(var i=0; i<2; i++){
+                    for(var j=0; j<2; j++){
+                        if(datosComprobar[i] != datosCheckboxes[j]){
+                            contador2++;
+                        }else{
+                            salir= true;
+                            break;
+                        }
+                    }
+                    if(salir==true){
+                        break;
+                    }
+                }
+                if(salir==true){
+                    alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
+                }else{
+
+                    checkboxes2.forEach(function(checkbox) {
+                        checkbox.disabled = true;
+                    });
+
+                    const botonDesactivado = document.getElementById("verificarEnc");
+                        botonDesactivado.disabled = true;
+                    
+                        //funcion que habilita el ingreso de los valores
+                document.getElementById('incognita').addEventListener('change', function(event){
+                    const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
+
+                    const opcion = document.querySelectorAll('.presionOpciones');
+
+                    opcion.forEach(function(opciones){
+                        opciones.style.display = 'none';
+                    });
+                    
+                    if(categoriaSeleccionada=='Presion'){
+                        document.getElementById('presion').style.display = 'block';
+                    }
+                });
+
+                    
+
+                }
+
+
+               
             }
         });
     </script>
