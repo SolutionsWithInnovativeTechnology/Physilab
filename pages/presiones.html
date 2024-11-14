@@ -6,6 +6,9 @@
     <title>Presiones</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/bootstrap.bundle.min.js" defer></script>  
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
 </head>
 <body>
     <!--header de la pagina-->
@@ -194,12 +197,13 @@
                 </div>
             </form>
 
-            
+            <div id="mostrarResultado" class="container" style="display: none;">
+                <br><br>
+                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                </div>
+            </div>
         </div>
-        
-        
-        
-
     </main>
     <!--Footer de la pagina-->
     <footer class="mt-5">
@@ -211,11 +215,14 @@
         let presion= false;
         let fuerza= false;
         let area= false;
+
         //muestra tus div segun la eleccion del select
         document.getElementById('incognita').addEventListener('change', function(event){
             const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
 
             const opcion = document.querySelectorAll('.presionOpciones');
+
+            document.getElementById('mostrarResultado').style.display = 'none';
 
             opcion.forEach(function(opciones){
                 opciones.style.display = 'none';
@@ -389,16 +396,33 @@
 
             //Condicion para comprobar la formula que debes de ocupar
             if(presion==true && fuerza==true){
-                const valorNumPresion = parseFloat(document.getElementById('valorInputPresion').value);
+                let valorNumPresion = parseFloat(document.getElementById('valorInputPresion').value);
                 const valorUnidadMPresion1 = document.getElementById('unidadMedidaPresion1').value;
                 const valorUnidadMPresion2 = document.getElementById('unidadMedidaPresion2').value;
 
-                const valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+                let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
                 const valorUnidadMFuerza = document.getElementById('unidadMedidaFuerza').value;
 
-                let valorNumArea = (valorNumFuerza)*(valorNumPresion);
+                console.log(valorNumPresion);
+
+                if (valorUnidadMPresion1 == 'Lb') {
+                    // Convertir libras a newtons
+                    valorNumPresion = valorNumPresion * 4.4482216152605;
+                }
                 
-                console.log(valorNumArea);
+                if (valorUnidadMPresion2 == 'In2') {
+                    // Convertir libras a newtons
+                    valorNumPresion = valorNumPresion * 1550;
+                }
+
+                console.log(valorNumPresion);
+
+                let valorNumArea = (valorNumFuerza)/(valorNumPresion);
+                
+                //Mostrar el resultado en el div
+                document.getElementById('resultado').innerText = valorNumArea;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultado').style.display = 'block';
 
             }
         });
