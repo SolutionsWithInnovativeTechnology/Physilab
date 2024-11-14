@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presiones</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js" defer></script>  
 </head>
 <body>
     <!--header de la pagina-->
     <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
           
                 <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +49,7 @@
     <main>
         <div class="container">
             <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Presiones</h1>
-            <form name="formu" action="" method="post" class="text-center mt-5">
+            <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
                 <label for="incognita" class="form-label mb-2">Dato que deseas encontrar: </label>
                 <div class="row justify-content-center">
                     <div class="col-10 col-md-auto mb-2">
@@ -150,7 +151,7 @@
                             <!--Unidad de medida-->
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
                             <select id="unidadMedidaFuerza" class="form-select text-center" >
-                                <option value="" disabled selected class="text-center">Newton(s)</option>
+                                <option value="N" disabled selected class="text-center">Newton(s)</option>
                             </select>
                             </div>
                     </div>
@@ -187,7 +188,7 @@
                 <div class="container">
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-6 col-md-auto text-center">
-                            <input type="submit" name="Enviar" class="form-control"id="botonEnviar" disabled>
+                            <input type="submit" name="Enviar" class="form-control mt-2"id="botonEnviar" disabled>
                         </div>
                     </div>
                 </div>
@@ -207,6 +208,9 @@
 
     <!--Funcionamiento general de la pagina(presiones)-->
     <script>
+        let presion= false;
+        let fuerza= false;
+        let area= false;
         //muestra tus div segun la eleccion del select
         document.getElementById('incognita').addEventListener('change', function(event){
             const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
@@ -244,8 +248,9 @@
                 alert('¡Necesitas seleccionar mínimo dos datos!');
             } else if(contador==3){//revisa que no se selccionen todos los dato
                 alert('¡No puedes seleccionar todos los datos!');
-            }
-            else { //deshabilita los checkboxes al cumpliar las condiciones
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else { //deshabilita los checkboxes al cumpliar las condiciones
                 checkboxes2.forEach(function(checkbox) {
                     checkbox.disabled = true;
             });
@@ -281,13 +286,13 @@
             
             if (contador > 1) {//revisa que se seleccionen minimo dos datos
                 alert('¡Solo puedes buscar un dato a la vez!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
             }
             else{
                 let contador2 = 0;
                 let salir = false;
-                let presion= false;
-                let fuerza= false;
-                let area= false;
+                
                 //variables que van a guardar los datos que se ingresen mediante el id
                 //PRESION
                 const valorInput_presion = document.getElementById('valorInputPresion');
@@ -369,8 +374,34 @@
                
             }
         });
+
+        document.getElementById('formularioDatos').addEventListener("submit", function(event){
+            event.preventDefault();
+            //variable que va a retener los datos
+            let resultado=0.0;
+            
+                //if para guardar los datos que se ingresaron
+            
+            if(area){
+                const valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                const valorUnidadMArea = document.getElementById('unidadMedidaArea').value;
+            }
+
+            //Condicion para comprobar la formula que debes de ocupar
+            if(presion==true && fuerza==true){
+                const valorNumPresion = parseFloat(document.getElementById('valorInputPresion').value);
+                const valorUnidadMPresion1 = document.getElementById('unidadMedidaPresion1').value;
+                const valorUnidadMPresion2 = document.getElementById('unidadMedidaPresion2').value;
+
+                const valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+                const valorUnidadMFuerza = document.getElementById('unidadMedidaFuerza').value;
+
+                let valorNumArea = (valorNumFuerza)*(valorNumPresion);
+                
+                console.log(valorNumArea);
+
+            }
+        });
     </script>
-    <!--Script necesario para usar el bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
