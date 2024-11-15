@@ -7,6 +7,7 @@
     <title>Inicio</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../js/bootstrap.bundle.min.js" defer></script>
 </head>
 
 <body>
@@ -57,50 +58,186 @@
     </header>
 
     <main>
-        <h1 class="text-center text-dark mt-5 fw-bold">Tensiones</h1>
-        <div class="container">
-            <form name="formu" action="#">
-                <section class="my-3">
-                    <h2 class="h4 text-black">Seleccione los datos que tenga</h2>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="datosObtenidos" id="tension">
-                        <label class="form-check-label" for="tension">
-                            Tensión
-                        </label>
+        <div class="container mt-5">
+            <h1 class="text-center text-dark fw-bold mb-4">Tensiones</h1>
+            <!-- Aquí se dibuja el diagrama de cuerpo libre -->
+            <canvas id="diagram" width="250" height="250" class="border mb-4 mx-auto d-block"></canvas>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="peso" class="form-label">Peso (N):</label>
+                            <input type="number" class="form-control" id="peso" value="0">
+                        </div>
+                        <div class="col-6">
+                            <label for="numTensiones" class="form-label">Número de tensiones:</label>
+                            <input type="number" class="form-control" id="numTensiones" value="1" min="1" max="4" readonly>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="datosObtenidos" id="peso">
-                        <label class="form-check-label" for="peso">
-                            Peso
-                        </label>
+                    
+                    <div id="inputsTension">
+                        
                     </div>
-                </section>
 
-                <section class="my-3">
-                    <h2 class="h4 text-black">Seleccione los datos a buscar</h2>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="datosObtenidos" id="tension">
-                        <label class="form-check-label" for="tension">
-                            Tensión
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="datosObtenidos" id="peso">
-                        <label class="form-check-label" for="peso">
-                            Peso
-                        </label>
-                    </div>
-                </section>
-
-                <button type="submit" class="btn btn-primary w-100 my-3">Calcular</button>
-            </form>
+                    <button type="button" class="btn btn-primary w-100" id="btnCalcular">Calcular</button>
+                </div>
+            </div>
         </div>
     </main>
 
-    <!--Script necesario para usar el bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-</body>
+    <script>
+        const canvas = document.getElementById('diagram');
+        const ctx = canvas.getContext('2d');
+        const numTensionesInput = document.getElementById('numTensiones');
+        const inputsTensionContainer = document.getElementById('inputsTension');
+        const pesoInput = document.getElementById('peso');
+        const btnCalcular = document.getElementById('btnCalcular');
 
+        /**
+         * Crea los inputs para ingresar las tensiones y sus ángulos.
+         * @param {number} num - Número de tensiones.
+         */
+        function createinputsTension(num) {
+            inputsTensionContainer.innerHTML = '';
+            for (let i = 0; i < num; i++) {
+                const div = document.createElement('div');
+                div.className = 'mb-3';
+                div.innerHTML = `
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="tension${i}" class="form-label">Tensión ${i + 1} (N):</label>
+                            <input type="number" class="form-control tension-input" id="tension${i}" value="0">
+                        </div>
+                        <div class="col-6">
+                            <label for="angulo${i}" class="form-label">Ángulo ${i + 1} (°):</label>
+                            <input type="number" class="form-control angulo-input" id="angulo${i}" value="0" min="0" max="360">
+                        </div>
+                    </div>
+                `;
+                inputsTensionContainer.appendChild(div);
+            }
+            updateDiagram();
+        }
+
+        /**
+         * Dibuja una flecha en el canvas desde un punto a otro.
+         * 
+         * @param {number} fromX - The x-coordinate of the starting point.
+         * @param {number} fromY - The y-coordinate of the starting point.
+         * @param {number} toX - The x-coordinate of the endpoint.
+         * @param {number} toY - The y-coordinate of the endpoint.
+         * @param {string} color - The color of the arrow.
+         */
+        function drawArrow(fromX, fromY, toX, toY, color) {
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(toX, toY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            const angulo = Math.atan2(toY - fromY, toX - fromX);
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - 10 * Math.cos(angulo - Math.PI / 6), toY - 10 * Math.sin(angulo - Math.PI / 6));
+            ctx.lineTo(toX - 10 * Math.cos(angulo + Math.PI / 6), toY - 10 * Math.sin(angulo + Math.PI / 6));
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        /**
+         * Actualiza el diagrama mostrando las flechas de tensiones y su peso.
+         * Limpia el canvas y dibuja un rectángulo gris en el centro.
+         * Luego, por cada input de tensión, dibuja una flecha desde el centro
+         * hasta el punto que se encuentra a una distancia de `arrowLength`
+         * en la dirección del ángulo ingresado. Si el valor de la tensión
+         * es distinto de cero, se dibuja la flecha y se muestra el valor
+         * de la tensión en la punta de la flecha.
+         * Finalmente, si el valor del peso es distinto de cero, se dibuja
+         * una flecha desde el centro hasta abajo y se muestra el valor del
+         * peso en la punta de la flecha.
+         */
+        function updateDiagram() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'lightgray';
+            ctx.fillRect(75, 75, 100, 100);
+
+            const centerX = 125;
+            const centerY = 125;
+            const arrowLength = 40;
+
+            const inputsTension = document.querySelectorAll('.tension-input');
+            const anguloInputs = document.querySelectorAll('.angulo-input');
+            const colors = ['red', 'blue', 'green', 'orange'];
+
+            for (let i = 0; i < inputsTension.length; i++) {
+                const tension = parseFloat(inputsTension[i].value) || 0;
+                const angulo = parseFloat(anguloInputs[i].value) || 0;
+
+                if (tension !== 0) {
+                    const anguloRad = angulo * Math.PI / 180;
+                    const endX = centerX + arrowLength * Math.cos(anguloRad);
+                    const endY = centerY - arrowLength * Math.sin(anguloRad);
+
+                    drawArrow(centerX, centerY, endX, endY, colors[i % colors.length]);
+                    ctx.fillStyle = 'black';
+                    ctx.font = '0.75rem system-ui';
+                    ctx.fillText(`${tension} N`, endX + 5, endY - 5);
+                }
+            }
+
+            const peso = parseFloat(pesoInput.value) || 0;
+            if (peso !== 0) {
+                drawArrow(125, 175, 125, 225, 'black');
+                ctx.fillStyle = 'black';
+                ctx.font = '0.825rem system-ui';
+                ctx.fillText(`${peso} N`, 135, 205);
+            }
+        }
+
+        function calculate(){
+            console.log("Peso: " + pesoInput.value);
+
+            const tensiones = {};
+            const inputsTension = document.querySelectorAll('.tension-input');
+            const anguloInputs = document.querySelectorAll('.angulo-input');
+            
+            inputsTension.forEach((input, i) => {
+                const tension = parseFloat(input.value) || 0;
+                const angulo = parseFloat(anguloInputs[i].value) || 0;
+                tensiones[i] = { tension, angulo };
+            });
+
+            console.log("Tensiones:");
+            console.log(tensiones);
+        }
+
+        numTensionesInput.addEventListener('input', () => {
+            const num = parseInt(numTensionesInput.value) || 1;
+            if(num > 4){
+                alert('¡No puede tener más de 4 tensiones!');
+                numTensionesInput.value = 1;
+            }else{
+                createinputsTension(num);
+            }
+            
+        });
+
+        pesoInput.addEventListener('input', updateDiagram);
+        
+        inputsTensionContainer.addEventListener('input', updateDiagram);
+
+        btnCalcular.addEventListener('click', () => {
+            if(pesoInput.value == 0 && tension0.value == 0){
+                alert('¡Debes ingresar al menos un dato!');
+            }else{
+                calculate();
+            }
+        });
+
+        createinputsTension(1);
+        updateDiagram();
+    </script>
+</body>
 </html>

@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presiones</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js" defer></script>  
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
 </head>
 <body>
     <!--header de la pagina-->
     <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
           
                 <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +52,7 @@
     <main>
         <div class="container">
             <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Presiones</h1>
-            <form name="formu" action="" method="post" class="text-center mt-5">
+            <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
                 <label for="incognita" class="form-label mb-2">Dato que deseas encontrar: </label>
                 <div class="row justify-content-center">
                     <div class="col-10 col-md-auto mb-2">
@@ -100,11 +104,11 @@
                                 <label class="form-check-label" for="area">Area</label>
                             </div>      
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc">Verificar Checkboxes</button>
+                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
                     </div><br>
                     <!--Habilitar la parte de formulario para ingresar los valores-->
                 <div>
-                    <div class="container">
+                    <div class="container" id="presionInput" style="display: none;">
                         <!--Contenedor para ingresar el valor de presion junto con sus respectivas unidades de medida-->
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-12 mb-2 text-center">
@@ -112,7 +116,7 @@
                         </div>
                         <!--Contenedor del input (Presion)-->
                         <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                        <input type="number" name="valorPresion" class="form-control text-center" placeholder="Presión">
+                        <input type="number" name="valorPresion" class="form-control text-center" placeholder="Presión" id="valorInputPresion" step="0.0000000001">
                         </div>
                         <!--Primera unidad de medida-->
                          <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
@@ -138,36 +142,36 @@
                     <br>
                 </div>
                     <!--Contenedor para ingresar el valor de FUERZA junto con sus unidades de medidas-->
-                <div class="container">
+                <div class="container" id="fuerzaInput" style="display: none;">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-12 mb-2 text-center">
                             <label for="" class="form-label text-center">Fuerza:</label>
                         </div>
                             <!--Contenedor del input(Fuerza)-->
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Fuerza">
+                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Fuerza" step="0.0000000001" id="valorInputFuerza">
                             </div>
                             <!--Unidad de medida-->
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
                             <select id="unidadMedidaFuerza" class="form-select text-center" >
-                                <option value="" disabled selected class="text-center">Newton(s)</option>
+                                <option value="N" disabled selected class="text-center">Newton(s)</option>
                             </select>
                             </div>
                     </div>
                 </div>
             <!--Contenedor para ingresar el valor de AREA junto con sus unidades de medidas-->
-            <div class="container">
+            <div class="container" id="areaInput" style="display: none;">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-12 mb-2 text-center">
                         <label for="" class="form-label text-center">Área:</label>
                     </div>
                         <!--Contenedor del input(Area)-->
                         <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                        <input type="number" name="valorArea" class="form-control text-center"  placeholder="Área">
+                        <input type="number" name="valorArea" class="form-control text-center"  placeholder="Área" step="0.0000000001" id="valorInputArea">
                         </div>
                         <!--Unidad de medida-->
                         <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                        <select id="unidadMedidArea" class="form-select text-center" >
+                        <select id="unidadMedidaArea" class="form-select text-center" >
                             <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
                             <option value="M2" class="text-center">Metros(s)²</option>
                             <option value="Km2" class="text-center">Kilometro(s)²</option>
@@ -187,18 +191,19 @@
                 <div class="container">
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-6 col-md-auto text-center">
-                            <input type="submit" name="Enviar" class="form-control">
+                            <input type="submit" name="Enviar" class="form-control mt-2"id="botonEnviar" disabled>
                         </div>
                     </div>
                 </div>
             </form>
 
-            
+            <div id="mostrarResultado" class="container" style="display: none;">
+                <br><br>
+                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                </div>
+            </div>
         </div>
-        
-        
-        
-
     </main>
     <!--Footer de la pagina-->
     <footer class="mt-5">
@@ -207,11 +212,17 @@
 
     <!--Funcionamiento general de la pagina(presiones)-->
     <script>
+        let presion= false;
+        let fuerza= false;
+        let area= false;
+
         //muestra tus div segun la eleccion del select
         document.getElementById('incognita').addEventListener('change', function(event){
             const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
 
             const opcion = document.querySelectorAll('.presionOpciones');
+
+            document.getElementById('mostrarResultado').style.display = 'none';
 
             opcion.forEach(function(opciones){
                 opciones.style.display = 'none';
@@ -244,8 +255,9 @@
                 alert('¡Necesitas seleccionar mínimo dos datos!');
             } else if(contador==3){//revisa que no se selccionen todos los dato
                 alert('¡No puedes seleccionar todos los datos!');
-            }
-            else { //deshabilita los checkboxes al cumpliar las condiciones
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else { //deshabilita los checkboxes al cumpliar las condiciones
                 checkboxes2.forEach(function(checkbox) {
                     checkbox.disabled = true;
             });
@@ -257,7 +269,8 @@
 
             const botonDesactivado = document.getElementById("verificarOb");
             botonDesactivado.disabled = true;
-
+            const botonDesactivado2 = document.getElementById("verificarEnc");
+            botonDesactivado2.disabled = false;
             }
             //console.log('Datos seleccionados:', datosComprobar);
 
@@ -280,11 +293,36 @@
             
             if (contador > 1) {//revisa que se seleccionen minimo dos datos
                 alert('¡Solo puedes buscar un dato a la vez!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
             }
-            else{ //deshabilita los checkboxes al cumpliar las condiciones
+            else{
                 let contador2 = 0;
                 let salir = false;
+                
+                //variables que van a guardar los datos que se ingresen mediante el id
+                //PRESION
+                const valorInput_presion = document.getElementById('valorInputPresion');
+                const unidadM_presion1 = document.getElementById('unidadMedidaPresion1');
+                const unidadM_presion2 = document.getElementById('unidadMedidaPresion2');
+                //FUERZA
+                const valorInput_fuerza = document.getElementById('valorInputFuerza');
+                const unidadM_fuerza1 = document.getElementById('unidadMedidaFuerza');
+                //AREA
+                const valorInput_area = document.getElementById('valorInputArea');
+                const unidadM_area1 = document.getElementById('unidadMedidaArea');
+
                 for(var i=0; i<2; i++){
+                    //if para comprobar que datos te va a proporcionar
+                    if(datosComprobar[i]=="presion"){
+                        presion=true;
+                    }
+                    if(datosComprobar[i]=="fuerza"){
+                        fuerza=true;
+                    }
+                    if(datosComprobar[i]=="area"){
+                        area=true;
+                    }
                     for(var j=0; j<2; j++){
                         if(datosComprobar[i] != datosCheckboxes[j]){
                             contador2++;
@@ -300,28 +338,40 @@
                 if(salir==true){
                     alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
                 }else{
-
+                     //deshabilita los checkboxes al cumpliar las condiciones
                     checkboxes2.forEach(function(checkbox) {
                         checkbox.disabled = true;
                     });
-
+                    //desactiva el boton 
                     const botonDesactivado = document.getElementById("verificarEnc");
                         botonDesactivado.disabled = true;
                     
-                        //funcion que habilita el ingreso de los valores
-                document.getElementById('incognita').addEventListener('change', function(event){
-                    const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
-
-                    const opcion = document.querySelectorAll('.presionOpciones');
-
-                    opcion.forEach(function(opciones){
-                        opciones.style.display = 'none';
-                    });
+                    const botonEnviar = document.getElementById("botonEnviar");
+                        botonEnviar.disabled = false;
                     
-                    if(categoriaSeleccionada=='Presion'){
-                        document.getElementById('presion').style.display = 'block';
-                    }
-                });
+                        //funcion que habilita el ingreso de los valores de presion en caso de ser seleccionado en los checkboxes
+                        if(presion){
+                            document.getElementById('presionInput').style.display = 'block';
+
+                            valorInput_presion.setAttribute('required', 'required');
+                            unidadM_presion1.setAttribute('required', 'required');
+                            unidadM_presion2.setAttribute('required', 'required');
+
+                        }
+                        //funcion que habilita el ingreso de los valores de fuerza en caso de ser seleccionado en los checkboxes
+                        if(fuerza){
+                            document.getElementById('fuerzaInput').style.display = 'block';
+                            valorInput_fuerza.setAttribute('required', 'required');
+                            //el de la unidad no es necesario en este caso, solo pq no hay más opciones de unidad de M
+                            //unidadM_fuerza1.setAttribute('required', 'required');
+                        }
+                        //funcion que habilita el ingreso de los valores de area en caso de ser seleccionado en los checkboxes
+                        if(area){
+                            document.getElementById('areaInput').style.display = 'block';
+                            valorInput_area.setAttribute('required', 'required');
+                            unidadM_area1.setAttribute('required', 'required');
+
+                        }
 
                     
 
@@ -331,8 +381,51 @@
                
             }
         });
+
+        document.getElementById('formularioDatos').addEventListener("submit", function(event){
+            event.preventDefault();
+            //variable que va a retener los datos
+            let resultado=0.0;
+            
+                //if para guardar los datos que se ingresaron
+            
+            if(area){
+                const valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                const valorUnidadMArea = document.getElementById('unidadMedidaArea').value;
+            }
+
+            //Condicion para comprobar la formula que debes de ocupar
+            if(presion==true && fuerza==true){
+                let valorNumPresion = parseFloat(document.getElementById('valorInputPresion').value);
+                const valorUnidadMPresion1 = document.getElementById('unidadMedidaPresion1').value;
+                const valorUnidadMPresion2 = document.getElementById('unidadMedidaPresion2').value;
+
+                let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+                const valorUnidadMFuerza = document.getElementById('unidadMedidaFuerza').value;
+
+                console.log(valorNumPresion);
+
+                if (valorUnidadMPresion1 == 'Lb') {
+                    // Convertir libras a newtons
+                    valorNumPresion = valorNumPresion * 4.4482216152605;
+                }
+                
+                if (valorUnidadMPresion2 == 'In2') {
+                    // Convertir libras a newtons
+                    valorNumPresion = valorNumPresion * 1550;
+                }
+
+                console.log(valorNumPresion);
+
+                let valorNumArea = (valorNumFuerza)/(valorNumPresion);
+                
+                //Mostrar el resultado en el div
+                document.getElementById('resultado').innerText = valorNumArea;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultado').style.display = 'block';
+
+            }
+        });
     </script>
-    <!--Script necesario para usar el bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
