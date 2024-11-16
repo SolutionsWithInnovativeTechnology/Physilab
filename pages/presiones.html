@@ -41,7 +41,7 @@
                             <a class="nav-link text-secondary" href="../pages/conversiones.html">Conversiones</a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="#">Definiciones</a>
+                            <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
                         </li>
                         </ul>
                     </div>
@@ -54,58 +54,67 @@
             <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Presiones</h1>
             <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
                 <label for="incognita" class="form-label mb-2">Dato que deseas encontrar: </label>
-                <div class="row justify-content-center">
-                    <div class="col-10 col-md-auto mb-2">
-                        <!--Los datos que se pueden llegar a pedir de los respectivos temas-->
-                        <select name="incognita" id="incognita" required class="form-select">
-                            <option value="" disabled selected class="text-center">Selecciona el dato que requieras encontrar</option>
-                            <option value="Presion" class="text-center">Presión</option>
-                            <option value="Hidrostatica" class="text-center">Presión Hidrostatica</option>
-                            <option value="Atmosferica" class="text-center">Presión Atmosferica</option>
-                            <option value="Absoluta" class="text-center">Presión Absoluta</option>
-                            <option value="Manometrica" class="text-center">Presión Manometrica</option>                
-                        </select>
-                    </div>
-                </div>  <br>
-                <!--Checkboxs para revisar los datos con los que cuentas-->
-                <div id="presion" class="presionOpciones" style="display: none;">
-                    <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
-                    <div>
-                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
-                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                <input class="form-check-input" type="checkbox" value="presion" name="datosOb">
-                                <label class="form-check-label" for="presion">Presión</label>
-                            </div> 
-                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
-                                <label class="form-check-label" for="fuerza">Fuerza</label>
-                            </div> 
-                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                <input class="form-check-input" type="checkbox" value="area" name="datosOb">
-                                <label class="form-check-label" for="area">Area</label>
-                            </div> 
-                        </div>  
-                        <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
-                    </div><br>
-                        <!--Checkboxs para revisar los datos que quieres encontrar-->
-                    <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
-                    <div class="container">
-                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
-                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                <input class="form-check-input" type="checkbox" value="presion" name="datosEnc" disabled>
-                                <label class="form-check-label" for="presion">Presión</label>
-                            </div> 
-                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc" disabled>
-                                <label class="form-check-label" for="fuerza">Fuerza</label>
-                            </div> 
-                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                <input class="form-check-input" type="checkbox" value="area" name="datosEnc" disabled>
-                                <label class="form-check-label" for="area">Area</label>
-                            </div>      
+                    <div class="row justify-content-center">
+                        <div class="col-10 col-md-auto mb-2">
+                            <!--Los datos que se pueden llegar a pedir de los respectivos temas-->
+                            <select name="incognita" id="incognita" required class="form-select">
+                                <option value="" disabled selected class="text-center">Selecciona el dato que requieras encontrar</option>
+                                <option value="Presion" class="text-center">Presión</option>
+                                <option value="Hidrostatica" class="text-center">Presión Hidrostatica</option>
+                                <option value="Atmosferica" class="text-center">Presión Atmosferica</option>
+                                <option value="Absoluta" class="text-center">Presión Absoluta</option>
+                                <option value="Manometrica" class="text-center">Presión Manometrica</option>                
+                            </select>
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
-                    </div><br>
+                    </div> <br>
+                <!--OPCIONES PRESION-->
+                <div id="presion" class="presionOpciones" style="display: none;">
+                    <!--Checkboxs para revisar los datos con los que cuentas PRESION-->         
+                        <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                            <div class="container">
+                                <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="presion" name="datosOb">
+                                            <label class="form-check-label" for="presion">Presión</label>
+                                    </div> 
+                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
+                                            <label class="form-check-label" for="fuerza">Fuerza</label>
+                                    </div> 
+                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="area" name="datosOb">
+                                            <label class="form-check-label" for="area">Area</label>
+                                    </div> 
+                                </div>  
+                                <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
+                            </div><br>
+                    <!--Checkboxs para revisar los datos que quieres encontrar PRESION-->
+                        <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                            <div class="container">
+                                <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="presion" name="datosEnc" disabled>
+                                            <label class="form-check-label" for="presion">Presión</label>
+                                    </div> 
+                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc" disabled>
+                                            <label class="form-check-label" for="fuerza">Fuerza</label>
+                                    </div> 
+                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="area" name="datosEnc" disabled>
+                                            <label class="form-check-label" for="area">Area</label>
+                                    </div>      
+                                </div>
+                                <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
+                             </div><br>
+                <!--Checkboxs para revisar los datos con los que cuentas PRESION HIDROSTATICA-->
+
+                <!--Checkboxs para revisar los datos que quieres encontrar PRESION HIDROSTATICA-->
+
+
+
+
+
                     <!--Habilitar la parte de formulario para ingresar los valores-->
                 <div>
                     <div class="container" id="presionInput" style="display: none;">
@@ -186,6 +195,12 @@
                 </div>
 
                 </div>
+                
+                <!--OPCIONES PRESION HIDROSTATICA-->
+                <div id="hidrostatica" class="hidrostaticaOpciones" style="display: none;">
+                    <!--Checkboxs para revisar los datos con los que cuentas PRESION HIDROSTATICA-->
+                    <!--Checkboxs para revisar los datos que quieres encontrar PRESION HIDROSTATICA-->
+                </div>
 
                 <!--Boton para enviar-->
                 <div class="container">
@@ -197,21 +212,39 @@
                 </div>
             </form>
 
-            <div id="mostrarResultado" class="container" style="display: none;">
-                <br><br>
-                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
-                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                <!--Mostrar Resultados-->
+            
+                <div id="mostrarResultado" class="container" style="display: none;">
+                    <br><br>
+                    <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                        <!--unidad de medida de Area-->
+                        <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                    </div>
                 </div>
-            </div>
+                <div id="mostrarResultadoPresion" class="container" style="display: none;">
+                    <br><br>
+                    <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                        <!--unidad de medida de Fuerza-->
+                        <div class="text-center fw-bold">Resultado: <span id="resultadoPresion" class="bold"></span> \( \text{N/m}^2 \)<span></span></div>
+                    </div>
+                </div>
+                <div id="mostrarResultadoFuerza" class="container" style="display: none;">
+                    <br><br>
+                    <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                        <!--unidad de medida de Presion-->
+                        <div class="text-center fw-bold">Resultado: <span id="resultadoFuerza" class="bold"></span> \( \text{N} \)<span></span></div>
+                    </div>
+                </div>
+
         </div>
     </main>
     <!--Footer de la pagina-->
-    <footer class="mt-5">
+        <footer class="mt-5">
 
-    </footer>
-
-    <!--Funcionamiento general de la pagina(presiones)-->
-    <script>
+        </footer>
+    <!--Scripts que se encargan del funcionamiento general de la página-->
+    <script>//Script del la opcion del select: Presiones
+        //declaracion de las variables de los diferentes datos
         let presion= false;
         let fuerza= false;
         let area= false;
@@ -395,7 +428,7 @@
             }
 
             //Condicion para comprobar la formula que debes de ocupar
-            if(presion==true && fuerza==true){
+            if(presion==true && fuerza==true){ //esta encuentra el area
                 let valorNumPresion = parseFloat(document.getElementById('valorInputPresion').value);
                 const valorUnidadMPresion1 = document.getElementById('unidadMedidaPresion1').value;
                 const valorUnidadMPresion2 = document.getElementById('unidadMedidaPresion2').value;
@@ -425,7 +458,97 @@
                 document.getElementById('mostrarResultado').style.display = 'block';
 
             }
+
+            if(fuerza==true && area==true){ //esta encuentra la presion
+                let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+                const valorUnidadMFuerza = document.getElementById('unidadMedidaFuerza').value;
+
+                let valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                const valorUnidadMArea = document.getElementById('unidadMedidaArea').value;
+                
+
+                if (valorUnidadMArea == 'Km2') {
+                    // Convertir Kilometros(Km²) a m²
+                    valorNumArea = valorNumArea * 1000000;
+                }
+                if (valorUnidadMArea == 'Cm2') {
+                    // Convertir centimetro(Cm²) a m²
+                    valorNumArea = valorNumArea * 0.0001;
+                }
+                if (valorUnidadMArea == 'Mm2') {
+                    // Convertir milimetro(Mm²) a m²
+                    valorNumArea = valorNumArea * 0.000001;
+                }
+                if (valorUnidadMArea == 'Ft2') {
+                    // Convertir pie(Ft²) a m²
+                    valorNumArea = valorNumArea * 0.092903;
+                }
+                if (valorUnidadMArea == 'In2') {
+                    // Convertir pulgadas(In²) a m²
+                    valorNumArea = valorNumArea * 0.00064516;
+                }
+
+
+                let valorNumPresion = (valorNumFuerza)/(valorNumArea);
+                
+                //Mostrar el resultado en el div
+                document.getElementById('resultadoPresion').innerText = valorNumPresion;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoPresion').style.display = 'block';
+            }
+
+            if(presion==true && area==true){ //este encuentra la fuerza
+                let valorNumPresion = parseFloat(document.getElementById('valorInputPresion').value);
+                const valorUnidadMPresion1 = document.getElementById('unidadMedidaPresion1').value;
+                const valorUnidadMPresion2 = document.getElementById('unidadMedidaPresion2').value;
+
+                let valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                const valorUnidadMArea = document.getElementById('unidadMedidaArea').value;
+
+                //comprobacion de la unidad de medida de presion
+                if (valorUnidadMPresion1 == 'Lb') {
+                    // Convertir libras a newtons
+                    valorNumPresion = valorNumPresion * 4.4482216152605;
+                }
+                
+                if (valorUnidadMPresion2 == 'In2') {
+                    // Convertir libras a newtons
+                    valorNumPresion = valorNumPresion * 1550;
+                }
+
+                //comprobacion de la unidad de medida de area
+                if (valorUnidadMArea == 'Km2') {
+                    // Convertir Kilometros(Km²) a m²
+                    valorNumArea = valorNumArea * 1000000;
+                }
+                if (valorUnidadMArea == 'Cm2') {
+                    // Convertir centimetro(Cm²) a m²
+                    valorNumArea = valorNumArea * 0.0001;
+                }
+                if (valorUnidadMArea == 'Mm2') {
+                    // Convertir milimetro(Mm²) a m²
+                    valorNumArea = valorNumArea * 0.000001;
+                }
+                if (valorUnidadMArea == 'Ft2') {
+                    // Convertir pie(Ft²) a m²
+                    valorNumArea = valorNumArea * 0.092903;
+                }
+                if (valorUnidadMArea == 'In2') {
+                    // Convertir pulgadas(In²) a m²
+                    valorNumArea = valorNumArea * 0.00064516;
+                }
+
+                let valorNumFuerza = (valorNumPresion)*(valorNumArea);
+
+                //Mostrar el resultado en el div
+                document.getElementById('resultadoFuerza').innerText = valorNumFuerza;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoFuerza').style.display = 'block';
+            }
+
         });
+    </script>
+    <script>//Script del la opcion del select: Presion Hidrostatica
     </script>
 </body>
 </html>

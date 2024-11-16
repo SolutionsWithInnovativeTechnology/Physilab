@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/stylesAldo.css">
+    <title>Calculadora de Caída Libre</title>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>Calculadora de Caída Libre</h1>
+
+            <label for="altura">Altura inicial (m):</label>
+            <input type="number" id="altura" placeholder="Ingrese la altura inicial">
+
+            <label for="velocidadFinal">Velocidad final (m/s):</label>
+            <input type="number" id="velocidadFinal" placeholder="Ingrese la velocidad final">
+
+            <label for="tiempo">Tiempo (s):</label>
+            <input type="number" id="tiempo" placeholder="Ingrese el tiempo">
+
+            <label for="precision">Número de decimales:</label>
+            <select id="precision">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+
+            <button onclick="calcularDatos()">Calcular</button>
+            <button onclick="limpiarCampos()">Limpiar</button>
+        </div>
+        
+        <div id="resultados" class="resultados">
+            <div class="proceso">
+                <h2>ALTURA Y VELOCIDAD EN BASE AL TIEMPO</h2>
+                <label for="tiempoCalculo">Altura recorrida a los</label>
+                <input type="number" id="tiempoCalculo" placeholder="Ingrese el tiempo" onchange="calcularAlturaVelocidad()"> segundos
+                <p id="alturaTiempoResultado">= <span class="highlight">0 metros</span></p>
+                <label for="tiempoCalculoVel">Velocidad del móvil a los</label>
+                <input type="number" id="tiempoCalculoVel" placeholder="Ingrese el tiempo" onchange="calcularAlturaVelocidad()"> segundos
+                <p id="velocidadTiempoResultado">= <span class="highlight">0 m/s</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="../js/script_caidaL.js"></script>
+</body>
+</html>

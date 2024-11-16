@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problemas de Arquímedes</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js" defer></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../pages/temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../pages/conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="#">Definiciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Main content -->
+    <main>
+        <div class="container">
+            <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Problemas de Arquímedes</h1>
+            <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
+                <label for="incognita" class="form-label mb-2">Dato que deseas encontrar: </label>
+                <div class="row justify-content-center">
+                    <div class="col-10 col-md-auto mb-2">
+                        <select name="incognita" id="incognita" required class="form-select">
+                            <option value="" disabled selected class="text-center">Selecciona el dato que requieres encontrar</option>
+                            <option value="W">Peso (W)</option>
+                            <option value="E">Empuje (E)</option>
+                            <option value="V">Volumen (V)</option>
+                            <option value="p">Densidad (ρ)</option>
+                            <option value="PA">Peso Aparente (PA)</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+
+                <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                <div>
+                    <div class="form-check form-switch row d-flex align-items-center justify-content-center">
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input datosOb" type="checkbox" value="W" name="datosOb">
+                            <label class="form-check-label" for="peso">Peso (W)</label>
+                        </div> 
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input datosOb" type="checkbox" value="E" name="datosOb">
+                            <label class="form-check-label" for="empuje">Empuje (E)</label>
+                        </div> 
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input datosOb" type="checkbox" value="p" name="datosOb">
+                            <label class="form-check-label" for="densidad">Densidad (ρ)</label>
+                        </div>
+                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                            <input class="form-check-input datosOb" type="checkbox" value="V" name="datosOb">
+                            <label class="form-check-label" for="volumen">Volumen (V)</label>
+                        </div>
+                    </div>  
+                    <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
+                </div>
+                <br>
+
+                <!-- Input fields for data -->
+                <div id="inputFields" class="container">
+                    <div id="pesoInput" style="display: none;">
+                        <label for="valorPeso" class="form-label">Peso (W):</label>
+                        <input type="number" name="valorPeso" id="valorPeso" class="form-control text-center datosInput" placeholder="Ingrese el peso" step="0.01">
+                    </div>
+                    <div id="empujeInput" style="display: none;">
+                        <label for="valorEmpuje" class="form-label">Empuje (E):</label>
+                        <input type="number" name="valorEmpuje" id="valorEmpuje" class="form-control text-center datosInput" placeholder="Ingrese el empuje" step="0.01">
+                    </div>
+                    <div id="densidadInput" style="display: none;">
+                        <label for="valorDensidad" class="form-label">Densidad (ρ):</label>
+                        <input type="number" name="valorDensidad" id="valorDensidad" class="form-control text-center datosInput" placeholder="Ingrese la densidad" step="0.01">
+                    </div>
+                    <div id="volumenInput" style="display: none;">
+                        <label for="valorVolumen" class="form-label">Volumen (V):</label>
+                        <input type="number" name="valorVolumen" id="valorVolumen" class="form-control text-center datosInput" placeholder="Ingrese el volumen" step="0.01">
+                    </div>
+                </div>
+                <br>
+
+                <!-- Submit button -->
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="col-6 col-md-auto text-center">
+                            <input type="submit" name="Enviar" class="form-control mt-2" id="botonEnviar" disabled>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Display result -->
+            <div id="mostrarResultado" class="container" style="display: none;">
+                <br><br>
+                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Almacena el estado de los campos
+        const inputFields = {
+            W: "pesoInput",
+            E: "empujeInput",
+            p: "densidadInput",
+            V: "volumenInput"
+        };
+
+        // Variables de botón
+        const botonEnviar = document.getElementById("botonEnviar");
+
+        // Función para verificar checkboxes y mostrar inputs correspondientes
+        document.getElementById("verificarOb").addEventListener("click", () => {
+            // Oculta todos los inputs antes de mostrar los seleccionados
+            Object.values(inputFields).forEach(id => document.getElementById(id).style.display = "none");
+
+            // Mostrar los inputs correspondientes a los checkboxes seleccionados
+            document.querySelectorAll('input[name="datosOb"]:checked').forEach((checkbox) => {
+                document.getElementById(inputFields[checkbox.value]).style.display = "block";
+            });
+
+            // Verificar si todos los campos visibles están llenos y habilitar el botón de enviar
+            verificarCamposCompletos();
+        });
+
+        // Función para habilitar el botón de enviar cuando todos los campos visibles están llenos
+        function verificarCamposCompletos() {
+            const todosLlenos = Array.from(document.querySelectorAll(".datosInput")).every((input) => {
+                return input.offsetParent === null || input.value.trim() !== "";
+            });
+            botonEnviar.disabled = !todosLlenos;
+        }
+
+        // Listener para habilitar el botón de enviar al llenar todos los campos requeridos
+        document.querySelectorAll(".datosInput").forEach((input) => {
+            input.addEventListener("input", verificarCamposCompletos);
+        });
+
+        // Calcular resultado al enviar
+        document.getElementById("formularioDatos").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const W = parseFloat(document.getElementById("valorPeso").value || 0);
+            const E = parseFloat(document.getElementById("valorEmpuje").value || 0);
+            const p = parseFloat(document.getElementById("valorDensidad").value || 0);
+            const V = parseFloat(document.getElementById("valorVolumen").value || 0);
+            
+            let resultado = null;
+
+            // Identificar la incógnita y aplicar la fórmula correspondiente
+            const incognita = document.getElementById("incognita").value;
+            switch (incognita) {
+                case "W":
+                    resultado = E + (W - E);
+                    break;
+                case "E":
+                    resultado = p * 9.8 * V;
+                    break;
+                case "V":
+                    resultado = E / (p * 9.8);
+                    break;
+                case "p":
+                    resultado = E / (V * 9.8);
+                    break;
+                case "PA":
+                    resultado = W - E;
+                    break;
+                default:
+                    alert("Selecciona una incógnita válida.");
+                    return;
+            }
+
+            // Mostrar el resultado
+            document.getElementById("resultado").innerText = resultado.toFixed(2);
+            document.getElementById("mostrarResultado").style.display = "block";
+        });
+    </script>
+</body>
+</html>

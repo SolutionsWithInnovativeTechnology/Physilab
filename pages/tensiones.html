@@ -58,7 +58,7 @@
     </header>
 
     <main>
-        <div class="container mt-5">
+        <div class="container my-3">
             <h1 class="text-center text-dark fw-bold mb-4">Tensiones</h1>
             <!-- Aquí se dibuja el diagrama de cuerpo libre -->
             <canvas id="diagram" width="250" height="250" class="border mb-4 mx-auto d-block"></canvas>
@@ -67,11 +67,11 @@
                     <div class="row mb-2">
                         <div class="col-6">
                             <label for="peso" class="form-label">Peso (N):</label>
-                            <input type="number" class="form-control" id="peso" value="0">
+                            <input type="number" class="form-control" id="peso">
                         </div>
                         <div class="col-6">
                             <label for="numTensiones" class="form-label">Número de tensiones:</label>
-                            <input type="number" class="form-control" id="numTensiones" value="1" min="1" max="4" readonly>
+                            <input type="number" class="form-control" id="numTensiones" min="1" max="4">
                         </div>
                     </div>
                     
@@ -82,6 +82,8 @@
                     <button type="button" class="btn btn-primary w-100" id="btnCalcular">Calcular</button>
                 </div>
             </div>
+
+            <div id="resultadoDiv"></div>
         </div>
     </main>
 
@@ -106,11 +108,11 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="tension${i}" class="form-label">Tensión ${i + 1} (N):</label>
-                            <input type="number" class="form-control tension-input" id="tension${i}" value="0">
+                            <input type="number" class="form-control tension-input" id="tension${i}">
                         </div>
                         <div class="col-6">
                             <label for="angulo${i}" class="form-label">Ángulo ${i + 1} (°):</label>
-                            <input type="number" class="form-control angulo-input" id="angulo${i}" value="0" min="0" max="360">
+                            <input type="number" class="form-control angulo-input" id="angulo${i}" min="0" max="360">
                         </div>
                     </div>
                 `;
@@ -211,6 +213,12 @@
 
             console.log("Tensiones:");
             console.log(tensiones);
+
+            let peso = parseFloat(pesoInput.value);
+            let ang = parseInt(tensiones[0]["angulo"])
+            if(peso == 0){
+                tensiones[0]["tension"];
+            }
         }
 
         numTensionesInput.addEventListener('input', () => {
@@ -229,7 +237,7 @@
         inputsTensionContainer.addEventListener('input', updateDiagram);
 
         btnCalcular.addEventListener('click', () => {
-            if(pesoInput.value == 0 && tension0.value == 0){
+            if(pesoInput.value == 0 && angulo0.value == 0){
                 alert('¡Debes ingresar al menos un dato!');
             }else{
                 calculate();
