@@ -5,12 +5,17 @@ const numTensionesInput = document.getElementById('numTensiones');
 const inputsTensionContainer = document.getElementById('inputsTension');
 const pesoInput = document.getElementById('peso');
 const btnCalcular = document.getElementById('btnCalcular');
-const resultContainer = document.getElementById('resultadoDiv');
+const resultContainer = document.getElementById('resultados');
+const resultadoDiv = document.getElementById('resultadoDiv');
 
 numTensionesInput.addEventListener('input', () => {
-    const num = parseInt(numTensionesInput.value) || 1;
-    if (num > 4) {
-        alert('¡No puede tener más de cuatro tensiones!');
+    const num = parseInt(numTensionesInput.value);
+    if (num > 2) {
+        alert('¡No puede tener más de dos tensiones!');
+        numTensionesInput.value = 1;
+        createinputsTension(1);
+    } else if (num < 1) {
+        alert('¡No puede tener menos de una tension!');
         numTensionesInput.value = 1;
         createinputsTension(1);
     } else {
@@ -23,7 +28,7 @@ pesoInput.addEventListener('input', updateDiagram);
 inputsTensionContainer.addEventListener('input', updateDiagram);
 
 btnCalcular.addEventListener('click', () => {
-    if (pesoInput.value == 0 && angulo0.value == 0) {
+    if (pesoInput.value == 0 && tension0.value == 0 || angulo0.value == 0 && tension0.value == 0) {
         alert('¡Debes ingresar al menos un dato!');
     } else {
         calculate();
@@ -129,7 +134,7 @@ function updateDiagram() {
         const tension = parseFloat(inputsTension[i].value) || 0;
         const angulo = parseFloat(anguloInputs[i].value) || 0;
 
-        if (tension !== 0) {
+        if (tension !== 0 || angulo !== 0) {
             const anguloRad = toRadians(angulo);
             const endX = centerX + arrowLength * Math.cos(anguloRad);
             const endY = centerY - arrowLength * Math.sin(anguloRad);
@@ -137,17 +142,17 @@ function updateDiagram() {
             drawArrow(centerX, centerY, endX, endY, colors[i % colors.length]);
             ctx.fillStyle = 'black';
             ctx.font = '0.75rem system-ui';
-            ctx.fillText(`${tension} N`, endX + 5, endY - 5);
+            let t = tension || '?';
+            ctx.fillText(`${t} N`, endX + 5, endY - 5);
         }
     }
 
     const peso = parseFloat(pesoInput.value) || 0;
-    if (peso !== 0) {
-        drawArrow(125, 175, 125, 225, 'black');
-        ctx.fillStyle = 'black';
-        ctx.font = '0.825rem system-ui';
-        ctx.fillText(`${peso} N`, 135, 205);
-    }
+    drawArrow(125, 175, 125, 225, 'black');
+    ctx.fillStyle = 'black';
+    ctx.font = '0.825rem system-ui';
+    let p = peso || '?';
+    ctx.fillText(`${p} N`, 135, 205);
 }
 
 function calculate() {
@@ -157,13 +162,14 @@ function calculate() {
 
     inputsTension.forEach((input, i) => {
         const tension = parseFloat(input.value) || 0;
-        const angulo = parseFloat(anguloInputs[i].value) || 0;
+        let angulo = parseFloat(anguloInputs[i].value) || 0;
+        if(angulo == 180) angulo = 0;
         tensiones[i] = { tension, angulo };
     });
 
-    let peso = parseFloat(pesoInput.value);
+    let peso = parseFloat(pesoInput.value) || 0;
 
-    // Construcción de las ecuaciones de equilibrio ∑Fx = 0; ∑Fy = 0
+    // Construcción de las ecuaciones de equilibrio ∑Fx = 0; ∑Fy = p
     let sumX = 0;
     let sumY = -peso;
 
@@ -173,42 +179,93 @@ function calculate() {
             // Guardamos como incógnita para resolver la ecuación
             tensiones[i].ecuacion = {
                 x: Math.cos(angRad),
-                y: Math.sin(angRad)
+                y: Math.sin(angRad),
+                angRad
             };
         } else {
-            // Si la tensión es conocida: sumar sus componentes a la ecuación
+            // Si la tensión es conocida, sumar sus componentes
             sumX += t.tension * Math.cos(angRad);
             sumY += t.tension * Math.sin(angRad);
         }
     });
 
-    let desconocidas = tensiones.filter(t => t.tension === 0); //Crea un array con las tensiones desconocidas
-    // Resolución del sistema (Ejemplo cuando solo hay una para entender cómo funciona)
+    const desconocidas = tensiones.filter(t => t.tension === 0);
+    // Caso: Calcular tensiones desconocidas
     if (desconocidas.length === 1) {
-        let ecuacion = desconocidas[0].ecuacion;
-        let tension = Math.sqrt((sumX / ecuacion.x) ** 2 + (sumY / ecuacion.y) ** 2); 
-        desconocidas[0].tension = tension.toFixed(2); // Guarda la solución en el array de tensiones
-    } else if (desconocidas.length > 1) {
-        console.log("Implementar resolución de sistema con varias incógnitas.");
+        // Resolver una incógnita
+        const ecuacion = desconocidas[0].ecuacion;
+        const tension = Math.sqrt(
+            ((-sumX / ecuacion.x) ** 2) + ((-sumY / ecuacion.y) ** 2)
+        );
+
+        desconocidas[0].tension = Math.abs(tension.toFixed(2));
+
+        sumY += desconocidas[0].tension * Math.sin(ecuacion.angRad);
+    } else  if(desconocidas.length === 2) {
+        const [t1, t2] = desconocidas;
+        const ang1 = t1.ecuacion.angRad;
+        const ang2 = t2.ecuacion.angRad;
+
+        const T2 = peso / (
+            (Math.cos(ang2) / Math.cos(ang1)) * Math.sin(ang1) + Math.sin(ang2)
+        );
+
+        const T1 = T2 * (Math.cos(ang2) / Math.cos(ang1));
+
+        t1.tension = Math.abs(T1.toFixed(2));
+        t2.tension = Math.abs(T2.toFixed(2));
+
+        sumY += T1 * Math.sin(ang1) + T2 * Math.sin(ang2);
+
+        console.log('Esta parte tiene error');
     }
 
-    console.log("Peso: " + pesoInput.value);
-    console.log("Tensiones:");
-    console.log(tensiones);
-    
-    mostrarResultados(tensiones);
+    // Caso: Calcular peso
+    if (peso === 0) {
+        peso = sumY.toFixed(2); // ∑Fy = 0 implica que el peso es -∑Fy
+    }
+
+    resultContainer.innerHTML = '';
+    resultadoDiv.classList.add('d-none');
+    addResults(tensiones, peso);
+    clearInputs();
 }
 
-function mostrarResultados(tensiones) {
-    resultContainer.innerHTML = '';
-    for (let i = 0; i < tensiones.length; i++) {
-        const tension = tensiones[i];
+/**
+ * Agrega los resultados de las tensiones y sus ángulos en el contenedor
+ * de resultados.
+ * 
+ * @param {array} tensiones - Arreglo con las tensiones y sus ángulos.
+ */
+function addResults(tensiones, peso) {
+    resultadoDiv.classList.remove('d-none');
+
+    const p = document.createElement('p');
+    p.innerHTML = `Peso: ${peso} N`;
+    resultContainer.appendChild(p);
+
+    tensiones.forEach((t, i) => {
         const div = document.createElement('div');
         div.classList.add('result-item');
         div.innerHTML = `
-            <p>Tensión ${i + 1}: ${tension.tension} N</p>
-            <p>Ángulo ${i + 1}: ${tension.angulo}°</p>
+            <p>Tensión ${i + 1}: ${t.tension} N</p>
+            <p>Ángulo ${i + 1}: ${t.angulo}°</p>
         `;
         resultContainer.appendChild(div);
-    }
+    });
+}
+
+
+/**
+ * Limpia los campos de los inputs de las tensiones y sus ángulos. Pone
+ * el peso y el numero de tensiones en su valor predeterminado.
+ */
+function clearInputs() {
+    const inputsTension = document.querySelectorAll('.tension-input');
+    const anguloInputs = document.querySelectorAll('.angulo-input');
+    pesoInput.value = '';
+    numTensionesInput.value = 1;
+    inputsTension.forEach(input => input.value = '');
+    anguloInputs.forEach(input => input.value = '');
+    createinputsTension(1);
 }

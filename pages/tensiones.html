@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>
+
     <script src="../js/script_tensiones.js" type="module"></script>
 </head>
 
@@ -72,7 +74,7 @@
                         </div>
                         <div class="col-6">
                             <label for="numTensiones" class="form-label">Número de tensiones:</label>
-                            <input type="number" class="form-control" id="numTensiones" min="1" max="4" value="1">
+                            <input type="number" class="form-control" id="numTensiones" min="1" max="2" value="1">
                         </div>
                     </div>
                     
@@ -81,8 +83,11 @@
                     </div>
 
                     <button type="button" class="btn btn-primary w-100" id="btnCalcular">Calcular</button>
-                    <div id="resultadoDiv" class="my-3">
-                        <!-- Aquí se muestran los resultados. -->
+                    <div class="card my-3 d-none" id="resultadoDiv">
+                        <div class="card-header">Resultados</div>
+                        <div class="card-body" id="resultados">
+                            <!-- Aquí se muestran los resultados -->
+                        </div>
                     </div>
                 </div>
             </div>
