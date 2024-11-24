@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problemas de Pascal</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+        .menu {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .menu button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: border-bottom 0.3s;
+        }
+
+        .menu button.active {
+            border-bottom: 3px solid #3498db;
+            color: #3498db;
+        }
+
+        .formulario {
+            display: none;
+        }
+
+        .formulario.active {
+            display: block;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-label input {
+            margin-right: 5px;
+        }
+
+        #resultadoFinal {
+            display: none;
+        }
+    </style>
+
+    <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                    <img src="../img/logo.png" alt="logo" height="63" class="ms-2">
+                    <h2
+                        style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">
+                        PhysicLabs</h2>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="text-center text-black mt-5">Problemas de Pascal</h1>
+
+            <!-- Menú de selección -->
+            <div class="menu">
+                <button id="normalButton" class="active">Pascal Normal</button>
+                <button id="alturaButton">Pascal con Altura</button>
+            </div>
+
+            <!-- Formulario Pascal Normal -->
+            <form id="pascalNormal" class="formulario active text-center mt-4">
+                <label for="incognitaNormal" class="form-label">Selecciona el dato que deseas calcular:</label>
+                <select id="incognitaNormal" class="form-select mb-3">
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="f1">Fuerza F1</option>
+                    <option value="f2">Fuerza F2</option>
+                    <option value="a1">Área A1</option>
+                    <option value="a2">Área A2</option>
+                    <option value="p">Presión (P)</option>
+                </select>
+
+                <label class="form-label">Selecciona los datos con los que cuentas:</label>
+                <div class="checkbox-grid">
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="f1"> Fuerza F1
+                    </label>
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="f2"> Fuerza F2
+                    </label>
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="a1"> Área A1
+                    </label>
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="a2"> Área A2
+                    </label>
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="p"> Presión (P)
+                    </label>
+                </div>
+
+                <button type="button" class="btn btn-primary mt-3" id="verificarNormal">Verificar Checkboxes</button>
+
+                <div class="container mt-4">
+                    <div id="fuerzaF1" style="display: none;">
+                        <label for="valorF1" class="form-label">Fuerza F1 (N):</label>
+                        <input type="number" id="valorF1" class="form-control text-center" step="0.000001">
+                    </div>
+                    <div id="fuerzaF2" style="display: none;">
+                        <label for="valorF2" class="form-label">Fuerza F2 (N):</label>
+                        <input type="number" id="valorF2" class="form-control text-center" step="0.000001">
+                    </div>
+                    <div id="areaA1" style="display: none;">
+                        <label for="valorA1" class="form-label">Área A1 (m²):</label>
+                        <input type="number" id="valorA1" class="form-control text-center" step="0.000001">
+                    </div>
+                    <div id="areaA2" style="display: none;">
+                        <label for="valorA2" class="form-label">Área A2 (m²):</label>
+                        <input type="number" id="valorA2" class="form-control text-center" step="0.000001">
+                    </div>
+                    <div id="presion" style="display: none;">
+                        <label for="valorP" class="form-label">Presión (P) [Pa]:</label>
+                        <input type="number" id="valorP" class="form-control text-center" step="0.000001">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success mt-4" id="calcularNormal">Calcular</button>
+            </form>
+
+            <!-- Formulario Pascal con Altura -->
+            <form id="pascalAltura" class="formulario text-center mt-4">
+                <label for="incognitaAltura" class="form-label">Selecciona el dato que deseas calcular:</label>
+                <select id="incognitaAltura" class="form-select mb-3">
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="pi">Presión Inicial (Pi)</option>
+                    <option value="ph">Presión Hidrostática (Ph)</option>
+                    <option value="h">Altura (h)</option>
+                    <option value="densidad">Densidad (ρ)</option>
+                </select>
+
+                <label class="form-label">Selecciona los datos con los que cuentas:</label>
+                <div class="checkbox-grid">
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="pi"> Presión Inicial (Pi)
+                    </label>
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="ph"> Presión Hidrostática (Ph)
+                    </label>
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="h"> Altura (h)
+                    </label>
+                    <label class="checkbox-label">
+                        <input class="form-check-input datosOb" type="checkbox" value="densidad"> Densidad (ρ)
+                    </label>
+                </div>
+
+                <button type="button" class="btn btn-primary mt-3" id="verificarAltura">Verificar Checkboxes</button>
+
+                <div class="container mt-4">
+                    <div id="presionInicialInput" style="display: none;">
+                        <label for="valorPi" class="form-label">Presión Inicial (Pi):</label>
+                        <input type="number" id="valorPi" class="form-control text-center" step="0.000001">
+                    </div>
+                    <div id="presionHidrostaticaInput" style="display: none;">
+                        <label for="valorPh" class="form-label">Presión Hidrostática (Ph):</label>
+                        <input type="number" id="valorPh" class="form-control text-center" step="0.000001">
+                    </div>
+                    <div id="alturaInput" style="display: none;">
+                        <label for="valorAltura" class="form-label">Altura (h):</label>
+                        <input type="number" id="valorAltura" class="form-control text-center" step="0.000001">
+                    </div>
+                    <div id="densidadInput" style="display: none;">
+                        <label for="valorDensidad" class="form-label">Densidad (ρ):</label>
+                        <input type="number" id="valorDensidad" class="form-control text-center" step="0.000001">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success mt-4" id="calcularAltura">Calcular</button>
+            </form>
+
+            <div id="resultadoFinal" class="container mt-4">
+                <h3 class="text-center">Resultado</h3>
+                <p id="resultadoTexto" class="text-center"></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Alternar entre Pascal Normal y Pascal con Altura
+        document.getElementById("normalButton").addEventListener("click", () => {
+            document.getElementById("pascalNormal").classList.add("active");
+            document.getElementById("pascalAltura").classList.remove("active");
+            resetResultado();
+        });
+
+        document.getElementById("alturaButton").addEventListener("click", () => {
+            document.getElementById("pascalAltura").classList.add("active");
+            document.getElementById("pascalNormal").classList.remove("active");
+            resetResultado();
+        });
+
+        // Mostrar campos para Pascal Normal
+        document.getElementById("verificarNormal").addEventListener("click", () => {
+            verificarCamposSeleccionados("normal");
+        });
+
+        // Mostrar campos para Pascal con Altura
+        document.getElementById("verificarAltura").addEventListener("click", () => {
+            verificarCamposSeleccionados("altura");
+        });
+
+        // Verificar y mostrar los campos seleccionados
+        function verificarCamposSeleccionados(tipo) {
+            const fields = tipo === "normal" ? normalFields : alturaFields;
+
+            // Ocultar todos los campos
+            Object.values(fields).forEach(id => {
+                document.getElementById(id).style.display = "none";
+            });
+
+            // Mostrar campos seleccionados
+            const checkboxes = document.querySelectorAll(`#pascal${capitalize(tipo)} .datosOb:checked`);
+            checkboxes.forEach(checkbox => {
+                const fieldId = fields[checkbox.value];
+                if (fieldId) document.getElementById(fieldId).style.display = "block";
+            });
+        }
+
+        // Función para resetear el resultado
+        function resetResultado() {
+            document.getElementById("resultadoFinal").style.display = "none";
+            document.getElementById("resultadoTexto").textContent = "";
+        }
+
+        // Capitalizar la primera letra de un string
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Campos disponibles en Pascal Normal
+        const normalFields = {
+            f1: "fuerzaF1",
+            f2: "fuerzaF2",
+            a1: "areaA1",
+            a2: "areaA2",
+            p: "presion"
+        };
+
+        // Campos disponibles en Pascal con Altura
+        const alturaFields = {
+            pi: "presionInicialInput",
+            ph: "presionHidrostaticaInput",
+            h: "alturaInput",
+            densidad: "densidadInput"
+        };
+
+        // Cálculos para Pascal Normal
+        document.getElementById("calcularNormal").addEventListener("click", () => {
+            const f1 = parseFloat(document.getElementById("valorF1").value) || null;
+            const f2 = parseFloat(document.getElementById("valorF2").value) || null;
+            const a1 = parseFloat(document.getElementById("valorA1").value) || null;
+            const a2 = parseFloat(document.getElementById("valorA2").value) || null;
+            const p = parseFloat(document.getElementById("valorP").value) || null;
+            const incognita = document.getElementById("incognitaNormal").value;
+
+            let calculados = { f1, f2, a1, a2, p };
+
+            // Calcular los valores posibles
+            if (f1 && a1) calculados.p = f1 / a1;
+            if (f2 && a2) calculados.p = f2 / a2;
+            if (p && a1) calculados.f1 = p * a1;
+            if (p && a2) calculados.f2 = p * a2;
+            if (f1 && f2 && a1) calculados.a2 = (f2 * a1) / f1;
+            if (f1 && f2 && a2) calculados.a1 = (f1 * a2) / f2;
+
+            mostrarResultado(calculados[incognita]);
+        });
+
+        // Cálculos para Pascal con Altura
+        document.getElementById("calcularAltura").addEventListener("click", () => {
+            const pi = parseFloat(document.getElementById("valorPi").value) || null;
+            const ph = parseFloat(document.getElementById("valorPh").value) || null;
+            const h = parseFloat(document.getElementById("valorAltura").value) || null;
+            const densidad = parseFloat(document.getElementById("valorDensidad").value) || null;
+            const incognita = document.getElementById("incognitaAltura").value;
+
+            const g = 9.81; // Gravedad
+            let calculados = { pi, ph, h, densidad };
+
+            // Calcular los valores posibles
+            if (ph && h) calculados.densidad = ph / (g * h);
+            if (ph && densidad) calculados.h = ph / (g * densidad);
+            if (h && densidad) calculados.ph = densidad * g * h;
+            if (pi && ph) calculados.p1 = pi + ph;
+            if (ph && calculados.p1) calculados.pi = calculados.p1 - ph;
+
+            mostrarResultado(calculados[incognita]);
+        });
+
+        // Función para mostrar el resultado
+        function mostrarResultado(valor) {
+            const resultadoTexto = document.getElementById("resultadoTexto");
+            if (isNaN(valor) || valor === null) {
+                resultadoTexto.textContent = "Datos insuficientes o incorrectos. Por favor, verifica los valores ingresados.";
+            } else {
+                resultadoTexto.textContent = `El resultado es: ${valor.toFixed(4)}`;
+            }
+            document.getElementById("resultadoFinal").style.display = "block";
+        }
+
+    </script>
+</body>
+
+</html>

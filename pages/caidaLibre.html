@@ -1,50 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caída Libre</title>
     <link rel="stylesheet" href="../css/stylesAldo.css">
-    <title>Calculadora de Caída Libre</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <script src="../js/script_caidaL.js" defer></script>
 </head>
+
 <body>
-    <div class="container">
-        <div class="calculator">
-            <h1>Calculadora de Caída Libre</h1>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png"
+                        alt="logo" height="63" class="ms-2">
+                    <h2 style="font-family:Impact" class="ms-2">PhysicLabs</h2>
+                </a>
 
-            <label for="altura">Altura inicial (m):</label>
-            <input type="number" id="altura" placeholder="Ingrese la altura inicial">
+                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <label for="velocidadFinal">Velocidad final (m/s):</label>
-            <input type="number" id="velocidadFinal" placeholder="Ingrese la velocidad final">
+                <!-- El offcanvas en sí -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Aquí se coloca la lista de enlaces -->
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-            <label for="tiempo">Tiempo (s):</label>
-            <input type="number" id="tiempo" placeholder="Ingrese el tiempo">
+    <main class="container my-3">
+        <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start gap-4">
+            <div class="calculator p-5 rounded shadow-lg">
+                <h1 class="fw-bold">Calculadora de Caída Libre</h1>
 
-            <label for="precision">Número de decimales:</label>
-            <select id="precision">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
+                <div class="mb-3">
+                    <label for="altura" class="form-label">Altura inicial (m):</label>
+                    <input type="number" id="altura" placeholder="Ingrese la altura inicial" class="form-control">
+                </div>
 
-            <button onclick="calcularDatos()">Calcular</button>
-            <button onclick="limpiarCampos()">Limpiar</button>
-        </div>
-        
-        <div id="resultados" class="resultados">
-            <div class="proceso">
-                <h2>ALTURA Y VELOCIDAD EN BASE AL TIEMPO</h2>
-                <label for="tiempoCalculo">Altura recorrida a los</label>
-                <input type="number" id="tiempoCalculo" placeholder="Ingrese el tiempo" onchange="calcularAlturaVelocidad()"> segundos
-                <p id="alturaTiempoResultado">= <span class="highlight">0 metros</span></p>
-                <label for="tiempoCalculoVel">Velocidad del móvil a los</label>
-                <input type="number" id="tiempoCalculoVel" placeholder="Ingrese el tiempo" onchange="calcularAlturaVelocidad()"> segundos
-                <p id="velocidadTiempoResultado">= <span class="highlight">0 m/s</span></p>
+                <div class="mb-3">
+                    <label for="velocidadFinal" class="form-label">Velocidad final (m/s):</label>
+                    <input type="number" id="velocidadFinal" placeholder="Ingrese la velocidad final"
+                        class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="tiempo" class="form-label">Tiempo (s):</label>
+                    <input type="number" id="tiempo" placeholder="Ingrese el tiempo" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="precision" class="form-label">Número de decimales:</label>
+                    <select id="precision" class="form-select">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <button onclick="calcularDatos()" type="button" class="btn btn-primary py-2">Calcular</button>
+                    <button onclick="limpiarCampos()" type="button" class="btn btn-secondary py-2">Limpiar</button>
+                </div>
+            </div>
+
+            <div id="resultados" class="resultados">
+                <div class="proceso">
+                    <h2 class="fw-bold h3">ALTURA Y VELOCIDAD EN BASE AL TIEMPO</h2>
+                    <label for="tiempoCalculo" class="form-label">Altura recorrida a los</label>
+                    <input type="number" id="tiempoCalculo" placeholder="Tiempo" onchange="calcularAlturaVelocidad()"> segundos
+                    <p id="alturaTiempoResultado">= <span class="highlight">0 metros</span></p>
+                    <label for="tiempoCalculoVel">Velocidad del móvil a los</label>
+                    <input type="number" id="tiempoCalculoVel" placeholder="Tiempo"
+                        onchange="calcularAlturaVelocidad()"> segundos
+                    <p id="velocidadTiempoResultado">= <span class="highlight">0 m/s</span></p>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="../js/script_caidaL.js"></script>
+    </main>
 </body>
+
 </html>

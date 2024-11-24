@@ -155,6 +155,12 @@ function updateDiagram() {
     ctx.fillText(`${p} N`, 135, 205);
 }
 
+/**
+ * Calcula las tensiones desconocidas y el peso dadas las tensiones y
+ * ángulos ingresados.
+ *
+ * @returns {void}
+ */
 function calculate() {
     const tensiones = [];
     const inputsTension = document.querySelectorAll('.tension-input');
