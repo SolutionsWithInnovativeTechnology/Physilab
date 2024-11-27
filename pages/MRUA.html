@@ -566,7 +566,21 @@
                 }
 
                 // Vi = raiz(Vf2 - 2ad)
-                resultado = Math.sqrt((valorNumVelocidadFin*valorNumVelocidadFin)-2*(valorNumAceleracion*valorNumDistancia));
+                /*resultado = Math.sqrt((valorNumVelocidadFin*valorNumVelocidadFin)-(2*(valorNumAceleracion*valorNumDistancia)));*/
+                var radicando = (valorNumVelocidadFin * valorNumVelocidadFin) - (2*valorNumAceleracion * valorNumDistancia);
+                const tolerancia = 1e-10;
+                if (Math.abs(radicando) < tolerancia) {
+                    console.log("Radicando cercano a 0, ajustando...");
+                    radicando = 0;
+                }
+
+                if (radicando < 0) {
+                    console.error("El radicando es negativo.");
+                    document.getElementById("resulVelIni").innerHTML = "Error: No es posible calcular la velocidad inicial con los datos proporcionados.";
+                    return;
+                }
+                console.log(radicando);
+                resultado = Math.sqrt(radicando);
 
                 document.getElementById("resulVelIni").innerHTML="La velocidad inicial es de "+resultado;
                 document.getElementById("resulVelIni").style.display='block';
@@ -604,7 +618,7 @@
                 }
 
                 //Vf = raiz(Vi2+2ad)
-                resultado = Math.sqrt((valorNumVelocidadIni*valorNumVelocidadIni)+2*(valorNumAceleracion*valorNumDistancia));
+                resultado = Math.sqrt((valorNumVelocidadIni*valorNumVelocidadIni)+(2*(valorNumAceleracion*valorNumDistancia)));
 
                 document.getElementById("resulVelFin").innerHTML="La velocidad final es de "+resultado;
                 document.getElementById("resulVelFin").style.display='block'
