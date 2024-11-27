@@ -51,7 +51,7 @@
     </header>
     <main>
         <div class="container">
-            <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Movimiento rectilíneo uniforme</h1>
+            <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Movimiento Circular Uniforme</h1>
             <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
                 <!--Checkboxs para revisar los datos con los que cuentas-->
                 <div id="presion" class="presionOpciones" style="display:block;">
@@ -60,11 +60,11 @@
                         <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
                             <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
                                 <input class="form-check-input" type="checkbox" value="velocidad" name="datosOb">
-                                <label class="form-check-label" for="presion">Velocidad</label>
+                                <label class="form-check-label" for="presion">Velocidad Angular</label>
                             </div> 
                             <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
                                 <input class="form-check-input" type="checkbox" value="distancia" name="datosOb">
-                                <label class="form-check-label" for="fuerza">Distancia</label>
+                                <label class="form-check-label" for="fuerza">Desplazamiento Angular</label>
                             </div> 
                             <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
                                 <input class="form-check-input" type="checkbox" value="tiempo" name="datosOb">
@@ -79,11 +79,11 @@
                         <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
                             <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
                                 <input class="form-check-input" type="checkbox" value="velocidad" name="datosEnc" disabled>
-                                <label class="form-check-label" for="presion">Velocidad</label>
+                                <label class="form-check-label" for="presion">Velocidad Angular</label>
                             </div> 
                             <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
                                 <input class="form-check-input" type="checkbox" value="distancia" name="datosEnc" disabled>
-                                <label class="form-check-label" for="fuerza">Distancia</label>
+                                <label class="form-check-label" for="fuerza">Desplazamiento Angular</label>
                             </div> 
                             <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
                                 <input class="form-check-input" type="checkbox" value="tiempo" name="datosEnc" disabled>
@@ -95,10 +95,10 @@
                     <!--Habilitar la parte de formulario para ingresar los valores-->
                 <div>
                     <div class="container" id="velocidadInput" style="display: none;">
-                        <!--Contenedor para ingresar el valor de velocidad junto con sus respectivas unidades de medida-->
+                        <!--Contenedor para ingresar el valor de VELOCIDAD ANGULAR junto con sus respectivas unidades de medida-->
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-12 mb-2 text-center">
-                            <label for="" class="form-label text-center">Velocidad:</label>
+                            <label for="" class="form-label text-center">Velocidad Angular:</label>
                         </div>
                         <!--Contenedor del input (Velocidad)-->
                         <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
@@ -108,8 +108,8 @@
                          <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
                             <select id="unidadMedidaVelocidad1" name="unidadMedidaPresion1" class="form-select text-center">
                                 <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
-                                <option value="m" class="text-center">Metros(m)</option>
-                                <option value="km" class="text-center">Kilometros(km)</option>
+                                <option value="rad" class="text-center">Radianes(rad)</option>
+                                <option value="rev" class="text-center">Revoluciones(rev)</option>
                             </select>
                         </div>
                         <!--label que contiene el divisor--> 
@@ -121,33 +121,33 @@
                             <select id="unidadMedidaVelocidad2" name="unidadMedidaPresion2" class="form-select text-center">
                                 <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
                                 <option value="s" class="text-center">Segundos(s)</option>
-                                <option value="h" class="text-center">Horas(h)</option>
+                                <option value="min" class="text-center">Minutos(min)</option>
                             </select>
                         </div> 
                     </div>
                     <br>
                 </div>
-                    <!--Contenedor para ingresar el valor de DISTANCIA junto con sus unidades de medidas-->
+                    <!--Contenedor para ingresar el valor de DESPLAZAMIENTO ANGULAR junto con sus unidades de medidas-->
                 <div class="container" id="distanciaInput" style="display: none;">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-12 mb-2 text-center">
-                            <label for="" class="form-label text-center">Distancia:</label>
+                            <label for="" class="form-label text-center">Desplazamiento Angular:</label>
                         </div>
                             <!--Contenedor del input(Distancia)-->
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Distancia" step="0.0000000001" id="valorInputDistancia">
+                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Desplazamiento Angular" step="0.0000000001" id="valorInputDistancia">
                             </div>
                             <!--Unidad de medida-->
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
                             <select id="unidadMedidaDistancia" class="form-select text-center" >
                                 <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
-                                <option value="m" class="text-center">Metros(m)</option>
-                                <option value="km" class="text-center">Kilometros(Km)</option>
+                                <option value="rad" class="text-center">Radianes(rad)</option>
+                                <option value="rev" class="text-center">Revoluciones(rev)</option>
                             </select>
                             </div>
                     </div>
                 </div>
-            <!--Contenedor para ingresar el valor de AREA junto con sus unidades de medidas-->
+            <!--Contenedor para ingresar el valor de TIEMPO junto con sus unidades de medidas-->
             <div class="container" id="tiempoInput" style="display: none;">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-12 mb-2 text-center">
@@ -184,12 +184,8 @@
 
             <div id="mostrarResultado" class="container" style="display: none;">
                 <br><br>
-                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
-                    <div class="text-center fw-bold">Resultado: 
-                        <span id="resulVel" class="bold" style="display: none;">\frac{\text{m}}{\text{s}} \</span>
-                        <span id="resulDis" style="display: none;"></span> 
-                        <span id="resulTie" style="display: none;"></span> 
-                    </div>
+                <div id="resul tadoDiv" class="row d-flex align-items-center justify-content-center">
+                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span><span></span></div>
                 </div>
             </div>
         </div>
@@ -199,7 +195,7 @@
 
     </footer>
 
-    <!--Funcionamiento general de la pagina-->
+    <!--Funcionamiento general de la pagina(presiones)-->
     <script>
         let velocidad= false;
         let distancia= false;
@@ -207,7 +203,7 @@
 
          var datosComprobar = [];
 
-        //funcion para validar el numero de datos con los que cuentas e ir habilitando y deshabilitando las secciones que usaremos despues
+        //funcion para validar el numero de datos con los que cuentas
         document.getElementById('verificarOb').addEventListener('click', function(event) {
             event.preventDefault();
             const checkboxes = document.querySelectorAll('input[name="datosOb"]:checked');
@@ -247,7 +243,7 @@
 
 
         //funcion para validar que solo se elija un dato para encontrar
-        //Esta funcion verifica que el usuario escoja solo el dato que falta y habilita el div para la introduccion de datos
+        //Esta funcion permite verificar que el usuario escoga solo el dato que falta y habilita el div para la introduccion de datos
         document.getElementById('verificarEnc').addEventListener('click', function(event) {
             event.preventDefault(); // evita que se envie el formulario
             const checkboxes = document.querySelectorAll('input[name="datosEnc"]:checked');
@@ -270,7 +266,6 @@
                 let contador2 = 0;
                 let salir = false;
                 
-                //En estas variables se guardan los contenedores que utilizaremos mas adelante
                 //variables que van a guardar los datos que se ingresen mediante el id
                 //VELOCIDAD
                 const valorInput_velocidad = document.getElementById('valorInputVelocidad');
@@ -283,7 +278,7 @@
                 const valorInput_tiempo = document.getElementById('valorInputTiempo');
                 const unidadM_tiempo1 = document.getElementById('unidadMedidaTiempo');
 
-                for(var i=0; i<2; i++){ // Recorrer el arreglo datosComprobar que contiene los datos seleccionados por el usuario
+                for(var i=0; i<2; i++){
                     //if para comprobar que datos te va a proporcionar
                     if(datosComprobar[i]=="velocidad"){
                         velocidad=true;
@@ -346,7 +341,7 @@
             }
         });
 
-        //Esta funcion permite calcular el resultado con los datos anteiormente hechos
+        //Esta funcion 
         document.getElementById('formularioDatos').addEventListener("submit", function(event){
             event.preventDefault();
             //variable que va a retener los datos
@@ -360,11 +355,11 @@
                 var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
                 var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
 
-                if(valorUnidadMVelocidad == "km"){
-                    valorNumVelocidad = valorNumVelocidad * 1000; //pasar kilometros a metros
+                if(valorUnidadMVelocidad == "rev"){
+                    valorNumVelocidad = valorNumVelocidad * 6.2832; //pasar revoluciones a radianes
                 }
-                if(valorUnidadMVelocidad2== "h"){
-                    valorNumVelocidad = valorNumVelocidad / 3600; //pasar horas a segundos
+                if(valorUnidadMVelocidad2== "min"){
+                    valorNumVelocidad = valorNumVelocidad / 60; //pasar minutos a segundos
                 }
 
                 if(valorUnidadMTiempo == "h"){
@@ -376,8 +371,7 @@
                 //Aplicar formula
                 resultado = valorNumVelocidad * valorNumTiempo;
 
-                document.getElementById("resulDis").innerHTML="La distancia es de "+resultado;
-                document.getElementById('resulDis').style.display = 'block';
+                document.getElementById("resultado").innerHTML="La desplazamiento angular es de "+resultado+" rad" ;
                 document.getElementById('mostrarResultado').style.display = 'block';
             }
             //Condicion para comprobar la formula que debes de ocupar 
@@ -389,21 +383,20 @@
                 var valorNumDistancia = parseFloat(document.getElementById("valorInputDistancia").value);
                 var valorUnidadMDistancia = document.getElementById("unidadMedidaDistancia").value;
 
-                if(valorUnidadMVelocidad == "km"){
-                    valorNumVelocidad == valorNumVelocidad * 1000; //pasar kilometros a metros
+                if(valorUnidadMVelocidad == "rev"){
+                    valorNumVelocidad == valorNumVelocidad * 6.2832; //pasar revolciones a radianes
                 }
-                if(valorUnidadMVelocidad2 = "h"){
-                    valorNumVelocidad == valorNumVelocidad / 3600; //pasar horas a segundos
+                if(valorUnidadMVelocidad2 = "min"){
+                    valorNumVelocidad == valorNumVelocidad / 60; //pasar horas a segundos
                 }
 
-                if(valorUnidadMDistancia == "km"){
-                    valorNumDistancia = valorNumDistancia * 1000; //pasar kilometros a metrosf
+                if(valorUnidadMDistancia == "rev"){
+                    valorNumDistancia = valorNumDistancia * 6.2832; //pasar revolciones a radianes
                 }
                 //Aplicar formula
                 resultado = valorNumDistancia / valorNumVelocidad;
 
-                document.getElementById("resulTie").innerHTML="El tiempo es de "+resultado;
-                document.getElementById("resulTie").style.display='block';
+                document.getElementById("resultado").innerHTML="El tiempo es de "+resultado+" s";
                 document.getElementById('mostrarResultado').style.display = 'block';
             }
             if(distancia == true && tiempo == true){//busca velocidad
@@ -413,8 +406,8 @@
                 var valorNumTiempo = parseFloat(document.getElementById('valorInputTiempo').value);
                 var valorUnidadMTiempo = document.getElementById('unidadMedidaTiempo').value;
 
-                if(valorUnidadMDistancia == "km"){
-                    valorNumDistancia = valorNumDistancia * 1000; //pasar horas a segundos
+                if(valorUnidadMDistancia == "rev"){
+                    valorNumDistancia = valorNumDistancia * 6.2832; //pasar revoluciones a radianes
                 }
 
                 if(valorUnidadMTiempo == "h"){
@@ -427,8 +420,7 @@
                 //Aplicar formula
                 resultado = valorNumDistancia / valorNumTiempo;
 
-                document.getElementById("resulVel").innerHTML="La velocidad es de "+resultado;
-                document.getElementById('resulVel').style.display = 'block';
+                document.getElementById("resultado").innerHTML="La velocidad angular es de "+resultado+" rad/s";
                 document.getElementById('mostrarResultado').style.display = 'block';
             }       
         });

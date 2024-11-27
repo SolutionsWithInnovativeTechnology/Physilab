@@ -28,10 +28,10 @@ pesoInput.addEventListener('input', updateDiagram);
 inputsTensionContainer.addEventListener('input', updateDiagram);
 
 btnCalcular.addEventListener('click', () => {
-    if (pesoInput.value == 0 && tension0.value == 0 || angulo0.value == 0 && tension0.value == 0) {
-        alert('¡Debes ingresar al menos un dato!');
-    } else {
+    if (esValido()) {
         calculate();
+    } else {
+        alert('¡Faltan datos por ingresar!');
     }
 });
 
@@ -40,6 +40,51 @@ updateDiagram();
 
 
 /************ FUNCIONES *************/
+
+/**
+ * Verifica que todos los ángulos y tensiones sean válidos.
+ * Reglas de validación:
+ * 1. Ningún ángulo puede ser 0 o estar vacío.
+ * 2. Ninguna tensión puede ser 0 o estar vacía.
+ * 3. La combinación de un ángulo y una tensión debe ser válida.
+ * @returns {boolean} Verdadero si alguna de las validaciones pasan.
+ */
+function esValido() {
+    const anguloInputs = document.querySelectorAll('.angulo-input');
+    const tensionInputs = document.querySelectorAll('.tension-input');
+    let v1 = true;
+    let v2 = true;
+    let v3 = true;
+
+    // Validar que ningún ángulo sea 0 o vacío
+    for (const angulo of anguloInputs) {
+        if (Number(angulo.value) === 0 || angulo.value.trim() === '') {
+            v1 = false;
+            break;
+        }
+    }
+
+    // Validar que ninguna tensión sea 0 o vacía
+    for (const tension of tensionInputs) {
+        if (Number(tension.value) === 0 || tension.value.trim() === '') {
+            v2 = false;
+            break;
+        }
+    }
+
+    // Validar combinaciones ángulo-tensión
+    for (let i = 0; i < tensionInputs.length; i++) {
+        const angulo = Number(anguloInputs[i].value);
+        const tension = Number(tensionInputs[i].value);
+        if ((angulo === 0 && tension === 0) || (isNaN(angulo) || isNaN(tension))) {
+            v3 = false;
+            break;
+        }
+    }
+
+    // Retorna verdadero si todas las validaciones pasan
+    return v1 || v2 || v3;
+}
 
 
 /**
@@ -169,7 +214,7 @@ function calculate() {
     inputsTension.forEach((input, i) => {
         const tension = parseFloat(input.value) || 0;
         let angulo = parseFloat(anguloInputs[i].value) || 0;
-        if(angulo == 180) angulo = 0;
+        if (angulo == 180) angulo = 0;
         tensiones[i] = { tension, angulo };
     });
 
@@ -207,7 +252,7 @@ function calculate() {
         desconocidas[0].tension = Math.abs(tension.toFixed(2));
 
         sumY += desconocidas[0].tension * Math.sin(ecuacion.angRad);
-    } else  if(desconocidas.length === 2) {
+    } else if (desconocidas.length === 2) {
         const [t1, t2] = desconocidas;
         const ang1 = t1.ecuacion.angRad;
         const ang2 = t2.ecuacion.angRad;

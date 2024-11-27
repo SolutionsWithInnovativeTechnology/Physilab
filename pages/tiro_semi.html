@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Tiro Semiparabólico</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <style>
+        .oculto {
+            display: none;
+        }
+
+        .resultados {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .resultados h3 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .resultados-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        .resultados-table th,
+        .resultados-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .resultados-table th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!--header de la pagina-->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png"
+                        alt="logo" height="63" class="ms-2">
+                    <h2 style="font-family:Impact" class="ms-2">PhysicLabs</h2>
+                </a>
+
+                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- El offcanvas en sí -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Aquí se coloca la lista de enlaces -->
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container my-3">
+        <div class="contenedor mt-5">
+            <h1 class="d-flex justify-content-center">Tiro Semiparabólico</h1>
+
+            <!-- Selección de datos -->
+            <div class="seccion mt-5 row d-flex justify-content-center align-items-center mb-3" id="paso-1">
+                <div class="form-check form-switch row d-flex align-items-center justify-content-center">
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input"
+                            type="checkbox" id="vx"> Velocidad horizontal (vₓ) [m/s]</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input"
+                            type="checkbox" id="h0"> Altura inicial (h₀) [m]</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input"
+                            type="checkbox" id="t"> Tiempo total de vuelo (T) [s]</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input"
+                            type="checkbox" id="vy"> Velocidad vertical final (vᵧ) [m/s]</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input"
+                            type="checkbox" id="vf"> Velocidad final (v_f) [m/s]</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input"
+                            type="checkbox" id="rango"> Alcance horizontal (R) [m]</label><br>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button onclick="validarDatosConocidos()" class="btn btn-primary mt-3">Validar</button>
+                </div>
+            </div>
+
+            <!-- Ingreso de datos -->
+            <div id="paso-2" class="seccion oculto">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <label for="datos" class="form-label mb-2 text-center fs-5">Datos con los que cuentas: </label>
+                    <div id="entradas" class="row d-flex justify-content-center align-items-center"></div>
+                    <div class="row d-flex align-items-center justify-content-center col-4 col-sm-auto col-md-auto">
+                        <button onclick="guardarDatos()" class="btn btn-primary mt-3">Enviar datos</button>
+                        <button onclick="limpiarFormulario()" class="btn btn-secondary mt-3">Regresar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultados -->
+            <div class="seccion oculto" id="resultados-seccion">
+                <h3>Resultados</h3>
+                <table class="resultados-table">
+                    <thead>
+                        <tr>
+                            <th>Parámetro</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-resultados"></tbody>
+            </div>
+        </div>
+    </main>
+
+
+
+    
+    <script>
+        // Datos conocidos y fórmulas
+        let datosConocidos = {};
+        const g = 9.81; // Gravedad en m/s²
+
+        const formulas = {
+            t: {
+                requiere: [["h0"], ["vy"], ["rango", "vx"]],
+                calcular: (datos) => {
+                    if (datos.h0 !== undefined) {
+                        return Math.sqrt((2 * datos.h0) / g); // T = sqrt(2 * h0 / g)
+                    } else if (datos.vy !== undefined) {
+                        return datos.vy / g; // T = vy / g
+                    } else if (datos.rango !== undefined && datos.vx !== undefined) {
+                        return datos.rango / datos.vx; // T = R / vx
+                    }
+                    return null;
+                }
+            },
+            vy: {
+                requiere: [["t"], ["h0"]],
+                calcular: (datos) => {
+                    if (datos.t !== undefined) {
+                        return g * datos.t; // vy = g * T
+                    } else if (datos.h0 !== undefined) {
+                        return Math.sqrt(2 * g * datos.h0); // vy = sqrt(2 * g * h0)
+                    }
+                    return null;
+                }
+            },
+            vf: {
+                requiere: [["vx", "vy"], ["h0"]],
+                calcular: (datos) => {
+                    if (datos.vx !== undefined && datos.vy !== undefined) {
+                        return Math.sqrt(datos.vx ** 2 + datos.vy ** 2); // vf = sqrt(vx^2 + vy^2)
+                    } else if (datos.h0 !== undefined) {
+                        return Math.sqrt(2 * g * datos.h0); // vf = sqrt(2 * g * h0)
+                    }
+                    return null;
+                }
+            },
+            rango: {
+                requiere: [["vx", "t"]],
+                calcular: (datos) => {
+                    if (datos.vx !== undefined && datos.t !== undefined) {
+                        return datos.vx * datos.t; // R = vx * T
+                    }
+                    return null;
+                }
+            },
+            h0: {
+                requiere: [["t"], ["vy"]],
+                calcular: (datos) => {
+                    if (datos.t !== undefined) {
+                        return (g * datos.t ** 2) / 2; // h0 = g * T^2 / 2
+                    } else if (datos.vy !== undefined) {
+                        return (datos.vy ** 2) / (2 * g); // h0 = vy^2 / (2 * g)
+                    }
+                    return null;
+                }
+            },
+            vx: {
+                requiere: [["rango", "t"]],
+                calcular: (datos) => {
+                    if (datos.rango !== undefined && datos.t !== undefined) {
+                        return datos.rango / datos.t; // vx = R / T
+                    }
+                    return null;
+                }
+            },
+        };
+
+        // Validar datos conocidos
+        function validarDatosConocidos() {
+            const entradas = [];
+            ["vx", "h0", "t", "vy", "vf", "rango"].forEach((parametro) => {
+                if (document.getElementById(parametro).checked) entradas.push(parametro);
+            });
+
+            if (entradas.length === 0) {
+                alert("Por favor, selecciona al menos un dato.");
+                return;
+            }
+
+            const divEntradas = document.getElementById("entradas");
+            divEntradas.innerHTML = "";
+            entradas.forEach((entrada) => {
+                const descripcion = obtenerDescripcion(entrada);
+                divEntradas.innerHTML += `<div class="row d-flex justify-content-center align-items-center col-12 col-sm-10 col-md-8 col-lg-7 mt-4">
+            <label for="${entrada}-valor" class="form-label text-center">${descripcion}:</label>
+            <input type="number" id="${entrada}-valor" class="form-control text-center" required>
+            </div>
+            `;
+            });
+
+            document.getElementById("paso-1").classList.add("oculto");
+            document.getElementById("paso-2").classList.remove("oculto");
+        }
+
+        // Guardar datos ingresados
+        function guardarDatos() {
+            ["vx", "h0", "t", "vy", "vf", "rango"].forEach((parametro) => {
+                const entrada = document.getElementById(`${parametro}-valor`);
+                if (entrada && entrada.value !== "") {
+                    datosConocidos[parametro] = parseFloat(entrada.value);
+                }
+            });
+            mostrarResultados();
+        }
+
+        // Mostrar resultados
+        function mostrarResultados() {
+            const resultados = [];
+            Object.keys(formulas).forEach((parametro) => {
+                const formula = formulas[parametro];
+                const sePuedeCalcular = formula.requiere.some((grupoRequisitos) =>
+                    grupoRequisitos.every((req) => datosConocidos[req] !== undefined)
+                );
+
+                if (sePuedeCalcular) {
+                    datosConocidos[parametro] = formula.calcular(datosConocidos);
+                    resultados.push({
+                        parametro: obtenerDescripcion(parametro),
+                        valor: datosConocidos[parametro].toFixed(2),
+                    });
+                }
+            });
+
+            const tablaResultados = document.getElementById("tabla-resultados");
+            tablaResultados.innerHTML = resultados.map(
+                (r) => `<tr><td>${r.parametro}</td><td>${r.valor}</td></tr>`
+            ).join("");
+
+            document.getElementById("resultados-seccion").classList.remove("oculto");
+        }
+
+        // Limpiar formulario
+        function limpiarFormulario() {
+            datosConocidos = {};
+            document.getElementById("paso-1").classList.remove("oculto");
+            document.getElementById("paso-2").classList.add("oculto");
+            document.getElementById("resultados-seccion").classList.add("oculto");
+        }
+
+        // Obtener descripciones más claras
+        function obtenerDescripcion(parametro) {
+            switch (parametro) {
+                case "vx": return "Velocidad horizontal (vₓ) [m/s]";
+                case "h0": return "Altura inicial (h₀) [m]";
+                case "t": return "Tiempo total de vuelo (T) [s]";
+                case "vy": return "Velocidad vertical final (vᵧ) [m/s]";
+                case "vf": return "Velocidad final (v_f) [m/s]";
+                case "rango": return "Alcance horizontal (R) [m]";
+                default: return parametro;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

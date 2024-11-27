@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>
+    <style>
+        /*main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    
+    }
+
+    .contenedor {
+        max-width: 800px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+        h1, h2 {
+            text-align: center;
+        }
+        .seccion {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }*/
+        .oculto {
+            display: none;
+        }
+
+        .resultados {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .resultados h3 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .resultados-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        .resultados-table th, .resultados-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .resultados-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+    </style>
+    <script src="../js/script_tensiones.js" type="module"></script>
+</head>
+
+<body>
+    <!--header de la pagina-->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png"
+                        alt="logo" height="63" class="ms-2">
+                    <h2 style="font-family:Impact" class="ms-2">PhysicLabs</h2>
+                </a>
+
+                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- El offcanvas en sí -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Aquí se coloca la lista de enlaces -->
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container my-3">
+        <div class="contenedor mt-5">
+            <h1 class="d-flex justify-content-center">Calculadora de Tiro Parabólico</h1>
+    
+            <!-- Paso 1: Selección de datos conocidos -->
+            <div class="seccion mt-5 row d-flex justify-content-center align-items-center mb-3" id="paso-1">
+                <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="v0"> Velocidad inicial (v₀) [m/s] - Velocidad al momento del lanzamiento.</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="angulo"> Ángulo de lanzamiento (θ) [°] - Ángulo respecto al horizonte.</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="vx"> Velocidad horizontal (vₓ) [m/s] - Componente horizontal de la velocidad.</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="vy"> Velocidad vertical (vᵧ) [m/s] - Componente vertical de la velocidad.</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="h0"> Altura inicial (h₀) [m] - Altura desde la que se lanza el objeto.</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="hmax"> Altura máxima (hₘₐₓ) [m] - Máxima altura alcanzada por el objeto.</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="t"> Tiempo de vuelo (tₜ) [s] - Tiempo total en el aire.</label><br>
+                    <label class="d-flex justify-content-center align-items-center mb-3"><input class="form-check-input" type="checkbox" id="rango"> Alcance horizontal (R) [m] - Distancia horizontal recorrida.</label><br>
+                </div>   
+                <div class="d-flex align-items-center justify-content-center">
+                    <button onclick="validarDatosConocidos()" class="btn btn-primary mt-3">Validar</button>
+                </div>             
+            </div>
+            
+            
+            
+    
+            <!-- Paso 2: Ingreso de datos -->
+            <div class="seccion oculto" id="paso-2">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <label for="datos" class="form-label mb-2 text-center fs-5">Datos con los que cuentas: </label>
+                    <div id="entradas" class="row d-flex justify-content-center align-items-center"></div>
+                    <div class="row d-flex align-items-center justify-content-center col-4 col-sm-auto col-md-auto">
+                        <button onclick="guardarDatos()" class="btn btn-primary mt-3">Enviar datos</button>
+                        <button onclick="limpiarFormulario()" class="btn btn-secondary mt-3">Regresar</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Paso 3: Resultados -->
+            <div class="seccion oculto" id="resultados-seccion">
+                
+                <div id="resultados"></div>
+            </div>
+        </div>
+    </main>
+    
+
+    <script>
+        // Objeto para almacenar los datos conocidos
+let datosConocidos = {};
+
+// Dependencias y fórmulas para cálculos
+const formulas = {
+    v0: {
+        requiere: [["vx", "vy"], ["rango", "angulo"], ["hmax", "angulo"]],
+        calcular: (datos) => {
+            if (datos.vx !== undefined && datos.vy !== undefined) {
+                return Math.sqrt(datos.vx ** 2 + datos.vy ** 2);
+            } else if (datos.rango !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180;
+                return Math.sqrt((datos.rango * 9.81) / Math.sin(2 * anguloRad));
+            } else if (datos.hmax !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180;
+                return Math.sqrt((2 * 9.81 * datos.hmax) / Math.sin(anguloRad) ** 2);
+            }
+            return null;
+        }
+    },
+    angulo: {
+        requiere: [["vx", "vy"], ["rango", "v0"]],
+        calcular: (datos) => {
+            if (datos.vx !== undefined && datos.vy !== undefined) {
+                return (Math.atan2(datos.vy, datos.vx) * 180) / Math.PI;
+            } else if (datos.rango !== undefined && datos.v0 !== undefined) {
+                return (Math.asin((datos.rango * 9.81) / datos.v0 ** 2) * 90) / Math.PI;
+            }
+            return null;
+        }
+    },
+    vx: {
+        requiere: [["v0", "angulo"], ["rango", "t"]],
+        calcular: (datos) => {
+            if (datos.v0 !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180;
+                return datos.v0 * Math.cos(anguloRad);
+            } else if (datos.rango !== undefined && datos.t !== undefined) {
+                return datos.rango / datos.t;
+            }
+            return null;
+        }
+    },
+    vy: {
+        requiere: [["v0", "angulo"], ["hmax", "h0"]],
+        calcular: (datos) => {
+            if (datos.v0 !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180;
+                return datos.v0 * Math.sin(anguloRad);
+            } else if (datos.hmax !== undefined && datos.h0 !== undefined) {
+                return Math.sqrt(2 * 9.81 * (datos.hmax - datos.h0));
+            }
+            return null;
+        }
+    },
+    hmax: {
+        requiere: [["h0", "vy"], ["v0", "angulo"]],
+        calcular: (datos) => {
+            const h0 = datos.h0 || 0; 
+            if (datos.vy !== undefined) {
+                return h0 + (datos.vy ** 2) / (2 * 9.81);
+            } else if (datos.v0 !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180;
+                return h0 + ((datos.v0 * Math.sin(anguloRad)) ** 2) / (2 * 9.81);
+            }
+            return null; 
+        }
+    },
+    t: {
+        requiere: [["rango", "v0", "angulo"], ["v0", "angulo"], ["vy"]],
+        calcular: (datos) => {
+        const g = 9.81; // Aceleración de la gravedad
+            if (datos.rango !== undefined && datos.v0 !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180; // Convertir ángulo a radianes
+                return datos.rango / (datos.v0 * Math.cos(anguloRad));
+            }
+            if (datos.v0 !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180;
+                return (2 * datos.v0 * Math.sin(anguloRad)) / g;
+            }
+            if (datos.vy !== undefined) {
+                return (2 * datos.vy) / g;
+            }
+            return null;r
+    }
+    },
+    rango: {
+        requiere: [["v0", "angulo"], ["vx", "t"]],
+        calcular: (datos) => {
+            if (datos.v0 !== undefined && datos.angulo !== undefined) {
+                const anguloRad = (datos.angulo * Math.PI) / 180;
+                return (datos.v0 ** 2 * Math.sin(2 * anguloRad)) / 9.81;
+            } else if (datos.vx !== undefined && datos.t !== undefined) {
+                return datos.vx * datos.t;
+            }
+            return null;
+        }
+    }
+};
+
+// Paso 1: Validar selección de datos conocidos
+function getDescripcionConUnidad(parametro) {
+    switch (parametro) {
+        case "v0":
+            return "Velocidad inicial (v₀) [m/s]";
+        case "angulo":
+            return "Ángulo de lanzamiento (θ) [°]";
+        case "vx":
+            return "Velocidad horizontal (vₓ) [m/s]";
+        case "vy":
+            return "Velocidad vertical (vᵧ) [m/s]";
+        case "h0":
+            return "Altura inicial (h₀) [m]";
+        case "hmax":
+            return "Altura máxima (hₘₐₓ) [m]";
+        case "t":
+            return "Tiempo total de vuelo (t) [s]";
+        case "rango":
+            return "Alcance horizontal (R) [m]";
+        default:
+            return parametro;
+    }
+}
+
+function validarDatosConocidos() {
+    const entradas = [];
+    ["v0", "angulo", "vx", "vy", "h0", "hmax", "t", "rango"].forEach((parametro) => {
+        if (document.getElementById(parametro).checked) entradas.push(parametro);
+    });
+
+    if (entradas.length === 0) {
+        alert("Por favor, selecciona al menos un dato.");
+        return;
+    }
+
+    const divEntradas = document.getElementById("entradas");
+    divEntradas.innerHTML = "";
+    entradas.forEach((entrada) => {
+        const descripcion = getDescripcionConUnidad(entrada);
+        divEntradas.innerHTML += `<div class="row d-flex justify-content-center align-items-center col-12 col-sm-10 col-md-8 col-lg-7 mt-4">
+            <label for="${entrada}-valor" class="form-label text-center">${descripcion}:</label>
+            <input type="number" id="${entrada}-valor" class="form-control text-center" required>
+            </div>
+            `;
+    });
+
+    document.getElementById("paso-1").classList.add("oculto");
+    document.getElementById("paso-2").classList.remove("oculto");
+}
+
+// Paso 2: Guardar los datos ingresados
+function guardarDatos() {
+    ["v0", "angulo", "vx", "vy", "h0", "hmax", "t", "rango"].forEach((parametro) => {
+        const entrada = document.getElementById(`${parametro}-valor`);
+        if (entrada && entrada.value !== "") {
+            datosConocidos[parametro] = parseFloat(entrada.value);
+        } else if (entrada) {
+            datosConocidos[parametro] = undefined; 
+        }
+    });
+
+    mostrarResultados();
+}
+
+// Paso 3: Calcular resultados y mostrarlos
+function mostrarResultados() {
+    const resultados = [];
+    Object.keys(formulas).forEach((parametro) => {
+        const formula = formulas[parametro];
+        const sePuedeCalcular = formula.requiere.some((grupoRequisitos) =>
+            grupoRequisitos.every((requisito) => datosConocidos[requisito] !== undefined && !isNaN(datosConocidos[requisito]))
+        );
+
+        if (sePuedeCalcular) {
+            const valor = formula.calcular(datosConocidos);
+            if (valor !== null) {
+                const descripcion = getDescripcionConUnidad(parametro);
+                resultados.push({ descripcion, valor: valor.toFixed(2) });
+            }
+        } else {
+            const descripcion = getDescripcionConUnidad(parametro);
+            resultados.push({ descripcion, valor: "Datos insuficientes" });
+        }
+    });
+
+    // Generar la tabla de resultados
+    let htmlResultados = `
+        <h3>Resultados</h3>
+        <table class="resultados-table">
+            <thead>
+                <tr>
+                    <th>Parámetro</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    resultados.forEach((resultado) => {
+        htmlResultados += `
+            <tr>
+                <td>${resultado.descripcion}</td>
+                <td>${resultado.valor}</td>
+            </tr>
+        `;
+    });
+
+    htmlResultados += `
+            </tbody>
+        </table>
+    `;
+
+    const divResultados = document.getElementById("resultados");
+    divResultados.classList.add("resultados");
+    divResultados.innerHTML = htmlResultados;
+    document.getElementById("resultados-seccion").classList.remove("oculto");
+}
+
+function limpiarFormulario() {
+    // Recarga la página para simular la limpieza del formulario
+    location.reload();
+}
+    </script>
+    
+</body>
+</html>

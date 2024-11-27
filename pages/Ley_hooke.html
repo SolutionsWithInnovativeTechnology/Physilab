@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presiones</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js" defer></script>  
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+<body>
+    <!--header de la pagina-->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+          
+                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <!-- El offcanvas en sí -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Aquí se coloca la lista de enlaces -->
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/temas.html">Temas</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/conversiones.html">Conversiones</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Ley de Hooke</h1>
+            <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
+                <!--Checkboxs para revisar los datos con los que cuentas-->
+                <div id="presion" class="presionOpciones">
+                    <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                    <div>
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="moduloelasticidad" name="datosOb">
+                                <label class="form-check-label" for="moduloelasticidad">Módulo de Elasticidad</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
+                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="deformacion" name="datosOb">
+                                <label class="form-check-label" for="deformacion">Deformación</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="masa" name="datosOb">
+                                <label class="form-check-label" for="masa">Masa</label>
+                            </div> 
+                        </div>  
+                        <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
+                    </div><br>
+                        <!--Checkboxs para revisar los datos que quieres encontrar-->
+                    <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                    <div class="container">
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="moduloelasticidad" name="datosEnc" disabled>
+                                <label class="form-check-label" for="moduloelasticidad">Modulo de Elasticidad</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc" disabled>
+                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="deformacion" name="datosEnc" disabled>
+                                <label class="form-check-label" for="deformacion">Deformación</label>
+                            </div>      
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="masa" name="datosEnc" disabled>
+                                <label class="form-check-label" for="masa">Masa</label>
+                            </div> 
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
+                    </div><br>
+                    <!--Habilitar la parte de formulario para ingresar los valores-->
+                <div>
+                    <div class="container" id="MEInput" style="display: none;">
+                        <!--Contenedor para ingresar el valor de modulo de elasticidad junto con sus respectivas unidades de medida-->
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-12 mb-2 text-center">
+                            <label for="" class="form-label text-center">Modulo de Elasticidad</label>
+                        </div>
+                        <!--Contenedor del input (Modulo de elasticidad)-->
+                        <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorME" class="form-control text-center" placeholder="Modulo de Elasticidad" id="valorInputME" step="0.0000000001">
+                        </div>
+                        <!--Primera unidad de medida-->
+                         <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaME1" name="unidadMedidaME1" class="form-select text-center">
+                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                <option value="N" class="text-center">Newton(s)</option>
+                            </select>
+                        </div>
+                        <!--label que contiene el divisor--> 
+                        <div class="col-1 col-sm-1 mb-2 text-center">
+                            <label for="">/</label>
+                        </div>
+                        <!--Segunda unidad de medida-->
+                        <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaME2" name="unidadMedidaME2" class="form-select text-center">
+                                <option value="M" class="text-center">Metros(s)</option>
+                                <option value="Km" class="text-center">Kilometro(s)</option>
+                                <option value="Cm" class="text-center">Centimetro(s)</option>
+                                <option value="Mm" class="text-center">Milimetro(s)</option>
+                                <option value="Ft" class="text-center">Pie(s)</option>
+                                <option value="In" class="text-center">Pulgada(s)</option>
+                            </select>
+                        </div> 
+                    </div>
+                    <br>
+                </div>
+                    <!--Contenedor para ingresar el valor de FUERZA junto con sus unidades de medidas-->
+                <div class="container" id="fuerzaInput" style="display: none;">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-12 mb-2 text-center">
+                            <label for="" class="form-label text-center">Fuerza:</label>
+                        </div>
+                            <!--Contenedor del input(Fuerza)-->
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Fuerza" step="0.0000000001" id="ValorInputFuerza">
+                            </div>
+                            <!--Unidad de medida-->
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaFuerza" class="form-select text-center" >
+                                <option value="N" disabled selected class="text-center">Newton(s)</option>
+                            </select>
+                            </div>
+                    </div>
+                </div>
+            <!--Contenedor para ingresar el valor de deformacion junto con sus unidades de medidas-->
+            <div class="container" id="DeformacionInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Deformacion:</label>
+                    </div>
+                        <!--Contenedor del input(Deformacion)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorDeformacion" class="form-control text-center"  placeholder="Deformacion" step="0.0000000001" id="valorInputDeformacion">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaDeformacion" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M" class="text-center">Metros(s)</option>
+                            <option value="Km" class="text-center">Kilometro(s)</option>
+                            <option value="Cm" class="text-center">Centimetro(s)</option>
+                            <option value="Mm" class="text-center">Milimetro(s)</option>
+                            <option value="Ft" class="text-center">Pie(s)</option>
+                            <option value="In" class="text-center">Pulgada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de la masa-->
+            <div class="container" id="MasaInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Masa</label>
+                    </div>
+                        <!--Contenedor del input(Masa)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorMasa" class="form-control text-center"  placeholder="Masa" step="0.0000000001" id="valorInputMasa">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaMasa" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="Kg" class="text-center">Kilogramo(s)</option>
+                            <option value="Lb" class="text-center">Libra(s)</option>
+                            <option value="G" class="text-center">Gramo(s)</option>
+                            <option value="T" class="text-center">Tonelada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+                </div>
+
+                </div>
+
+                <!--Boton para enviar-->
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="col-6 col-md-auto text-center">
+                            <input type="submit" name="Enviar" class="form-control mt-2"id="botonEnviar" disabled>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div id="mostrarResultado" class="container" style="display: none;">
+                <br><br>
+                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--Footer de la pagina-->
+    <footer class="mt-5">
+
+    </footer>
+
+    <!--Funcionamiento general de la pagina(presiones)-->
+    <script>
+        let ModulodeElasticidad= false;
+        let fuerza= false;
+        let Defo = false;
+        let masa = false;
+        let datosCheckboxes = [];
+
+         var datosComprobar = [];
+
+        //funcion para validar el numero de datos con los que cuentas
+        document.getElementById('verificarOb').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosOb"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosOb"]');
+            const checkboxes3 = document.querySelectorAll('input[name="datosEnc"]');
+            
+            let ME = false;
+            let F = false;
+            let D = false;
+            let M = false;
+
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+
+                    if(checkbox.value=="moduloelasticidad"){
+                        ME = true;
+                    }
+                    if(checkbox.value=="fuerza"){
+                        F = true;
+                    }
+                    if(checkbox.value=="deformacion"){
+                        D = true;
+                    }
+                    if(checkbox.value=="masa"){
+                        M = true;
+                    }
+            });
+            
+            if (contador < 2) {//revisa que se seleccionen minimo dos datos
+                alert('¡Necesitas seleccionar mínimo dos datos!');
+            } else if(contador==4){//revisa que no se selccionen todos los dato
+                alert('¡No puedes seleccionar todos los datos!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else if(F == true && M ==true){//Revisa que no se pueda seleccionar fueza i masa a la vez
+                alert('¡No puedes seleccionar masa y fuerza a la vez!');
+            }
+            else { //deshabilita los checkboxes al cumpliar las condiciones
+                checkboxes2.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+            });
+            datosComprobar = [...datosCheckboxes];
+
+            checkboxes3.forEach(function(checkbox) {
+                    checkbox.disabled = false;
+            });
+
+            const botonDesactivado = document.getElementById("verificarOb");
+            botonDesactivado.disabled = true;
+            const botonDesactivado2 = document.getElementById("verificarEnc");
+            botonDesactivado2.disabled = false;
+            }
+            //console.log('Datos seleccionados:', datosComprobar);
+
+        });
+
+
+        //funcion para validar que solo se elija un dato para encontrar
+        document.getElementById('verificarEnc').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosEnc"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosEnc"]');
+            let contador = 0;
+            /*const datosCheckboxes = [];*/
+
+
+            //Checa cual Dato faltante estan buscando
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador > 1) {//revisa que se seleccionen minimo dos datos
+                alert('¡Solo puedes buscar un dato a la vez!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }
+            else{
+                let contador2 = 0;
+                let salir = false;
+                
+                //variables que van a guardar los datos que se ingresen mediante el id
+                //Modulo de elasticidad
+                const valorInput_ME = document.getElementById('valorInputME');
+                const unidadM_ME1 = document.getElementById('unidadMedidaME1');
+                const unidadM_ME2 = document.getElementById('unidadMedidaME2');
+                //FUERZA
+                const valorInput_fuerza = document.getElementById('ValorInputFuerza');
+                const unidadM_fuerza1 = document.getElementById('unidadMedidaFuerza');
+                //Deformacion
+                const valorInput_Deformacion = document.getElementById('valorInputDeformacion');
+                const unidadM_Deformacion1 = document.getElementById('unidadMedidaDeformacion');
+                //Masa
+                const valorinput_Masa = document.getElementById('valorInputMasa');
+                const unidadM_Masa1 = document.getElementById('unidadMedidaMasa');
+                
+                console.log(datosCheckboxes[0]);
+                for(var i=0; i<datosComprobar.length; i++){
+                    //if para comprobar que datos te va a proporcionar
+                    if(datosComprobar[i]=="moduloelasticidad"){
+                        ModulodeElasticidad=true;
+                    }
+                    if(datosComprobar[i]=="fuerza"){
+                        fuerza=true;
+                    }
+                    if(datosComprobar[i]=="deformacion"){
+                        Defo=true;
+                    }
+                    if(datosComprobar[i]=="masa"){
+                        masa=true;
+                    }
+                    for(var j=0; j<datosCheckboxes.length; j++){
+                        if(datosComprobar[i] != datosCheckboxes[j]){
+                            contador2++;
+                        }else{
+                            salir= true;
+                            break;
+                        }
+                    }
+                    if(salir==true){
+                        break;
+                    }
+                }
+                if(salir==true){
+                    alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
+                }else{
+                     //deshabilita los checkboxes al cumpliar las condiciones
+                    checkboxes2.forEach(function(checkbox) {
+                        checkbox.disabled = true;
+                    });
+                    //desactiva el boton 
+                    const botonDesactivado = document.getElementById("verificarEnc");
+                        botonDesactivado.disabled = true;
+                    
+                    const botonEnviar = document.getElementById("botonEnviar");
+                        botonEnviar.disabled = false;
+                    
+                        //funcion que habilita el ingreso de los valores de presion en caso de ser seleccionado en los checkboxes
+                        if(ModulodeElasticidad){
+                            document.getElementById('MEInput').style.display = 'block';
+
+                            valorInput_ME.setAttribute('required', 'required');
+                            unidadM_ME1.setAttribute('required', 'required');
+                            unidadM_ME2.setAttribute('required', 'required');
+
+                        }
+                        //funcion que habilita el ingreso de los valores de fuerza en caso de ser seleccionado en los checkboxes
+                        if(fuerza){
+                            document.getElementById('fuerzaInput').style.display = 'block';
+                            valorInput_fuerza.setAttribute('required', 'required');
+                            //el de la unidad no es necesario en este caso, solo pq no hay más opciones de unidad de M
+                            //unidadM_fuerza1.setAttribute('required', 'required');
+                        }
+                        //funcion que habilita el ingreso de los valores de area en caso de ser seleccionado en los checkboxes
+                        if(Defo){
+                            document.getElementById('DeformacionInput').style.display = 'block';
+                            valorInput_Deformacion.setAttribute('required', 'required');
+                            unidadM_Deformacion1.setAttribute('required', 'required');
+
+                        }
+                        if(masa){
+                            document.getElementById('MasaInput').style.display = 'block';
+                            valorinput_Masa.setAttribute('required', 'required');
+                            unidadM_Masa1.setAttribute('required', 'required');
+                        }
+                    
+
+                }
+
+
+               
+            }
+        });
+
+        document.getElementById('formularioDatos').addEventListener("submit", function(event){
+            event.preventDefault();
+            //variable que va a retener los datos
+            let Resultado=0.0;
+            
+            //IF PARA CALCULAR EL MODULO DE ELASTICIDAD 
+            if(datosCheckboxes[0] == "moduloelasticidad"){
+                let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                let valorUnidadDeformacion = document.getElementById('unidadMedidaDeformacion').value;
+
+                switch(valorUnidadDeformacion){
+                    case "M":
+                    valorNumDeformacion = valorNumDeformacion;
+                    break;
+                    case "Km":
+                    valorNumDeformacion = valorNumDeformacion * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDeformacion = valorNumDeformacion / 100;
+                    break;
+                    case "Mm":
+                    valorNumDeformacion = valorNumDeformacion / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDeformacion = valorNumDeformacion * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDeformacion = valorNumDeformacion * 0.0254;
+                    break;
+                }
+
+                if(fuerza){
+                    let valorNumfuerza = parseFloat(document.getElementById('ValorInputFuerza').value);
+
+                    Resultado = valorNumfuerza / valorNumDeformacion;
+                }
+                if(masa){
+                    let valorNummasa = parseFloat(document.getElementById('valorInputMasa').value);
+                    let valorUnidadMasa = document.getElementById('unidadMedidaMasa').value;
+                    
+                    switch(valorUnidadMasa){
+                    case "Kg":
+                    valorNummasa = valorNummasa;
+                    break;
+                    case "Lb":
+                    valorNummasa = valorNummasa * 0.453592;
+                    break;
+                    case "G":
+                    valorNummasa = valorNummasa / 1000;
+                    break;
+                    case "T":
+                    valorNummasa = valorNummasa * 1000;
+                    break;
+                }
+
+                    Resultado = (valorNummasa * 9.8) / valorNumDeformacion;
+                }
+
+            }
+
+            //IF PARA SACAR LA DEFORMACION
+            if(datosCheckboxes[0] == "deformacion"){
+                let valorNumNME = parseFloat(document.getElementById('valorInputME').value);
+                let valorUnidadME = document.getElementById('unidadMedidaME2');
+
+                switch(valorUnidadME){
+                    case "M":
+                    valorNumNME = valorNumNME;
+                    break;
+                    case "Km":
+                    valorNumNME = valorNumNME * 1000;
+                    break;
+                    case "Cm":
+                    valorNumNME = valorNumNME * 0.01;
+                    break;
+                    case "Mm":
+                    valorNumNME = valorNumNME * 0.001;
+                    break;
+                    case "Ft":
+                    valorNumNME = valorNumNME * 0.3048;
+                    break;
+                    case "In":
+                    valorNumNME = valorNumNME * 0.0254;
+                    break;
+                }
+
+                if(fuerza){
+                    let valorNumfuerza = parseFloat(document.getElementById('ValorInputFuerza').value);
+
+                    Resultado = valorNumfuerza / valorNumNME;
+                }
+                if(masa){
+                    let valorNummasa = parseFloat(document.getElementById('valorInputMasa').value);
+                    let valorUnidadMasa = document.getElementById('unidadMedidaMasa');
+                    
+                    switch(valorUnidadMasa){
+                    case "Kg":
+                    valorNummasa = valorNummasa;
+                    break;
+                    case "Lb":
+                    valorNummasa = valorNummasa * 0.453592;
+                    break;
+                    case "G":
+                    valorNummasa = valorNummasa / 1000;
+                    break;
+                    case "T":
+                    valorNummasa = valorNummasa * 1000;
+                    break;
+                }
+
+                    Resultado = (valorNummasa * 9.8) / valorNumNME;
+                }
+
+            }
+
+            //IF PARA SACAR FUERZA
+            if(datosCheckboxes[0] == "fuerza"){
+                let valorNumNME = parseFloat(document.getElementById('valorInputME').value);
+                let valorUnidadME = document.getElementById('unidadMedidaME2');
+
+                let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                let valorUnidadDeformacion = document.getElementById('unidadMedidaDeformacion');
+
+                switch(valorUnidadME){
+                    case "M":
+                    valorNumNME = valorNumNME;
+                    break;
+                    case "Km":
+                    valorNumNME = valorNumNME * 1000;
+                    break;
+                    case "Cm":
+                    valorNumNME = valorNumNME * 0.01;
+                    break;
+                    case "Mm":
+                    valorNumNME = valorNumNME * 0.001;
+                    break;
+                    case "Ft":
+                    valorNumNME = valorNumNME * 0.3048;
+                    break;
+                    case "In":
+                    valorNumNME = valorNumNME * 0.0254;
+                    break;
+                }
+
+                switch(valorUnidadDeformacion){
+                    case "M":
+                    valorNumDeformacion = valorNumDeformacion;
+                    break;
+                    case "Km":
+                    valorNumDeformacion = valorNumDeformacion * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDeformacion = valorNumDeformacion / 100;
+                    break;
+                    case "Mm":
+                    valorNumDeformacion = valorNumDeformacion / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDeformacion = valorNumDeformacion * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDeformacion = valorNumDeformacion * 0.0254;
+                    break;
+                }
+
+                Resultado = valorNumNME / valorNumDeformacion;
+                
+                if(masa){
+                    let valorNummasa = parseFloat(document.getElementById('valorInputMasa').value);
+                    let valorUnidadMasa = document.getElementById('unidadMedidaMasa');
+                    
+                    switch(valorUnidadMasa){
+                    case "Kg":
+                    valorNummasa = valorNummasa;
+                    break;
+                    case "Lb":
+                    valorNummasa = valorNummasa * 0.453592;
+                    break;
+                    case "G":
+                    valorNummasa = valorNummasa / 1000;
+                    break;
+                    case "T":
+                    valorNummasa = valorNummasa * 1000;
+                    break;
+                }
+
+                    Resultado = (valorNummasa * 9.8);
+                }
+
+            }
+
+            //IF PARA SCAR MASA
+            if(datosCheckboxes[0] == "masa"){
+                
+                
+                if(fuerza == false){
+                let fuezas = 0;
+                let valorNumNME = parseFloat(document.getElementById('valorInputME').value);
+                let valorUnidadME = document.getElementById('unidadMedidaME2');
+
+                switch(valorUnidadME){
+                    case "M":
+                    valorNumNME = valorNumNME;
+                    break;
+                    case "Km":
+                    valorNumNME = valorNumNME * 1000;
+                    break;
+                    case "Cm":
+                    valorNumNME = valorNumNME * 0.01;
+                    break;
+                    case "Mm":
+                    valorNumNME = valorNumNME * 0.001;
+                    break;
+                    case "Ft":
+                    valorNumNME = valorNumNME * 0.3048;
+                    break;
+                    case "In":
+                    valorNumNME = valorNumNME * 0.0254;
+                    break;
+                }
+
+                let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                let valorUnidadDeformacion = document.getElementById('unidadMedidaDeformacion').value;
+
+                switch(valorUnidadDeformacion){
+                    case "M":
+                    valorNumDeformacion = valorNumDeformacion;
+                    break;
+                    case "Km":
+                    valorNumDeformacion = valorNumDeformacion * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDeformacion = valorNumDeformacion / 100;
+                    break;
+                    case "Mm":
+                    valorNumDeformacion = valorNumDeformacion / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDeformacion = valorNumDeformacion * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDeformacion = valorNumDeformacion * 0.0254;
+                    break;
+                }
+
+                fuezas = valorNumNME / valorNumDeformacion;
+
+                Resultado = fuezas / 9.8;
+                }
+                
+                if(fuerza){
+                    let valorNumfuerza = parseFloat(document.getElementById('ValorInputFuerza').value);
+
+                    Resultado = valorNumfuerza / 9.8;
+                }
+            }
+
+            console.log(Resultado);
+            //Mostrar el resultado en el div
+            document.getElementById('resultado').innerText = Resultado;
+            // Hacer visible el div de resultado
+            document.getElementById('mostrarResultado').style.display = 'block';
+
+        });
+    </script>
+</body>
+</html>

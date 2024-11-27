@@ -11,39 +11,63 @@
     <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="index.html"><img src="img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
-          
-                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="img/logo.png" alt="logo" height="63" class="ms-2">
+                    <h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            
-                <!-- El offcanvas en sí -->
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <!-- Aquí se coloca la lista de enlaces -->
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
-                        <li class="nav-item me-3">
-                            <a class="nav-link active text-white" aria-current="page" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="pages/temas.html">Temas</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="pages/conversiones.html">Conversiones</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="pages/definiciones.html">Definiciones</a>
-                        </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link active text-white" aria-current="page" href="#">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="pages/temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="pages/conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="pages/definiciones.html">Definiciones</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-          </nav>
+        </nav>
     </header>
+
+    <main class="container">
+        <div class="text-center my-5">
+            <!-- Logo principal -->
+            <img src="img/logo.png" alt="Logo principal" height="150">
+        </div>
+
+        <!-- Lista de integrantes -->
+        <section class="mb-5">
+            <h2>Desarrollado por el grupo 5AMPr</h2>
+        </section>
+
+        <!-- Explicación del proyecto -->
+        <section>
+            <h2>Acerca del Proyecto</h2>
+            <p>
+                Este proyecto está diseñado para resolver problemas de física de manera interactiva y práctica. 
+                Ofrece un apartado de <strong>definiciones</strong> donde puedes consultar términos clave 
+                y una <strong>calculadora</strong> que sirve como un conversor de unidades.
+            </p>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center fixed-bottom py-3">
+        <p>&copy; 2024 PhysicLabs. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

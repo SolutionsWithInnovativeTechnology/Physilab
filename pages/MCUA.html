@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimiento Circular Uniformemente Acelerado</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js" defer></script>  
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+<body>
+    <!--header de la pagina-->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+          
+                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <!-- El offcanvas en sí -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Aquí se coloca la lista de enlaces -->
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/temas.html">Temas</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/conversiones.html">Conversiones</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="#">Definiciones</a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Movimiento rectilíneo uniforme</h1>
+            <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
+                <!--Checkboxs para revisar los datos con los que cuentas-->
+                <div id="presion" class="presionOpciones" style="display:block;">
+                    <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                    <div>
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="velocidad" name="datosOb">
+                                <label class="form-check-label" for="presion"> Velocidad Angular Inicial</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="distancia" name="datosOb">
+                                <label class="form-check-label" for="fuerza">Velocidad Angular Final</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="tiempo" name="datosOb">
+                                <label class="form-check-label" for="tiempo">Tiempo</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="desAn" name="datosOb">
+                                <label class="form-check-label" for="tiempo">Desplazamiento Angular</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="AceAn" name="datosOb">
+                                <label class="form-check-label" for="tiempo">Aceleracion Angular</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="AceTan" name="datosOb">
+                                <label class="form-check-label" for="tiempo">Aceleracion Tangencial</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="diam" name="datosOb">
+                                <label class="form-check-label" for="tiempo">Diametro</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="radio" name="datosOb">
+                                <label class="form-check-label" for="tiempo">Radio</label>
+                            </div>  
+                        </div>  
+                        <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
+                    </div><br>
+                        <!--Checkboxs para revisar los datos que quieres encontrar-->
+                    <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                    <div class="container">
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="velocidad" name="datosEnc" disabled>
+                                <label class="form-check-label" for="presion">Velocidad Angular Inicial</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="distancia" name="datosEnc" disabled>
+                                <label class="form-check-label" for="fuerza">Velocidad Angular Final</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="tiempo" name="datosEnc" disabled>
+                                <label class="form-check-label" for="area">Tiempo</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="desAn" name="datosEnc" disabled>
+                                <label class="form-check-label" for="tiempo">Desplazamiento Angular</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="AceAn" name="datosEnc" disabled>
+                                <label class="form-check-label" for="tiempo">Aceleracion Angular</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="AceTan" name="datosEnc" disabled>
+                                <label class="form-check-label" for="tiempo">Aceleracion Tangencial</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="diam" name="datosEnc" disabled>
+                                <label class="form-check-label" for="tiempo">Diametro</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="radio" name="datosEnc" disabled>
+                                <label class="form-check-label" for="tiempo">Radio</label>
+                            </div> 
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
+                    </div><br>
+            <!------Habilitar la parte de formulario para ingresar los valores------->
+        <div>
+            <div class="container" id="velocidadInput" style="display: none;">
+            <!--Contenedor para ingresar el valor de velocidad junto con sus respectivas unidades de medida-->
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Velocidad Angular Inicial:</label>
+                    </div>
+                    <!--Contenedor del input (Velocidad)-->
+                    <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorPresion" class="form-control text-center" placeholder="Velocidad Angular In" id="valorInputVelocidad" step="0.0000000001">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaVelocidad1" name="unidadMedidaPresion1" class="form-select text-center">
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="rad/s" class="text-center">Radianes sobre segundos(rad/s)</option>
+                            <option value="rad/min" class="text-center">Radianes sobre minutos(rad/min)</option>
+                            <option value="rev/min" class="text-center">Revoluciones sobre minutos(rev/min)</option>
+                            <option value="rev/s" class="text-center">Revoluciones sobre segundos(rev/s)</option>
+                        </select>
+                    </div> 
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de VELOCIDAD ANGULAR INICIAL junto con sus unidades de medidas-->
+            <div class="container" id="distanciaInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Velocidad Angular Final:</label>
+                    </div>
+                    <!--Contenedor del input(Distancia)-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Velocidad Angular Fi" step="0.0000000001" id="valorInputDistancia">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaDistancia" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="rad/s" class="text-center">Radianes sobre segundos(rad/s)</option>
+                            <option value="rad/min" class="text-center">Radianes sobre minutos(rad/min)</option>
+                            <option value="rev/min" class="text-center">Revoluciones sobre minutos(rev/s)</option>
+                            <option value="rev/s" class="text-center">Revoluciones sobre segundos(rev/s)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de TIEMPO junto con sus unidades de medidas-->
+            <div class="container" id="tiempoInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Tiempo:</label>
+                    </div>
+                    <!--Contenedor del input(Tiempo)-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorArea" class="form-control text-center"  placeholder="Tiempo" step="0.0000000001" id="valorInputTiempo">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaTiempo" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="h" class="text-center">Horas(h)</option>
+                            <option value="min" class="text-center">Minutos(m)</option>
+                            <option value="s" class="text-center">Segundos(s)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de DESPLAZAMIENTO ANGULAR junto son su unidad de medida-->
+            <div class="container" id="desAnInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Desplazamiento Angular:</label>
+                    </div>
+                    <!--Contenedor del input(Desplazamiento)-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valordesAn" class="form-control text-center"  placeholder="Desplazamiento" step="0.0000000001" id="valorInputdesAn">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidadesAn" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="rad" class="text-center">Radianes(rad)</option>
+                            <option value="rev" class="text-center">Revoluciones(rev)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de ACELERACION ANGULAR junto con sus unidades de medida-->
+            <div class="container" id="AceAnInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Aceleracion Angular:</label>
+                    </div>
+                    <!--Contenedor del input(AceleracionAN)-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valordesAn" class="form-control text-center"  placeholder="Aceleracion" step="0.0000000001" id="valorInputAceAn">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaAceAn" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="rad/s2" class="text-center">Radianes sobre segundos cuadrados(rad/s2)</option>
+                            <option value="rev/s2" class="text-center">Revoluciones sobre segundos cuadrados(rev/s2)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de ACELERACION TANGENCIAL junto con sus unidades de medida-->
+            <div class="container" id="AceTanInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Aceleracion Tangencial:</label>
+                    </div>
+                    <!--Contenedor del input(AceleracionTAN)-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valordesAn" class="form-control text-center"  placeholder="Aceleracion" step="0.0000000001" id="valorInputAceTan">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaAceTan" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="m/s2" class="text-center">Metros sobre segundos cuadrados(m/s2)</option>
+                            <option value="cm/s2" class="text-center">Centimetros sobre segundos cuadrados(cm/s2)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de DIAMETRO junto con sus unidades de medida-->
+            <div class="container" id="diamInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Diametro:</label>
+                    </div>
+                    <!--Contenedor del input(AceleracionTAN)-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valordesAn" class="form-control text-center"  placeholder="Diametro" step="0.0000000001" id="valorInputdiam">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidadiam" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="cm" class="text-center">Centimetros(cm)</option>
+                            <option value="m" class="text-center">Metros(m)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de RADIO junto con sus unidades de medida-->
+            <div class="container" id="radioInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Radio:</label>
+                    </div>
+                    <!--Contenedor del input(Radio)-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valordesAn" class="form-control text-center"  placeholder="Radio" step="0.0000000001" id="valorInputradio">
+                    </div>
+                    <!--Unidad de medida-->
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaradio" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="cm" class="text-center">Centimetros(cm)</option>
+                            <option value="m" class="text-center">Metros(m)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!--Boton para enviar-->
+            <div class="container">
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="col-6 col-md-auto text-center">
+                        <input type="submit" name="Enviar" class="form-control mt-2"id="botonEnviar" disabled>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div id="mostrarResultado" class="container" style="display: none;">
+                <br><br>
+                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span><span></span></div>
+                </div>
+            </div>
+    </div>
+    </main>
+    <!--Footer de la pagina-->
+    <footer class="mt-5">
+
+    </footer>
+
+    <!--Funcionamiento general de la pagina(presiones)-->
+    <script>
+        let velocidad= false;
+        let distancia= false;
+        let tiempo= false;
+        let desAn = false;
+        let AceAn = false;
+        let AceTan = false;
+        let diam = false;
+        let radio = false;
+        let datosCheckboxes = [];
+
+        var datosComprobar = [];
+
+        //funcion para validar el numero de datos con los que cuentas
+        document.getElementById('verificarOb').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosOb"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosOb"]');
+            const checkboxes3 = document.querySelectorAll('input[name="datosEnc"]');
+
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador < 2) {//revisa que se seleccionen minimo dos datos
+                alert('¡Necesitas seleccionar mínimo dos datos!');
+            } else if(contador==8){//revisa que no se selccionen todos los dato
+                alert('¡No puedes seleccionar todos los datos!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else { //deshabilita los checkboxes al cumpliar las condiciones
+                checkboxes2.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+                });
+                datosComprobar = [...datosCheckboxes]; //Contiene todos los datos seleccionados por el usuario(Datos con los que cuentas)
+                checkboxes3.forEach(function(checkbox) {
+                        checkbox.disabled = false;
+                });
+
+                const botonDesactivado = document.getElementById("verificarOb");
+                botonDesactivado.disabled = true;
+                const botonDesactivado2 = document.getElementById("verificarEnc");
+                botonDesactivado2.disabled = false;
+            }
+        });
+
+
+        //funcion para validar que solo se elija un dato para encontrar
+        //Esta funcion permite verificar que el usuario escoga solo el dato que falta y habilita el div para la introduccion de datos
+        document.getElementById('verificarEnc').addEventListener('click', function(event) {
+            event.preventDefault(); // evita que se envie el formulario
+            const checkboxes = document.querySelectorAll('input[name="datosEnc"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosEnc"]');
+            let contador = 0;
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador > 1) {//revisa que se seleccionen minimo dos datos
+                alert('¡Solo puedes buscar un dato a la vez!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }
+            else{
+                let contador2 = 0;
+                let salir = false;
+                
+                //variables que van a guardar los datos que se ingresen mediante el id
+                //VELOCIDAD AN INI
+                const valorInput_velocidad = document.getElementById('valorInputVelocidad');
+                const unidadM_velocidad1 = document.getElementById('unidadMedidaVelocidad1');
+                //VELOCIDAD AN FIN
+                const valorInput_distancia = document.getElementById('valorInputDistancia');
+                const unidadM_distancia1 = document.getElementById('unidadMedidaDistancia');
+                //TIEMPO
+                const valorInput_tiempo = document.getElementById('valorInputTiempo');
+                const unidadM_tiempo1 = document.getElementById('unidadMedidaTiempo');
+                //DESPLAZAMIENTO AN
+                const valorInput_desplazamiento = document.getElementById('valorInputdesAn');
+                const unidadM_desplazamiento1 = document.getElementById('unidadMedidadesAn');
+                //ACELERACION AN
+                const valorInput_aceleracionAN = document.getElementById('valorInputAceAn');
+                const unidadM_aceleracionAN1 = document.getElementById('unidadMedidaAceAn');
+                //ACELERACION TAN
+                const valorInput_aceleracionTAN = document.getElementById('valorInputAceTan');
+                const unidadM_aceleracionTAN1 = document.getElementById('unidadMedidaAceTan');
+                //DIAMETRO
+                const valorInput_diametro = document.getElementById('valorInputdiam');
+                const unidadM_diametro1 = document.getElementById('unidadMedidadiam');
+                //RADIO
+                const valorInput_radio = document.getElementById('valorInputradio');
+                const unidadM_radio1 = document.getElementById('unidadMedidaradio');
+
+
+                for(var i=0; i<datosComprobar.length; i++){
+                    //if para comprobar que datos te va a proporcionar
+                    if(datosComprobar[i]=="velocidad"){
+                        velocidad=true;
+                    }
+                    if(datosComprobar[i]=="distancia"){
+                        distancia=true;
+                    }
+                    if(datosComprobar[i]=="tiempo"){
+                        tiempo=true;
+                    }
+                    if(datosComprobar[i]=="desAn"){
+                        desAn=true;
+                    }
+                    if(datosComprobar[i]=="AceAn"){
+                        AceAn=true;
+                    }
+                    if(datosComprobar[i]=="AceTan"){
+                        AceTan=true;
+                    }
+                    if(datosComprobar[i]=="diam"){
+                        diam=true;
+                    }
+                    if(datosComprobar[i]=="radio"){
+                        radio=true;
+                    }
+                    for(var j=0; j<datosCheckboxes.length; j++){
+                        if(datosComprobar[i] != datosCheckboxes[j]){ // EN cada iteracion verificar que los datos del principio(datosOb) y del fianl(datosEnc) no coincidan
+                            contador2++;
+                        }else{
+                            salir= true;
+                            break;
+                        }
+                    }
+                    if(salir==true){
+                        break;
+                    }
+                }
+                if(salir==true){
+                    alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
+                }else{
+                     //deshabilita los checkboxes al cumpliar las condiciones
+                    checkboxes2.forEach(function(checkbox) {
+                        checkbox.disabled = true;
+                    });
+                    //desactiva el boton 
+                    const botonDesactivado = document.getElementById("verificarEnc");
+                        botonDesactivado.disabled = true;
+                    
+                    const botonEnviar = document.getElementById("botonEnviar");
+                        botonEnviar.disabled = false;
+                    
+                        //funcion que habilita el ingreso de los valores de presion en caso de ser seleccionado en los checkboxes
+                        if(velocidad){
+                            document.getElementById('velocidadInput').style.display = 'block';
+                            valorInput_velocidad.setAttribute('required', 'required');
+                            unidadM_velocidad1.setAttribute('required', 'required');
+
+                        }
+                        //funcion que habilita el ingreso de los valores de fuerza en caso de ser seleccionado en los checkboxes
+                        if(distancia){
+                        
+                            document.getElementById('distanciaInput').style.display = 'block';
+                            valorInput_distancia.setAttribute('required', 'required');
+                            unidadM_distancia1.setAttribute('required', 'required');
+                        }console.log(distancia);
+                        //funcion que habilita el ingreso de los valores de area en caso de ser seleccionado en los checkboxes
+                        if(tiempo){
+                            document.getElementById('tiempoInput').style.display = 'block';
+                            valorInput_tiempo.setAttribute('required', 'required');
+                            unidadM_tiempo1.setAttribute('required', 'required');
+
+                        }
+                        //funcion que habilita el ingreso de los valores de desplazamiento angular en caso de ser seleccionado en los checkboxes
+                        if(desAn){
+                            document.getElementById('desAnInput').style.display = 'block';
+                            valorInput_desplazamiento.setAttribute('required','required');
+                            unidadM_desplazamiento1.setAttribute('required','required');
+                        }
+                        //funcion que habilita el ingreso de los valores de aceleracion angular en caso de ser seleccionado en los checkboxes
+                        if(AceAn){
+                            document.getElementById('AceAnInput').style.display = 'block';
+                            valorInput_aceleracionAN.setAttribute('required','required');
+                            unidadM_aceleracionAN1.setAttribute('required','required');
+                        }
+                        //funcion que habilita el ingreso de los valores de aceleracion tangencial en caso de ser seleccionado en los checkboxes
+                        if(AceTan){
+                            document.getElementById('AceTanInput').style.display = 'block';
+                            valorInput_aceleracionTAN.setAttribute('required','required');
+                            unidadM_aceleracionTAN1.setAttribute('required','required');
+                        }
+                        //funcion que habilita el ingreso de los valores de diametro en caso de ser seleccionado en los checkboxes
+                        if(diam){
+                            document.getElementById('diamInput').style.display = 'block';
+                            valorInput_diametro.setAttribute('required','required');
+                            unidadM_diametro1.setAttribute('required','required');
+                        }
+                        //funcion que habilita el ingreso de los valores de radio en caso de ser seleccionado en los checkboxes
+                        if(radio){
+                            document.getElementById('radioInput').style.display = 'block';
+                            valorInput_radio.setAttribute('required','required');
+                            unidadM_radio1.setAttribute('required','required');
+                        }
+                }  
+            }
+        });
+
+        //Esta funcion 
+        document.getElementById('formularioDatos').addEventListener("submit", function(event){
+            event.preventDefault();
+            //variable que va a retener los datos
+            var resultado=0.0;
+            
+            if(velocidad == true && distancia == true && tiempo == true){//Busca distancia
+                var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
+                var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
+            
+                var valorNumDistancia = parseFloat(document.getElementById('valorInputDistancia').value);
+                var valorUnidadMDistancia = document.getElementById('unidadMedidaDistancia').value;
+
+                var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
+                var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
+
+                if(valorUnidadMVelocidad == "rad/min"){
+                    valorNumVelocidad = valorNumVelocidad / 60;
+                }
+                if(valorUnidadMVelocidad == "rev/min"){
+                    valorNumVelocidad = (valorNumVelocidad*6.2832)/60;
+                }
+                if(valorUnidadMVelocidad == "rev/s"){
+                    valorNumVelocidad = valorNumVelocidad*6.2832;
+                }
+
+                
+                if(valorUnidadMDistancia == "rad/min"){
+                    valorNumDistancia = valorNumVelocidad / 60;
+                }
+                if(valorUnidadMDistancia == "rev/min"){
+                    valorNumDistancia = (valorNumVelocidad*6.2832)/60;
+                }
+                if(valorUnidadMDistancia == "rev/s"){
+                    valorNumDistancia = valorNumVelocidad*6.2832;
+                }
+
+                if(valorUnidadMTiempo == "min"){
+                    valorNumTiempo = valorNumTiempo * 60;
+                }
+                if(valorUnidadMTiempo == "h"){
+                    valorNumTiempo = valorNumTiempo * 3600;
+                }
+
+                //Aplicar formula
+                resultado = (valorNumDistancia - valorNumVelocidad)/valorNumTiempo;
+
+                document.getElementById("resultado").innerHTML="La aceleracion angular es de "+resultado+" rad/s2";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }
+            
+            /*if(velocidad == true && distancia == true && tiempo == true){
+                var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
+                var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
+            
+                var valorNumDistancia = parseFloat(document.getElementById('valorInputDistancia').value);
+                var valorUnidadMDistancia = document.getElementById('unidadMedidaDistancia').value;
+
+                var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
+                var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
+
+                if(valorUnidadMVelocidad == "rad/min"){
+                    valorNumVelocidad = valorNumVelocidad / 60;
+                }
+                if(valorUnidadMVelocidad == "rev/min"){
+                    valorNumVelocidad = (valorNumVelocidad*6.2832)/60;
+                }
+                if(valorUnidadMVelocidad == "rev/s"){
+                    valorNumVelocidad = valorNumVelocidad*6.2832;
+                }
+
+                
+                if(valorUnidadMDistancia == "rad/min"){
+                    valorNumDistancia = valorNumVelocidad / 60;
+                }
+                if(valorUnidadMDistancia == "rev/min"){
+                    valorNumDistancia = (valorNumVelocidad*6.2832)/60;
+                }
+                if(valorUnidadMDistancia == "rev/s"){
+                    valorNumDistancia = valorNumVelocidad*6.2832;
+                }
+
+                if(valorUnidadMTiempo == "min"){
+                    valorNumTiempo = valorNumTiempo * 60;
+                }
+                if(valorUnidadMTiempo == "h"){
+                    valorNumTiempo = valorNumTiempo * 3600;
+                }
+
+                //Aplicar la formula
+                resultado = ((valorNumDistancia+valorNumVelocidad)/2)*valorNumTiempo;
+
+                document.getElementById("resultado").innerHTML="El desplazamiento angular es de "+resultado+" rad/s2";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }*/
+
+            if(AceAn == true && radio == true ){
+                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+
+                var valorNumradio = parseFloat(document.getElementById("valorInputradio").value);
+                var valorUnidadMradio = document.getElementById("unidadMedidaradio");
+
+                if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceAn * 6.2832;
+                }
+
+                if(valorUnidadMradio == "cm"){
+                    valorNumradio = valorNumradio/100;
+                }
+                //Aplicar formula
+                resultado = valorNumAceAn*valorNumradio;
+
+                document.getElementById("resultado").innerHTML="La aceleracion tangencial es de "+resultado+" m/s2";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }else if(AceAn == true && diam == true){
+                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+
+                var valorNumdiam = parseFloat(document.getElementById("valorInputdiam").value);
+                var valorUnidadMdiam = document.getElementById("unidadMedidadiam");
+
+                if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceAn * 6.2832;
+                }
+
+                if(valorUnidadMdiam == "cm"){
+                    valorNumdiam = valorNumradio/100;
+                }
+
+                valorNumdiam = valorNumdiam/2;
+                //Aplicar formula
+                resultado = valorNumAceAn*valorNumdiam;
+
+                document.getElementById("resultado").innerHTML="La aceleracion tangencial es de "+resultado+" m/s2";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }
+
+            if(velocidad == true && tiempo == true && AceAn == true){
+                var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
+                var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
+
+                var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
+                var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
+
+                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+
+                if(valorUnidadMVelocidad == "rad/min"){
+                    valorNumVelocidad = valorNumVelocidad / 60;
+                }
+                if(valorUnidadMVelocidad == "rev/min"){
+                    valorNumVelocidad = (valorNumVelocidad*6.2832)/60;
+                }
+                if(valorUnidadMVelocidad == "rev/s"){
+                    valorNumVelocidad = valorNumVelocidad*6.2832;
+                }
+
+                if(valorUnidadMTiempo == "min"){
+                    valorNumTiempo = valorNumTiempo * 60;
+                }
+                if(valorUnidadMTiempo == "h"){
+                    valorNumTiempo = valorNumTiempo * 3600;
+                }
+
+                if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceAn * 6.2832;
+                }
+
+                //Aplicar formula
+                resultado = (valorNumVelocidad*valorNumTiempo)+((0.5*valorNumAceAn)*(valorNumTiempo*valorNumTiempo));
+
+                document.getElementById("resultado").innerHTML="El desplazamiento angular es de "+resultado+" rad";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }
+
+            if(velocidad == true && AceAn == true && desAn == true){
+                var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
+                var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
+
+                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+
+                var valorNumdesAn = parseFloat(document.getElementById("valorInputdesAn").value);
+                var valorUnidadMdesAn = document.getElementById("unidadMedidadesAn").value;
+
+                if(valorUnidadMVelocidad == "rad/min"){
+                    valorNumVelocidad = valorNumVelocidad / 60;
+                }
+                if(valorUnidadMVelocidad == "rev/min"){
+                    valorNumVelocidad = (valorNumVelocidad*6.2832)/60;
+                }
+                if(valorUnidadMVelocidad == "rev/s"){
+                    valorNumVelocidad = valorNumVelocidad*6.2832;
+                }
+
+                if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceAn * 6.2832;
+                }
+
+                if(valorUnidadMdesAn == "rev"){
+                    valorNumdesAn = valorNumdesAn * 6.2832;
+                }
+
+                //Aplicar formula
+                resultado = Math.sqrt(((valorNumVelocidad*valorNumVelocidad)+(2*valorNumAceAn*valorNumdesAn)));
+
+                document.getElementById("resultado").innerHTML="El desplazamiento angular es de "+resultado+" rad";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

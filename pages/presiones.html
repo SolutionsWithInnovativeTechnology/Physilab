@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presiones</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>
-    <script type="text/javascript" async src="../js/mathjax/tex-mml-chtml.js"></script>
+    <script src="../js/bootstrap.bundle.min.js" defer></script>  
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
 </head>
 <body>
     <!--header de la pagina-->
@@ -50,87 +52,430 @@
     <main>
         <div class="container">
             <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Presiones</h1>
-            <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
-                <label for="incognita" class="form-label mb-2">Dato que deseas encontrar: </label>
-                    <div class="row justify-content-center">
-                        <div class="col-10 col-md-auto mb-2">
-                            <!--Los datos que se pueden llegar a pedir de los respectivos temas-->
-                            <select name="incognita" id="incognita" required class="form-select">
-                                <option value="" disabled selected class="text-center">Selecciona el dato que requieras encontrar</option>
-                                <option value="Presion" class="text-center">Presión</option>
-                                <option value="Hidrostatica" class="text-center">Presión Hidrostatica</option>
-                                <option value="Atmosferica" class="text-center">Presión Atmosferica</option>
-                                <option value="Absoluta" class="text-center">Presión Absoluta</option>
-                                <option value="Manometrica" class="text-center">Presión Manometrica</option>                
-                            </select>
+            <!--Inicio del Formulario-->
+                <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
+                    <label for="incognita" class="form-label mb-2">Dato que deseas encontrar: </label>
+                        <div class="row justify-content-center">
+                            <div class="col-10 col-md-auto mb-2">
+                                <!--Las distintas opciones a elegir-->
+                                <select name="incognita" id="incognita" required class="form-select" >
+                                    <option value="" disabled selected class="text-center">Selecciona el dato que requieras encontrar</option>
+                                    <option value="Presion" class="text-center">Presión</option>
+                                    <option value="Hidrostatica" class="text-center">Presión Hidrostatica</option>
+                                    <option value="OtrasPresiones" class="text-center">Otros Tipos de Presiones</option>               
+                                </select>
+                            </div>
+                        </div><br>
+                    <!--OPCIONES PRESION-->
+                    <div id="presionSelect" class="presionOpciones" style="display: none;">
+                        <!--Checkboxs para revisar los datos con los que cuentas PRESION-->         
+                            <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                                <div class="container">
+                                    <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                            <input class="form-check-input" type="checkbox" value="presion" name="datosOb">
+                                                <label class="form-check-label" for="presion">Presión</label>
+                                        </div> 
+                                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                            <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
+                                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                                        </div> 
+                                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                            <input class="form-check-input" type="checkbox" value="area" name="datosOb">
+                                                <label class="form-check-label" for="area">Area</label>
+                                        </div> 
+                                    </div>  
+                                        <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
+                                </div><br>
+                        <!--Checkboxs para revisar los datos que quieres encontrar PRESION-->
+                            <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                                <div class="container">
+                                    <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                            <input class="form-check-input" type="checkbox" value="presion" name="datosEnc" disabled>
+                                                <label class="form-check-label" for="presion">Presión</label>
+                                        </div> 
+                                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                            <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc" disabled>
+                                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                                        </div> 
+                                        <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                            <input class="form-check-input" type="checkbox" value="area" name="datosEnc" disabled>
+                                                <label class="form-check-label" for="area">Area</label>
+                                        </div>      
+                                    </div>
+                                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
+                                </div><br>
+
+
+                        <!--Habilitar la parte de formulario para ingresar los valores-->
+                        <div>
+                            <div class="container" id="presionInput" style="display: none;">
+                                <!--Contenedor para ingresar el valor de presion junto con sus respectivas unidades de medida-->
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-12 mb-2 text-center">
+                                        <label for="" class="form-label text-center">Presión:</label>
+                                    </div>
+                                <!--Contenedor del input (Presion)-->
+                                    <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                        <input type="number" name="valorPresion" class="form-control text-center" placeholder="Presión" id="valorInputPresion" step="0.0000000001">
+                                    </div>
+                                <!--Primera unidad de medida-->
+                                    <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                        <select id="unidadMedidaPresion1" name="unidadMedidaPresion1" class="form-select text-center">
+                                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                            <option value="N" class="text-center">Newton(s)</option>
+                                            <option value="Lb" class="text-center">Libra(s)</option>
+                                        </select>
+                                    </div>
+                                <!--label que contiene el divisor--> 
+                                    <div class="col-1 col-sm-1 mb-2 text-center">
+                                        <label for="">/</label>
+                                    </div>
+                                <!--Segunda unidad de medida-->
+                                    <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                        <select id="unidadMedidaPresion2" name="unidadMedidaPresion2" class="form-select text-center">
+                                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                            <option value="In2" class="text-center">Pulgada(s)²</option>
+                                            <option value="M2" class="text-center">Metro(s)²</option>
+                                        </select>
+                                    </div> 
+                                </div><br>
+                            </div>
+                            <!--Contenedor para ingresar el valor de FUERZA junto con sus unidades de medidas-->
+                            <div class="container" id="fuerzaInput" style="display: none;">
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-12 mb-2 text-center">
+                                        <label for="" class="form-label text-center">Fuerza:</label>
+                                    </div>
+                                    <!--Contenedor del input(Fuerza)-->
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                        <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Fuerza" step="0.0000000001" id="valorInputFuerza">
+                                    </div>
+                                    <!--Unidad de medida-->
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                        <select id="unidadMedidaFuerza" class="form-select text-center" >
+                                            <option value="N" disabled selected class="text-center">Newton(s)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Contenedor para ingresar el valor de AREA junto con sus unidades de medidas-->
+                            <div class="container" id="areaInput" style="display: none;">
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-12 mb-2 text-center">
+                                        <label for="" class="form-label text-center">Área:</label>
+                                    </div>
+                                <!--Contenedor del input(Area)-->
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                        <input type="number" name="valorArea" class="form-control text-center"  placeholder="Área" step="0.0000000001" id="valorInputArea">
+                                    </div>
+                                <!--Unidad de medida-->
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                        <select id="unidadMedidaArea" class="form-select text-center" >
+                                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                            <option value="M2" class="text-center">Metros(s)²</option>
+                                            <option value="Km2" class="text-center">Kilometro(s)²</option>
+                                            <option value="Cm2" class="text-center">Centimetro(s)²</option>
+                                            <option value="Mm2" class="text-center">Milimetro(s)²</option>
+                                            <option value="Ft2" class="text-center">Pie(s)²</option>
+                                            <option value="In2" class="text-center">Pulgada(s)²</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div> <br>
-                <!--OPCIONES PRESION-->
-                <div id="presion" class="presionOpciones" style="display: none;">
-                    <!--Checkboxs para revisar los datos con los que cuentas PRESION-->         
+                    </div>
+
+                    <!--OPCIONES PRESION HIDROSTATICA-->
+                    <div id="hidrostatica" class="hidrostaticaOpciones" style="display: none;">
+                        <!--Checkboxs para revisar los datos con los que cuentas PRESION HIDROSTATICA-->         
                         <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
                             <div class="container">
-                                <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
-                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                        <input class="form-check-input" type="checkbox" value="presion" name="datosOb">
-                                            <label class="form-check-label" for="presion">Presión</label>
-                                    </div> 
-                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                        <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
-                                            <label class="form-check-label" for="fuerza">Fuerza</label>
-                                    </div> 
-                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                        <input class="form-check-input" type="checkbox" value="area" name="datosOb">
-                                            <label class="form-check-label" for="area">Area</label>
-                                    </div> 
-                                </div>  
-                                <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
+                            <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="pHidrostatica" name="datosObHidro">
+                                        <label class="form-check-label" for="pHidrostatica">Presión Hidrostatica</label>
+                                </div> 
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="densidad" name="datosObHidro">
+                                        <label class="form-check-label" for="densidad">Densidad</label>
+                                </div> 
+                                <!--<div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="gravedad" name="datosObHidro">
+                                        <label class="form-check-label" for="gravedad">Gravedad</label>
+                                </div>--> 
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="altura" name="datosObHidro">
+                                        <label class="form-check-label" for="altura">Altura</label>
+                                </div> 
+                            </div>  
+                            <button type="button" class="btn btn-primary mt-3" id="verificarObHidro">Verificar Checkboxes</button>
                             </div><br>
-                    <!--Checkboxs para revisar los datos que quieres encontrar PRESION-->
+                            <!--Checkboxs para revisar los datos que quieres encontrar PRESION HIDROSTATICA-->
                         <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
                             <div class="container">
                                 <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
-                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                        <input class="form-check-input" type="checkbox" value="presion" name="datosEnc" disabled>
-                                            <label class="form-check-label" for="presion">Presión</label>
+                                    <div class="col-4 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="pHidrostatica" name="datosEncHidro" disabled>
+                                            <label class="form-check-label" for="pHidrostatica">Presión Hidrostatica</label>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="densidad" name="datosEncHidro" disabled>
+                                            <label class="form-check-label" for="densidad">Densidad</label>
                                     </div> 
-                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                        <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc" disabled>
-                                            <label class="form-check-label" for="fuerza">Fuerza</label>
-                                    </div> 
-                                    <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
-                                        <input class="form-check-input" type="checkbox" value="area" name="datosEnc" disabled>
-                                            <label class="form-check-label" for="area">Area</label>
-                                    </div>      
+                                    <!--<div class="col-4 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="gravedad" name="datosEncHidro" disabled>
+                                            <label class="form-check-label" for="gravedad">Gravedad</label>
+                                    </div> -->
+                                    <div class="col-4 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-center align-items-center">
+                                        <input class="form-check-input" type="checkbox" value="altura" name="datosEncHidro" disabled>
+                                            <label class="form-check-label" for="altura">Altura</label>
+                                    </div>
                                 </div>
-                                <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
-                             </div><br>
-                <!--Checkboxs para revisar los datos con los que cuentas PRESION HIDROSTATICA-->
+                                    <button type="button" class="btn btn-primary mt-3" id="verificarEncHidro" disabled>Verificar Checkboxes</button>
+                            </div><br>
 
-                <!--Checkboxs para revisar los datos que quieres encontrar PRESION HIDROSTATICA-->
+                        <div>
+                            <div class="container" id="pHidrostaticaInput" style="display: none;">
+                                <!--Contenedor para ingresar el valor de densidad junto con sus respectivas unidades de medida-->
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-12 mb-2 text-center">
+                                        <label for="" class="form-label text-center">Presión Hidrostatica:</label>
+                                    </div>
+                                    <!--Contenedor del input (presion hidrostatica)-->
+                                    <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                    <input type="number" name="valorpHidrostatica" class="form-control text-center" placeholder="P. Hidrostatica" id="valorInputHidrostatica" step="0.0000000001">
+                                    </div>
+                                    <!--Primera unidad de medida-->
+                                    <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                        <select id="unidadMedidaPHidrostatica1" name="unidadMedidaPHidrostatica1" class="form-select text-center">
+                                            <option value="N" disabled selected class="text-center">Newton(s)</option>
+                                        </select>
+                                    </div>
+                                    <!--label que contiene el divisor--> 
+                                    <div class="col-1 col-sm-1 mb-2 text-center">
+                                        <label for="">/</label>
+                                    </div>
+                                    <!--Segunda unidad de medida-->
+                                    <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                        <select id="unidadMedidaPHidrostatica2" name="unidadMedidaPHisdrostatica2" class="form-select text-center">
+                                            <option value="M2" disabled selected class="text-center">Metros(s)²</option>
+                                        </select>
+                                    </div> 
+                                </div><br>
+                            </div>
+                            <div class="container" id="densidadInput" style="display: none;">
+                                <!--Contenedor para ingresar el valor de densidad junto con sus respectivas unidades de medida-->
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-12 mb-2 text-center">
+                                        <label for="" class="form-label text-center">Densidad:</label>
+                                    </div>
+                                    <!--Contenedor del input (Densidad)-->
+                                        <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                            <input type="number" name="valorDensidad" class="form-control text-center" placeholder="Densidad" id="valorInputDensidad" step="0.0000000001">
+                                        </div>
+                                        <!--Primera unidad de medida-->
+                                        <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                            <select id="unidadMedidaDensidad1" name="unidadMedidaDensidad1" class="form-select text-center">
+                                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                                <option value="Kg" class="text-center">Kilogramo(s)</option>
+                                                <option value="Lb" class="text-center">Libra(s)</option>
+                                                <option value="G" class="text-center">Gramo(s)</option>
+                                                <option value="T" class="text-center">Tonelada(s)</option>
+                                            </select>
+                                        </div>
+                                        <!--label que contiene el divisor--> 
+                                        <div class="col-1 col-sm-1 mb-2 text-center">
+                                            <label for="">/</label>
+                                        </div>
+                                        <!--Segunda unidad de medida-->
+                                        <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                            <select id="unidadMedidaDensidad2" name="unidadMedidaDensidadn2" class="form-select text-center">
+                                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                                <option value="M3" class="text-center">Metros(s)³</option>
+                                                <option value="Km3" class="text-center">Kilometro(s)³</option>
+                                                <option value="Cm3" class="text-center">Centimetro(s)³</option>
+                                                <option value="Mm3" class="text-center">Milimetro(s)³</option>
+                                                <option value="Ft3" class="text-center">Pie(s)³</option>
+                                                <option value="In3" class="text-center">Pulgada(s)³</option>
+                                            </select>
+                                        </div> 
+                                </div><br>
+                            </div>
+                                    
+                            <div class="container" id="gravedadInput" style="display: none;">
+                                <!--Contenedor para ingresar el valor de GRAVEDAD junto con sus unidades de medidas-->
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-12 mb-2 text-center">
+                                        <label for="" class="form-label text-center">Gravedad:</label>
+                                    </div>
+                                    <!--Contenedor del input(Gravedad)-->
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                            <input type="number" name="valorGravedad" class="form-control text-center"  placeholder="9.8" step="0.0000000001" id="valorInputGravedad" value="9.8" disabled>
+                                        </div>
+                                    <!--Primera unidad de medida-->
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                            <select id="unidadMedidaGravedad1" class="form-select text-center" >
+                                                <option value="M" disabled selected class="text-center">Metros(s)</option>
+                                            </select>
+                                        </div>
+                                    <!--label que contiene el divisor--> 
+                                        <div class="col-1 col-sm-1 mb-2 text-center">
+                                            <label for="">/</label>
+                                        </div>
+                                    <!--Segunda unidad de medida-->
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                            <select id="unidadMedidaGravedad2" class="form-select text-center" >
+                                                <option value="Seg2" disabled selected class="text-center">Segundos(s)²</option>
+                                            </select>
+                                        </div>
+                                </div>
+                            </div>
+                            
+                            <div class="container" id="alturaInput" style="display: none;">
+                                <!--Contenedor para ingresar el valor de ALTURA junto con sus unidades de medidas-->
+                                <div class="row d-flex justify-content-center align-items-center">
+                                    <div class="col-12 mb-2 text-center">
+                                        <label for="" class="form-label text-center">Altura:</label>
+                                    </div>
+                                    <!--Contenedor del input(Altura)-->
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                            <input type="number" name="valorAltura" class="form-control text-center"  placeholder="Altura" step="0.0000000001" id="valorInputAltura">
+                                        </div>
+                                    <!--Unidad de medida-->
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                            <select id="unidadMedidaAltura" class="form-select text-center" >
+                                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                                                <option value="M" class="text-center">Metros(s)</option>
+                                                <option value="Km" class="text-center">Kilometro(s)</option>
+                                                <option value="Cm" class="text-center">Centimetro(s)</option>
+                                                <option value="Mm" class="text-center">Milimetro(s)</option>
+                                                <option value="Ft" class="text-center">Pie(s)</option>
+                                                <option value="In" class="text-center">Pulgada(s)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>       
+                    </div>
+                    
+                    <!--OPCIONE PARA PRESION ATMOSFERICA, PRESION ABSOLUTA, PRESION MANOMETRICA-->
+                    <div id="otrasPresiones" class="otrasPreOpciones" style="display: none;">
+                        <!--Checkboxs para revisar los datos con los que cuentas OTRAS PRESIONES-->         
+                        <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                        <div class="container">
+                            <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="presionAbs" name="datosObOtrasPre">
+                                        <label class="form-check-label" for="presionAbs">Presión Absoluta</label>
+                                </div> 
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="presionAtm" name="datosObOtrasPre">
+                                        <label class="form-check-label" for="presionAtm">Presión Atmosférica</label>
+                                </div> 
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="presionMan" name="datosObOtrasPre">
+                                        <label class="form-check-label" for="presionMan">Presión Manométrica</label>
+                                </div> 
+                            </div>  
+                            <button type="button" class="btn btn-primary mt-3" id="verificarObOtrasPre">Verificar Checkboxes</button>
+                        </div><br>
+                        <!--Checkboxs para revisar los datos que quieres encontrar OTRAS PRESIONES-->
+                        <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                        <div class="container">
+                            <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="presionAbs" name="datosEncOtrasPre" disabled>
+                                        <label class="form-check-label" for="presionAbs">Presión Absoluta</label>
+                                </div> 
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="presionAtm" name="datosEncOtrasPre" disabled>
+                                        <label class="form-check-label" for="presionAtm">Presión Atmosférica</label>
+                                </div> 
+                                <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="presionMan" name="datosEncOtrasPre" disabled>
+                                        <label class="form-check-label" for="presionMan">Presión Manométrica</label>
+                                </div>      
+                            </div>
+                            <button type="button" class="btn btn-primary mt-3" id="verificarEncOtrasPre" disabled>Verificar Checkboxes</button>
+                        </div><br>
 
-
-
-
-
-                    <!--Habilitar la parte de formulario para ingresar los valores-->
-                <div>
-                    <div class="container" id="presionInput" style="display: none;">
-                        <!--Contenedor para ingresar el valor de presion junto con sus respectivas unidades de medida-->
+                        <div>
+                            <div class="container" id="presionAbsInput" style="display: none;">
+                                <!--Contenedor para ingresar el valor de presion Absoluta junto con sus respectivas unidades de medida-->
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 mb-2 text-center">
+                                    <label for="" class="form-label text-center">Presión Absoluta:</label>
+                                </div>
+                                <!--Contenedor del input (Presion)-->
+                                <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                <input type="number" name="valorPresionAbs" class="form-control text-center" placeholder="Presión Absoluta" id="valorInputPresionAbs" step="0.0000000001">
+                                </div>
+                                <!--Primera unidad de medida-->
+                                <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                    <select id="unidadMedidaPresionAbs1" name="unidadMedidaPresionAbs2" class="form-select text-center">
+                                        <option value="N" disabled selected class="text-center">Newton(s)</option>
+                                    </select>
+                                </div>
+                                <!--label que contiene el divisor--> 
+                                <div class="col-1 col-sm-1 mb-2 text-center">
+                                    <label for="">/</label>
+                                </div>
+                                <!--Segunda unidad de medida-->
+                                <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                    <select id="unidadMedidaPresionAbs2" name="unidadMedidaPresionAbs2" class="form-select text-center">
+                                        <option value="M2" disabled selected class="text-center">Metro(s)²</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <br>
+                        </div>
+                            <!--Contenedor para ingresar el valor de PRESION ATMOSFERICA junto con sus unidades de medidas-->
+                            <div class="container" id="presionAtmInput" style="display: none;">
+                                <!--Contenedor para ingresar el valor de presion junto con sus respectivas unidades de medida-->
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12 mb-2 text-center">
+                                    <label for="" class="form-label text-center">Presión Atmosférica:</label>
+                                </div>
+                                <!--Contenedor del input (Presion)-->
+                                <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                                <input type="number" name="valorInputPresionAtm" class="form-control text-center" placeholder="Presión Atmosférica" id="valorInputPresionAtm" step="0.0000000001">
+                                </div>
+                                <!--Primera unidad de medida-->
+                                <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                    <select id="unidadMedidaPresionAtm1" name="unidadMedidaPresionAtm1" class="form-select text-center">
+                                        <option value="N" disabled selected class="text-center">Newton(s)</option>
+                                    </select>
+                                </div>
+                                <!--label que contiene el divisor--> 
+                                <div class="col-1 col-sm-1 mb-2 text-center">
+                                    <label for="">/</label>
+                                </div>
+                                <!--Segunda unidad de medida-->
+                                <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                                    <select id="unidadMedidaPresionAtm2" name="unidadMedidaPresionAtm2" class="form-select text-center">
+                                        <option value="M2" disabled selected class="text-center">Metro(s)²</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <br>
+                        </div>
+                    <!--Contenedor para ingresar el valor de PRESION MANOMETRICA junto con sus unidades de medidas-->
+                    <div class="container" id="presionManInput" style="display: none;">
+                        <!--Contenedor para ingresar el valor de presion man junto con sus respectivas unidades de medida-->
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-12 mb-2 text-center">
-                            <label for="" class="form-label text-center">Presión:</label>
+                            <label for="" class="form-label text-center">Presión Manométrica:</label>
                         </div>
                         <!--Contenedor del input (Presion)-->
                         <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                        <input type="number" name="valorPresion" class="form-control text-center" placeholder="Presión" id="valorInputPresion" step="0.0000000001">
+                        <input type="number" name="valorInputPresionMan" class="form-control text-center" placeholder="Presión Manométrica" id="valorInputPresionMan" step="0.0000000001">
                         </div>
                         <!--Primera unidad de medida-->
-                         <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
-                            <select id="unidadMedidaPresion1" name="unidadMedidaPresion1" class="form-select text-center">
-                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
-                                <option value="N" class="text-center">Newton(s)</option>
-                                <option value="Lb" class="text-center">Libra(s)</option>
+                        <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaPresionMan1" name="unidadMedidaPresionMan1" class="form-select text-center">
+                                <option value="N" disabled selected class="text-center">Newton(s)</option>
                             </select>
                         </div>
                         <!--label que contiene el divisor--> 
@@ -139,108 +484,105 @@
                         </div>
                         <!--Segunda unidad de medida-->
                         <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
-                            <select id="unidadMedidaPresion2" name="unidadMedidaPresion2" class="form-select text-center">
-                                <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
-                                <option value="In2" class="text-center">Pulgada(s)²</option>
-                                <option value="M2" class="text-center">Metro(s)²</option>
+                            <select id="unidadMedidaPresionMan2" name="unidadMedidaPresionMan2" class="form-select text-center">
+                                <option value="M2" disabled selected class="text-center">Metro(s)²</option>
                             </select>
                         </div> 
                     </div>
                     <br>
                 </div>
-                    <!--Contenedor para ingresar el valor de FUERZA junto con sus unidades de medidas-->
-                <div class="container" id="fuerzaInput" style="display: none;">
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-12 mb-2 text-center">
-                            <label for="" class="form-label text-center">Fuerza:</label>
                         </div>
-                            <!--Contenedor del input(Fuerza)-->
-                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Fuerza" step="0.0000000001" id="valorInputFuerza">
+                    </div>
+        
+                    <!--CONTENEDOR DE LOS BOTONES DE ENVIAR Y BORRAR-->
+                    <div class="container" id="BotonesDatosContainer" style="display: none;">
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <!-- Botón Enviar -->
+                            <div class="col-4 col-sm-4 col-md-auto text-center">
+                                <input type="submit" name="Enviar" class="btn btn-success mt-2" id="botonEnviar" disabled>
                             </div>
-                            <!--Unidad de medida-->
-                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                            <select id="unidadMedidaFuerza" class="form-select text-center" >
-                                <option value="N" disabled selected class="text-center">Newton(s)</option>
-                            </select>
-                            </div>
-                    </div>
-                </div>
-            <!--Contenedor para ingresar el valor de AREA junto con sus unidades de medidas-->
-            <div class="container" id="areaInput" style="display: none;">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-12 mb-2 text-center">
-                        <label for="" class="form-label text-center">Área:</label>
-                    </div>
-                        <!--Contenedor del input(Area)-->
-                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                        <input type="number" name="valorArea" class="form-control text-center"  placeholder="Área" step="0.0000000001" id="valorInputArea">
-                        </div>
-                        <!--Unidad de medida-->
-                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
-                        <select id="unidadMedidaArea" class="form-select text-center" >
-                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
-                            <option value="M2" class="text-center">Metros(s)²</option>
-                            <option value="Km2" class="text-center">Kilometro(s)²</option>
-                            <option value="Cm2" class="text-center">Centimetro(s)²</option>
-                            <option value="Mm2" class="text-center">Milimetro(s)²</option>
-                            <option value="Ft2" class="text-center">Pie(s)²</option>
-                            <option value="In2" class="text-center">Pulgada(s)²</option>
-                        </select>
-                        </div>
-                </div>
-            </div>
-                </div>
-
-                </div>
-                
-                <!--OPCIONES PRESION HIDROSTATICA-->
-                <div id="hidrostatica" class="hidrostaticaOpciones" style="display: none;">
-                    <!--Checkboxs para revisar los datos con los que cuentas PRESION HIDROSTATICA-->
-                    <!--Checkboxs para revisar los datos que quieres encontrar PRESION HIDROSTATICA-->
-                </div>
-
-                <!--Boton para enviar-->
-                <div class="container">
-                    <div class="row d-flex align-items-center justify-content-center">
-                        <div class="col-6 col-md-auto text-center">
-                            <input type="submit" name="Enviar" class="form-control mt-2"id="botonEnviar" disabled>
+                            <!-- Botón Borrar -->
+                        
+                            <div class="col-4 col-sm-auto col-md-auto text-center">
+                                <button type="button" class="btn btn-danger mt-2" id="borrarDatos" disabled>Borrar</button>
+                            </div> 
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
-                <!--Mostrar Resultados-->
-            
-                <div id="mostrarResultado" class="container" style="display: none;">
-                    <br><br>
-                    <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
-                        <!--unidad de medida de Area-->
-                        <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                <!--CONTENEDORES QUE MUESTRAN LOS RESULTADOS Y LAS UNIDADES DE MEDIDAS-->
+                    <div id="mostrarResultado" class="container" style="display: none;">
+                        <br><br>
+                        <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                            <!--unidad de medida de Area-->
+                            <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                        </div>
                     </div>
-                </div>
-                <div id="mostrarResultadoPresion" class="container" style="display: none;">
-                    <br><br>
-                    <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
-                        <!--unidad de medida de Fuerza-->
-                        <div class="text-center fw-bold">Resultado: <span id="resultadoPresion" class="bold"></span> \( \text{N/m}^2 \)<span></span></div>
+                    <div id="mostrarResultadoPresion" class="container" style="display: none;">
+                        <br><br>
+                        <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                            <!--unidad de medida de Fuerza-->
+                            <div class="text-center fw-bold">Resultado: <span id="resultadoPresion" class="bold"></span> \( \text{N/m}^2 \)<span></span></div>
+                        </div>
                     </div>
-                </div>
-                <div id="mostrarResultadoFuerza" class="container" style="display: none;">
-                    <br><br>
-                    <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
-                        <!--unidad de medida de Presion-->
-                        <div class="text-center fw-bold">Resultado: <span id="resultadoFuerza" class="bold"></span> \( \text{N} \)<span></span></div>
+                    <div id="mostrarResultadoFuerza" class="container" style="display: none;">
+                        <br><br>
+                        <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                            <!--unidad de medida de Presion-->
+                            <div class="text-center fw-bold">Resultado: <span id="resultadoFuerza" class="bold"></span> \( \text{N} \)<span></span></div>
+                        </div>
                     </div>
-                </div>
-
+                    <div id="mostrarResultadoAlt" class="container" style="display: none;">
+                        <br><br>
+                        <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                            <!--unidad de medida de Presion-->
+                            <div class="text-center fw-bold">Resultado: <span id="resultadoAlt" class="bold"></span> \( \text{m} \)<span></span></div>
+                        </div>
+                    </div>
+                    <div id="mostrarResultadoDensi" class="container" style="display: none;">
+                        <br><br>
+                        <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                            <!--unidad de medida de Presion-->
+                            <div class="text-center fw-bold">Resultado: <span id="resultadoDensi" class="bold"></span> \( \text{Kg/m}^3\)<span></span></div>
+                        </div>
+                    </div>
+                    <div id="mostrarResultadoKPa" class="container" style="display: none;">
+                        <br><br>
+                        <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                            <!--unidad de medida de Presion-->
+                            <div class="text-center fw-bold">Resultado: <span id="resultadoKPa" class="bold"></span> \( \text{KPa}\)<span></span></div>
+                        </div>
+                    </div>
         </div>
     </main>
     <!--Footer de la pagina-->
-        <footer class="mt-5">
-
-        </footer>
+        <footer class="mt-5"></footer>
     <!--Scripts que se encargan del funcionamiento general de la página-->
+    <script>
+         //Agregar un evento 'change' a los selects
+         document.getElementById('incognita').addEventListener('change', resetearFormulario);
+
+         function resetearFormulario(){
+
+        // Ocultar los resultados
+        document.getElementById('mostrarResultado').style.display = 'none';
+        document.getElementById('resultado').innerText = "";
+        document.getElementById('mostrarResultadoPresion').style.display = 'none';
+        document.getElementById('resultadoPresion').innerText = "";
+        document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+        document.getElementById('resultadoFuerza').innerText = "";
+        document.getElementById('mostrarResultadoAlt').style.display = 'none';
+        document.getElementById('resultadoAlt').innerText = "";
+        document.getElementById('mostrarResultadoDensi').style.display = 'none';
+        document.getElementById('resultadoDensi').innerText = "";
+        document.getElementById('mostrarResultadoKPa').style.display = 'none';
+        document.getElementById('resultadoKPa').innerText = "";
+
+        document.getElementById('BotonesDatosContainer').style.display = 'none';
+       }
+
+
+    </script>
     <script>//Script del la opcion del select: Presiones
         //declaracion de las variables de los diferentes datos
         let presion= false;
@@ -258,9 +600,15 @@
             opcion.forEach(function(opciones){
                 opciones.style.display = 'none';
             });
-            
+
+            console.log(categoriaSeleccionada); 
+            /*if(categoriaSeleccionada!='Presion'){
+                function recargarPagina(){
+                    location.reload();
+                }
+            }*/
             if(categoriaSeleccionada=='Presion'){
-                document.getElementById('presion').style.display = 'block';
+                document.getElementById('presionSelect').style.display = 'block';
             }
          });
 
@@ -316,6 +664,10 @@
             let contador = 0;
             const datosCheckboxes = [];
 
+             //Mostrar el boton de borrar y enviar
+             //document.getElementById('BotonesDatosContainer').style.display = 'block';
+
+
             //Cuenta el numero de checkboxs seleccionados
             checkboxes.forEach(checkbox=>  {
                     contador++;
@@ -328,6 +680,7 @@
                 alert('¡Tienes que seleccionar algún dato!');
             }
             else{
+                
                 let contador2 = 0;
                 let salir = false;
                 
@@ -369,6 +722,7 @@
                 if(salir==true){
                     alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
                 }else{
+                    document.getElementById('BotonesDatosContainer').style.display = 'block';
                      //deshabilita los checkboxes al cumpliar las condiciones
                     checkboxes2.forEach(function(checkbox) {
                         checkbox.disabled = true;
@@ -379,6 +733,9 @@
                     
                     const botonEnviar = document.getElementById("botonEnviar");
                         botonEnviar.disabled = false;
+                    
+                    const botonBorrar = document.getElementById("borrarDatos");
+                        botonBorrar.disabled = false;
                     
                         //funcion que habilita el ingreso de los valores de presion en caso de ser seleccionado en los checkboxes
                         if(presion){
@@ -401,15 +758,8 @@
                             document.getElementById('areaInput').style.display = 'block';
                             valorInput_area.setAttribute('required', 'required');
                             unidadM_area1.setAttribute('required', 'required');
-
                         }
-
-                    
-
                 }
-
-
-               
             }
         });
 
@@ -417,13 +767,6 @@
             event.preventDefault();
             //variable que va a retener los datos
             let resultado=0.0;
-            
-                //if para guardar los datos que se ingresaron
-            
-            if(area){
-                const valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
-                const valorUnidadMArea = document.getElementById('unidadMedidaArea').value;
-            }
 
             //Condicion para comprobar la formula que debes de ocupar
             if(presion==true && fuerza==true){ //esta encuentra el area
@@ -451,9 +794,25 @@
                 let valorNumArea = (valorNumFuerza)/(valorNumPresion);
                 
                 //Mostrar el resultado en el div
+                document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                document.getElementById('resultadoPresion').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+                document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                document.getElementById('resultadoKPa').innerText = "";
+
                 document.getElementById('resultado').innerText = valorNumArea;
                 // Hacer visible el div de resultado
                 document.getElementById('mostrarResultado').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultado').innerText = "";
+                    document.getElementById('mostrarResultado').style.display = 'none';
+                });
 
             }
 
@@ -490,9 +849,26 @@
                 let valorNumPresion = (valorNumFuerza)/(valorNumArea);
                 
                 //Mostrar el resultado en el div
+                 document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                document.getElementById('resultadoKPa').innerText = "";
+                document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+               
+
                 document.getElementById('resultadoPresion').innerText = valorNumPresion;
                 // Hacer visible el div de resultado
                 document.getElementById('mostrarResultadoPresion').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoPresion').innerText = "";
+                    document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                });
             }
 
             if(presion==true && area==true){ //este encuentra la fuerza
@@ -539,14 +915,803 @@
                 let valorNumFuerza = (valorNumPresion)*(valorNumArea);
 
                 //Mostrar el resultado en el div
+                document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                document.getElementById('resultadoPresion').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+                document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                document.getElementById('resultadoKPa').innerText = "";
+
                 document.getElementById('resultadoFuerza').innerText = valorNumFuerza;
                 // Hacer visible el div de resultado
                 document.getElementById('mostrarResultadoFuerza').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoFuerza').innerText = "";
+                    document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                });
             }
 
         });
+
+        document.getElementById('borrarDatos').addEventListener('click', function(event) {
+            //Presion
+            document.getElementById('valorInputPresion').value = '';
+            document.getElementById('unidadMedidaPresion1').value = '';
+            document.getElementById('unidadMedidaPresion2').value = '';
+            //Fuerza
+            document.getElementById('valorInputFuerza').value = '';
+            //document.getElementById('unidadMedidaFuerza').value = '';
+            //Area
+            document.getElementById('valorInputArea').value = '';
+            document.getElementById('unidadMedidaArea').value = '';            
+
+           
+        });
     </script>
     <script>//Script del la opcion del select: Presion Hidrostatica
+        let pHidrostatica= false;
+        let densidad= false;
+        let gravedad= true;
+        let altura= false;
+
+         //muestra tus div segun la eleccion del select
+         document.getElementById('incognita').addEventListener('change', function(event){
+            const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
+
+            const opcion = document.querySelectorAll('.hidrostaticaOpciones');
+
+            document.getElementById('mostrarResultado').style.display = 'none';
+
+            opcion.forEach(function(opciones){
+                opciones.style.display = 'none';
+            });
+            
+            if(categoriaSeleccionada=='Hidrostatica'){
+                document.getElementById('hidrostatica').style.display = 'block';
+            }
+         });
+
+         var datosComprobar = [];
+
+          //funcion para validar el numero de datos con los que cuentas
+        document.getElementById('verificarObHidro').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosObHidro"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosObHidro"]');
+            const checkboxes3 = document.querySelectorAll('input[name="datosEncHidro"]');
+
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador < 2) {//revisa que se seleccionen minimo dos datos
+                alert('¡Necesitas seleccionar mínimo dos datos!');
+            } else if(contador==3){//revisa que no se selccionen todos los dato
+                alert('¡No puedes seleccionar todos los datos!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else { //deshabilita los checkboxes al cumpliar las condiciones
+                checkboxes2.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+            });
+            datosComprobar = [...datosCheckboxes];
+
+            checkboxes3.forEach(function(checkbox) {
+                    checkbox.disabled = false;
+            });
+
+            const botonDesactivado = document.getElementById("verificarObHidro");
+            botonDesactivado.disabled = true;
+            const botonDesactivado2 = document.getElementById("verificarEncHidro");
+            botonDesactivado2.disabled = false;
+            }
+            console.log('Datos seleccionados:', datosComprobar);
+        });
+
+         //funcion para validar que solo se elija un dato para encontrar
+         document.getElementById('verificarEncHidro').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosEncHidro"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosEncHidro"]');
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Mostrar el boton de borrar y enviar
+            //document.getElementById('BotonesDatosContainer').style.display = 'block';
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador > 1) {//revisa que se seleccionen minimo dos datos
+                alert('¡Solo puedes buscar un dato a la vez!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else{
+                let contador2 = 0;
+                let salir = false;
+                
+                //variables que van a guardar los datos que se ingresen mediante el id
+                //Presion Hidrostatica
+                const valorInput_hidrostatica = document.getElementById('valorInputHidrostatica');
+                const unidadM_hidrostatica1 = document.getElementById('unidadMedidaPHidrostatica1');
+                const unidadM_hidrostatica2 = document.getElementById('unidadMedidPHidrostatica2');
+                //Densidad
+                const valorInput_densidad = document.getElementById('valorInputDensidad');
+                const unidadM_densidad1 = document.getElementById('unidadMedidaDensidad1');
+                const unidadM_densidad2 = document.getElementById('unidadMedidaDensidad2');
+                //gravedad
+                const valorInput_gravedad = 9.8;
+                const unidadM_gravedad1 = document.getElementById('unidadMedidaGravedad1');
+                const unidadM_gravedad2 = document.getElementById('unidadMedidaGravedad2');
+                //altura
+                const valorInput_altura = document.getElementById('valorInputAltura');
+                const unidadM_altura1 = document.getElementById('unidadMedidaAltura');
+
+                for(var i=0; i<2; i++){
+                    //if para comprobar que datos te va a proporcionar
+                    if(datosComprobar[i]=="pHidrostatica"){
+                        pHidrostatica=true;
+                    }
+                    if(datosComprobar[i]=="densidad"){
+                        densidad=true;
+                    }
+                    //if(datosComprobar[i]=="gravedad"){
+                        //gravedad=true;
+                    //}
+                    if(datosComprobar[i]=="altura"){
+                        altura=true;
+                    }
+                    for(var j=0; j<2; j++){
+                        if(datosComprobar[i] != datosCheckboxes[j]){
+                            contador2++;
+                        }else{
+                            salir= true;
+                            break;
+                        }
+                    }
+                    if(salir==true){
+                        break;
+                    }
+                }
+                if(salir==true){
+                    alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
+                }else{
+                    document.getElementById('BotonesDatosContainer').style.display = 'block';
+                     //deshabilita los checkboxes al cumpliar las condiciones
+                    checkboxes2.forEach(function(checkbox) {
+                        checkbox.disabled = true;
+                    });
+                    //desactiva el boton 
+                    const botonDesactivado = document.getElementById("verificarEncHidro");
+                        botonDesactivado.disabled = true;
+                    
+                    const botonEnviar = document.getElementById("botonEnviar");
+                        botonEnviar.disabled = false;
+                    const botonBorrar = document.getElementById("borrarDatos");
+                        botonBorrar.disabled = false;
+                    
+                    
+
+                        
+                        //funcion que habilita el ingreso de los valores de presion Hidrostatica en caso de ser seleccionado en los checkboxes
+                        if(pHidrostatica){
+                            document.getElementById('pHidrostaticaInput').style.display = 'block';
+
+                            valorInput_hidrostatica.setAttribute('required', 'required');
+                           // unidadM_densidad1.setAttribute('required', 'required');
+                            //unidadM_densidad2.setAttribute('required', 'required');
+
+                        }
+                                               
+                        
+                        //funcion que habilita el ingreso de los valores de densidad en caso de ser seleccionado en los checkboxes
+                        if(densidad){
+                            document.getElementById('densidadInput').style.display = 'block';
+
+                            valorInput_densidad.setAttribute('required', 'required');
+                            unidadM_densidad1.setAttribute('required', 'required');
+                            unidadM_densidad2.setAttribute('required', 'required');
+
+                        }
+                        //funcion que habilita el ingreso de los valores de gravedad en caso de ser seleccionado en los checkboxes
+                        if(gravedad){
+                            document.getElementById('gravedadInput').style.display = 'block';
+                            //revisar pq es un valor predeterminado
+                            //valorInput_gravedad.setAttribute('required', 'required');
+                            //el de la unidad no es necesario en este caso, solo pq no hay más opciones de unidad de M
+                            //unidadM_fuerza1.setAttribute('required', 'required');
+                            //console.log(valorInput_gravedad);
+                        }
+                        //funcion que habilita el ingreso de los valores de altura en caso de ser seleccionado en los checkboxes
+                        if(altura){
+                            document.getElementById('alturaInput').style.display = 'block';
+                            valorInput_altura.setAttribute('required', 'required');
+                            unidadM_altura1.setAttribute('required', 'required');
+                        }
+                    
+                }
+            }
+            
+        });
+
+        document.getElementById('formularioDatos').addEventListener("submit", function(event){
+            event.preventDefault();
+            //variable que va a retener los datos
+            let resultado=0.0;
+            
+            
+
+            //Condicion para comprobar la formula que debes de ocupar
+            if(pHidrostatica==true && densidad==true && gravedad==true){ //esta encuentra la altura
+                let valorNumpHidrostatica = parseFloat(document.getElementById('valorInputHidrostatica').value);
+                const valorUnidadMhidrostatica1 = document.getElementById('unidadMedidaPHidrostatica1').value;
+                const valorUnidadMhidrostatica2 = document.getElementById('unidadMedidaPHidrostatica2').value;
+
+                let valorNumDensidad = parseFloat(document.getElementById('valorInputDensidad').value);
+                const valorUnidadMDensidad1 = document.getElementById('unidadMedidaDensidad1').value;
+                const valorUnidadMDensidad2 = document.getElementById('unidadMedidaDensidad2').value;
+
+                let valorNumGravedad = 9.8;
+                const valorUnidadMGravedad1 = document.getElementById('unidadMedidaGravedad1').value;
+                const valorUnidadMGravedad2 = document.getElementById('unidadMedidaGravedad2').value;
+                //console.log(valorNumGravedad);
+
+                //convertir la primera unidad de medida
+                if (valorUnidadMDensidad1 == 'Lb') {
+                    // Convertir Lb a Kg
+                    valorNumDensidad = valorNumDensidad * 0.453592;
+                }
+                if (valorUnidadMDensidad1 == 'G') {
+                    // Convertir G a Kg
+                    valorNumDensidad = valorNumDensidad * 0.001;
+                }
+                if (valorUnidadMDensidad1 == 'T') {
+                    // Convertir T a Kg
+                    valorNumDensidad = valorNumDensidad * 1000;
+                }
+                
+                //convertir la segunda unidad de medida
+                if (valorUnidadMDensidad2 == 'Km3') {
+                    // Convertir Km3 a M3
+                    valorNumDensidad = valorNumDensidad * 1000000000;
+                }
+                if (valorUnidadMDensidad2 == 'Cm3') {
+                    // Convertir Cm3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.000001;
+                }
+                if (valorUnidadMDensidad2 == 'Mm3') {
+                    // Convertir Mm3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.000000001;
+                }
+                if (valorUnidadMDensidad2 == 'Ft3') {
+                    // Convertir Ft3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.0283168;
+                }
+                if (valorUnidadMDensidad2 == 'In3') {
+                    // Convertir In3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.000016387064;
+                }
+
+                let valorNumAltura = (valorNumpHidrostatica)/((valorNumDensidad)*(valorNumGravedad));
+                
+                console.log(valorNumAltura);
+                //Mostrar el resultado en el div
+                document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                document.getElementById('resultadoPresion').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+                document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                document.getElementById('resultadoKPa').innerText = "";
+
+                document.getElementById('resultadoAlt').innerText = valorNumAltura;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoAlt').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoAlt').innerText = "";
+                    document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                });
+            }
+            if(densidad==true && gravedad==true && altura==true){//ente encuentra la presion hidrostatica
+                let valorNumDensidad = parseFloat(document.getElementById('valorInputDensidad').value);
+                const valorUnidadMDensidad1 = document.getElementById('unidadMedidaDensidad1').value;
+                const valorUnidadMDensidad2 = document.getElementById('unidadMedidaDensidad2').value;
+
+                let valorNumGravedad = 9.8;
+                const valorUnidadMGravedad1 = document.getElementById('unidadMedidaGravedad1').value;
+                const valorUnidadMGravedad2 = document.getElementById('unidadMedidaGravedad2').value;
+
+                let valorNumAltura = parseFloat(document.getElementById('valorInputAltura').value);
+                const valorUnidadMAltura1 = document.getElementById('unidadMedidaAltura').value;
+          
+                  //convertir la primera unidad de medida de densidad
+                  if (valorUnidadMDensidad1 == 'Lb') {
+                    // Convertir Lb a Kg
+                    valorNumDensidad = valorNumDensidad * 0.453592;
+                }
+                if (valorUnidadMDensidad1 == 'G') {
+                    // Convertir G a Kg
+                    valorNumDensidad = valorNumDensidad * 0.001;
+                }
+                if (valorUnidadMDensidad1 == 'T') {
+                    // Convertir T a Kg
+                    valorNumDensidad = valorNumDensidad * 1000;
+                }
+                
+                //convertir la segunda unidad de medida de densidad
+                if (valorUnidadMDensidad2 == 'Km3') {
+                    // Convertir Km3 a M3
+                    valorNumDensidad = valorNumDensidad * 1000000000;
+                }
+                if (valorUnidadMDensidad2 == 'Cm3') {
+                    // Convertir Cm3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.000001;
+                }
+                if (valorUnidadMDensidad2 == 'Mm3') {
+                    // Convertir Mm3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.000000001;
+                }
+                if (valorUnidadMDensidad2 == 'Ft3') {
+                    // Convertir Ft3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.0283168;
+                }
+                if (valorUnidadMDensidad2 == 'In3') {
+                    // Convertir In3 a M3
+                    valorNumDensidad = valorNumDensidad * 0.000016387064;
+                }
+
+                //convertir la unidad de medida de la altura
+                if(valorUnidadMAltura1=="Km"){
+                    //convertir Km a M
+                    valorNumAltura = valorNumAltura * 1000;
+                }
+                if(valorUnidadMAltura1=="Cm"){
+                    //convertir Cm a M
+                    valorNumAltura = valorNumAltura *0.01;
+                }
+                if(valorUnidadMAltura1=="Mm"){
+                    //convertir Mm a M
+                    valorNumAltura = valorNumAltura * 0.001;
+                }
+                if(valorUnidadMAltura1=="Ft"){
+                    //convertir Ft a M
+                    valorNumAltura = valorNumAltura * 0.3048;
+                }
+                if(valorUnidadMAltura1=="In"){
+                    //convertir In a M
+                    valorNumAltura = valorNumAltura * 0.0254;
+                }
+
+                let valorNumpHidrostatica= ((valorNumDensidad)*(valorNumGravedad)*(valorNumAltura));
+                
+                //Mostrar el resultado en el div
+                document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+                document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                document.getElementById('resultadoKPa').innerText = "";
+
+                document.getElementById('resultadoPresion').innerText = valorNumpHidrostatica;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoPresion').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoPresion').innerText = "";
+                    document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                });
+
+            }
+            if(pHidrostatica==true && gravedad==true && altura==true){//encontrar la densidad
+                let valorNumpHidrostatica = parseFloat(document.getElementById('valorInputHidrostatica').value);
+                const valorUnidadMhidrostatica1 = document.getElementById('unidadMedidaPHidrostatica1').value;
+                const valorUnidadMhidrostatica2 = document.getElementById('unidadMedidaPHidrostatica2').value;
+
+                let valorNumGravedad = 9.8;
+                const valorUnidadMGravedad1 = document.getElementById('unidadMedidaGravedad1').value;
+                const valorUnidadMGravedad2 = document.getElementById('unidadMedidaGravedad2').value;
+
+                let valorNumAltura = parseFloat(document.getElementById('valorInputAltura').value);
+                const valorUnidadMAltura1 = document.getElementById('unidadMedidaAltura').value;
+
+                 //convertir la unidad de medida de la altura
+                 if(valorUnidadMAltura1=="Km"){
+                    //convertir Km a M
+                    valorNumAltura = valorNumAltura * 1000;
+                }
+                if(valorUnidadMAltura1=="Cm"){
+                    //convertir Cm a M
+                    valorNumAltura = valorNumAltura *0.01;
+                }
+                if(valorUnidadMAltura1=="Mm"){
+                    //convertir Mm a M
+                    valorNumAltura = valorNumAltura * 0.001;
+                }
+                if(valorUnidadMAltura1=="Ft"){
+                    //convertir Ft a M
+                    valorNumAltura = valorNumAltura * 0.3048;
+                }
+                if(valorUnidadMAltura1=="In"){
+                    //convertir In a M
+                    valorNumAltura = valorNumAltura * 0.0254;
+                }
+
+                let valorNumDensidad = ((valorNumpHidrostatica)/((valorNumGravedad*(valorNumAltura))));
+
+                 //Mostrar el resultado en el div
+                 document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                document.getElementById('resultadoPresion').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                document.getElementById('resultadoKPa').innerText = "";
+
+                 document.getElementById('resultadoDensi').innerText = valorNumDensidad;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoDensi').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoDensi').innerText = "";
+                    document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                });
+            }
+
+            
+        });
+
+        document.getElementById('borrarDatos').addEventListener('click', function(event) {
+            //Gravedad
+            //document.getElementById('valorInputGravedad').value = '';
+            //document.getElementById('unidadMedidaGravedad1').value = '';
+            //document.getElementById('unidadMedidaGravedad2').value = '';
+            //Altura
+            document.getElementById('valorInputAltura').value = '';
+            document.getElementById('unidadMedidaAltura').value = '';
+            //P. Hidrostica
+            document.getElementById('valorInputHidrostatica').value = '';
+            //document.getElementById('unidadMedidaGravedad1').value = '';
+            //document.getElementById('unidadMedidaGravedad2').value = '';
+            //Densidad
+            document.getElementById('valorInputDensidad').value = '';
+            document.getElementById('unidadMedidaDensidad1').value = '';
+            document.getElementById('unidadMedidaDensidad3').value = '';
+
+           
+        });
+
+        
+    </script>
+    <script>//Script del la opcion del select: Otras presiones
+    let presionAbs=false;
+    let presionAtm=false;
+    let presionMan=false;
+
+    document.getElementById('incognita').addEventListener('change', function(event){
+            const categoriaSeleccionada = this.value; //obtenemos el valor seleccionado
+
+            const opcion = document.querySelectorAll('.otrasPreOpciones');
+
+            document.getElementById('mostrarResultado').style.display = 'none';
+
+            opcion.forEach(function(opciones){
+                opciones.style.display = 'none';
+            });
+            
+            if(categoriaSeleccionada=='OtrasPresiones'){
+                document.getElementById('otrasPresiones').style.display = 'block';
+            }
+         });
+
+         var datosComprobar = [];
+
+           //funcion para validar el numero de datos con los que cuentas
+        document.getElementById('verificarObOtrasPre').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosObOtrasPre"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosObOtrasPre"]');
+            const checkboxes3 = document.querySelectorAll('input[name="datosEncOtrasPre"]');
+
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador < 2) {//revisa que se seleccionen minimo dos datos
+                alert('¡Necesitas seleccionar mínimo dos datos!');
+            } else if(contador==3){//revisa que no se selccionen todos los dato
+                alert('¡No puedes seleccionar todos los datos!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else { //deshabilita los checkboxes al cumpliar las condiciones
+                checkboxes2.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+            });
+            datosComprobar = [...datosCheckboxes];
+
+            checkboxes3.forEach(function(checkbox) {
+                    checkbox.disabled = false;
+            });
+
+            const botonDesactivado = document.getElementById("verificarObOtrasPre");
+            botonDesactivado.disabled = true;
+            const botonDesactivado2 = document.getElementById("verificarEncOtrasPre");
+            botonDesactivado2.disabled = false;
+            }
+            //console.log('Datos seleccionados:', datosComprobar);
+        });
+
+           //funcion para validar que solo se elija un dato para encontrar
+        document.getElementById('verificarEncOtrasPre').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosEncOtrasPre"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosEncOtrasPre"]');
+            let contador = 0;
+            const datosCheckboxes = [];
+
+             //Mostrar el boton de borrar y enviar
+             //document.getElementById('BotonesDatosContainer').style.display = 'block';
+
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador > 1) {//revisa que se seleccionen minimo dos datos
+                alert('¡Solo puedes buscar un dato a la vez!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }
+            else{
+                let contador2 = 0;
+                let salir = false;
+                
+                //variables que van a guardar los datos que se ingresen mediante el id
+                //PRESION ABSOLUTA
+                const valorInput_presionAbs = document.getElementById('valorInputPresionAbs');
+                const unidadM_presionAbs1 = document.getElementById('unidadMedidaPresionAbs1');
+                const unidadM_presionabs2 = document.getElementById('unidadMedidaPresionAbs2');
+                //PRESION ATMOSFERICA
+                const valorInput_presionAtm = document.getElementById('valorInputPresionAtm');
+                const unidadM_presionAtm1 = document.getElementById('unidadMedidaPresionAtm1');
+                const unidadM_presionAtm2 = document.getElementById('unidadMedidaPresionAtm2');
+                //PRESION ABSOLUTA
+                const valorInput_presionMan = document.getElementById('valorInputPresionMan');
+                const unidadM_presionMan1 = document.getElementById('unidadMedidaPresionMan1');
+                const unidadM_presionMan2 = document.getElementById('unidadMedidaPresionMan2');
+
+                for(var i=0; i<2; i++){
+                    //if para comprobar que datos te va a proporcionar
+                    if(datosComprobar[i]=="presionAbs"){
+                        presionAbs=true;
+                    }
+                    if(datosComprobar[i]=="presionAtm"){
+                        presionAtm=true;
+                    }
+                    if(datosComprobar[i]=="presionMan"){
+                        presionMan=true;
+                    }
+                    for(var j=0; j<2; j++){
+                        if(datosComprobar[i] != datosCheckboxes[j]){
+                            contador2++;
+                        }else{
+                            salir= true;
+                            break;
+                        }
+                    }
+                    if(salir==true){
+                        break;
+                    }
+                }
+                if(salir==true){
+                    alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
+                }else{
+                    document.getElementById('BotonesDatosContainer').style.display = 'block';
+                     //deshabilita los checkboxes al cumpliar las condiciones
+                    checkboxes2.forEach(function(checkbox) {
+                        checkbox.disabled = true;
+                    });
+                    //desactiva el boton 
+                    const botonDesactivado = document.getElementById("verificarEncOtrasPre");
+                        botonDesactivado.disabled = true;
+                    
+                    const botonEnviar = document.getElementById("botonEnviar");
+                        botonEnviar.disabled = false;
+                    
+                    const botonBorrar = document.getElementById("borrarDatos");
+                        botonBorrar.disabled = false;
+                    
+                        //funcion que habilita el ingreso de los valores de presion en caso de ser seleccionado en los checkboxes
+                        if(presionAbs){
+                            document.getElementById('presionAbsInput').style.display = 'block';
+
+                            valorInput_presionAbs.setAttribute('required', 'required');
+                            //unidadM_presionAbs1.setAttribute('required', 'required');
+                            //unidadM_presionAbs2.setAttribute('required', 'required');
+
+                        }
+                        //funcion que habilita el ingreso de los valores de fuerza en caso de ser seleccionado en los checkboxes
+                        if(presionAtm){
+                            document.getElementById('presionAtmInput').style.display = 'block';
+                            valorInput_presionAtm.setAttribute('required', 'required');
+                            //unidadM_presionAtm1.setAttribute('required', 'required');
+                            //unidadM_presionAtm2.setAttribute('required', 'required');
+                        }
+                        //funcion que habilita el ingreso de los valores de area en caso de ser seleccionado en los checkboxes
+                        if(presionMan){
+                            document.getElementById('presionManInput').style.display = 'block';
+                            valorInput_presionMan.setAttribute('required', 'required');
+                            //unidadM_presionMan1.setAttribute('required', 'required');
+                            //unidadM_presionMan2.setAttribute('required', 'required');
+                        }
+                }
+            }
+        });
+
+        document.getElementById('formularioDatos').addEventListener("submit", function(event){
+            event.preventDefault();
+            //variable que va a retener los datos
+            let resultado=0.0;
+
+            //Condicion para comprobar la formula que debes de ocupar
+            if(presionAtm==true && presionMan==true){ //esta encuentra el La presion Absoluta
+                let valorNumPresionAtm = parseFloat(document.getElementById('valorInputPresionAtm').value);
+                const valorUnidadMPresionAtm1 = document.getElementById('unidadMedidaPresionAtm1').value;
+                const valorUnidadMPresionAtm2 = document.getElementById('unidadMedidaPresionAtm2').value;
+
+                let valorNumPresionMan = parseFloat(document.getElementById('valorInputPresionMan').value);
+                const valorUnidadMPresionMan1 = document.getElementById('unidadMedidaPresionMan1').value;
+                const valorUnidadMPresionMan2 = document.getElementById('unidadMedidaPresionMan2').value;
+
+
+                let valorNumPresionAbs = ((valorNumPresionMan)+(valorNumPresionAtm))/(1000);
+
+                //Pasarlo a kPa
+                //let valorNumPresionAbsK = (valorNumPresionAbs)/(1000);
+                //Mostrar el resultado en el div
+                document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                document.getElementById('resultadoPresion').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+               
+                document.getElementById('resultadoKPa').innerText = valorNumPresionAbs;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoKPa').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoKPa').innerText = "";
+                    document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                });
+
+            }
+            if(presionAtm==true && presionAbs==true){ //esta encuentra el La presion Manometrica
+                let valorNumPresionAtm = parseFloat(document.getElementById('valorInputPresionAtm').value);
+                const valorUnidadMPresionAtm1 = document.getElementById('unidadMedidaPresionAtm1').value;
+                const valorUnidadMPresionAtm2 = document.getElementById('unidadMedidaPresionAtm2').value;
+
+                let valorNumPresionAbs = parseFloat(document.getElementById('valorInputPresionAbs').value);
+                const valorUnidadMPresionAbs1 = document.getElementById('unidadMedidaPresionAbs1').value;
+                const valorUnidadMPresionAbs2 = document.getElementById('unidadMedidaPresionAbs2').value;
+
+
+                let valorNumPresionMan = ((valorNumPresionAbs)-(valorNumPresionAtm))/(1000);
+
+                //Pasarlo a kPa
+                //let valorNumPresionManK = (valorNumPresionMan)/(1000);
+
+                //console.log(valorNumPresionManK);
+                //Mostrar el resultado en el div
+                document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                document.getElementById('resultadoPresion').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+
+                document.getElementById('resultadoKPa').innerText = valorNumPresionMan;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoKPa').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoKPa').innerText = "";
+                    document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                });
+
+            }
+            if(presionAbs==true && presionMan==true){ //esta encuentra el La presion Atmosferica
+                let valorNumPresionAbs = parseFloat(document.getElementById('valorInputPresionAbs').value);
+                const valorUnidadMPresionAbs1 = document.getElementById('unidadMedidaPresionAbs1').value;
+                const valorUnidadMPresionAbs2 = document.getElementById('unidadMedidaPresionAbs2').value;
+
+
+                let valorNumPresionMan = parseFloat(document.getElementById('valorInputPresionMan').value);
+                const valorUnidadMPresionMan1 = document.getElementById('unidadMedidaPresionMan1').value;
+                const valorUnidadMPresionMan2 = document.getElementById('unidadMedidaPresionMan2').value;
+
+
+                let valorNumPresionAtm =((valorNumPresionAbs)-(valorNumPresionMan))/(1000);
+
+                //Pasarlo a kPa
+                //let valorNumPresionAtmK = (valorNumPresionAtm)/(1000);
+                //Mostrar el resultado en el div
+                document.getElementById('mostrarResultado').style.display = 'none';
+                document.getElementById('resultado').innerText = "";
+                document.getElementById('mostrarResultadoPresion').style.display = 'none';
+                document.getElementById('resultadoPresion').innerText = "";
+                document.getElementById('mostrarResultadoFuerza').style.display = 'none';
+                document.getElementById('resultadoFuerza').innerText = "";
+                document.getElementById('mostrarResultadoAlt').style.display = 'none';
+                document.getElementById('resultadoAlt').innerText = "";
+                document.getElementById('mostrarResultadoDensi').style.display = 'none';
+                document.getElementById('resultadoDensi').innerText = "";
+
+                document.getElementById('resultadoKPa').innerText = valorNumPresionAtm;
+                // Hacer visible el div de resultado
+                document.getElementById('mostrarResultadoKPa').style.display = 'block';
+
+                document.getElementById('borrarDatos').addEventListener('click', function(event) {
+                    document.getElementById('resultadoKPa').innerText = "";
+                    document.getElementById('mostrarResultadoKPa').style.display = 'none';
+                });
+            }
+        });
+
+        document.getElementById('borrarDatos').addEventListener('click', function(event) {
+            //Presion Absoluta
+            document.getElementById('valorInputPresionAbs').value = '';
+            //document.getElementById('unidadMedidaPresionAbs1').value = '';
+            //document.getElementById('unidadMedidaPresionAbs2').value = '';
+            //Presion Atmosferica
+            document.getElementById('valorInputPresionAtm').value = '';
+            //document.getElementById('unidadMedidaPresionAtm1').value = '';
+            //document.getElementById('unidadMedidaPresionAtm2').value = '';  
+            //Presion Manometrica
+            document.getElementById('valorInputPresionMan').value = '';
+            //document.getElementById('unidadMedidaPresionAbs1').value = '';
+            //document.getElementById('unidadMedidaPresionAbs2').value = '';        
+        });
+
+
     </script>
 </body>
 </html>

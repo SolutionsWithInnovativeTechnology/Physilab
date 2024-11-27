@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presiones</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js" defer></script>  
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+</head>
+<body>
+    <!--header de la pagina-->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
+          
+                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <!-- El offcanvas en sí -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- Aquí se coloca la lista de enlaces -->
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/temas.html">Temas</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="../pages/conversiones.html">Conversiones</a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="nt-5 text-center text-black mt-5" style="font-weight: bold;">Ley de Young</h1>
+            <form name="formu" id="formularioDatos" method="post" class="text-center mt-5">
+                <!--Checkboxs para revisar los datos con los que cuentas-->
+                <div id="presion" class="presionOpciones">
+                    <label for="datos" class="form-label mb-2">Datos con los que cuentas: </label>
+                    <div>
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="moduloyoung" name="datosOb">
+                                <label class="form-check-label" for="moduloyoung">Módulo de Young</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosOb">
+                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="doi" name="datosOb">
+                                <label class="form-check-label" for="doi">Decremento o incremento</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="area" name="datosOb">
+                                <label class="form-check-label" for="area">Area</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="longitud" name="datosOb">
+                                <label class="form-check-label" for="longitud">Longitud</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="esfuerzo" name="datosOb">
+                                <label class="form-check-label" for="esfuerzo">Esfuerzo</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="diametro" name="datosOb">
+                                <label class="form-check-label" for="diametro">Diametro</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="radio" name="datosOb">
+                                <label class="form-check-label" for="radio">Radio</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="masa" name="datosOb">
+                                <label class="form-check-label" for="masa">Masa</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="deformacion" name="datosOb">
+                                <label class="form-check-label" for="deformacion">Deformación</label>
+                            </div>
+                        </div>  
+                        <button type="button" class="btn btn-primary mt-3" id="verificarOb">Verificar Checkboxes</button>
+                    </div><br>
+                        <!--Checkboxs para revisar los datos que quieres encontrar datosEnc-->
+                    <label for="datos" class="form-label mb-2">Datos que deseas encontrar: </label>
+                    <div class="container">
+                        <div class="form-check form-switch row d-flex align-items-center justify-content-center" >
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="moduloyoung" name="datosEnc" disabled>
+                                <label class="form-check-label" for="moduloyoung">Módulo de Young</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="fuerza" name="datosEnc" disabled>
+                                <label class="form-check-label" for="fuerza">Fuerza</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="doi" name="datosEnc" disabled>
+                                <label class="form-check-label" for="doi">Decremento o incremento</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="area" name="datosEnc" disabled>
+                                <label class="form-check-label" for="area">Area</label>
+                            </div> 
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="longitud" name="datosEnc" disabled>
+                                <label class="form-check-label" for="longitud">Longitud</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="esfuerzo" name="datosEnc" disabled>
+                                <label class="form-check-label" for="esfuerzo">Esfuerzo</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="diametro" name="datosEnc" disabled>
+                                <label class="form-check-label" for="diametro">Diametro</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="radio" name="datosEnc" disabled>
+                                <label class="form-check-label" for="radio">Radio</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="masa" name="datosEnc" disabled>
+                                <label class="form-check-label" for="masa">Masa</label>
+                            </div>
+                            <div class="col-4 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
+                                <input class="form-check-input" type="checkbox" value="deformacion" name="datosEnc" disabled>
+                                <label class="form-check-label" for="deformacion">Deformación</label>
+                            </div> 
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" id="verificarEnc" disabled>Verificar Checkboxes</button>
+                    </div><br>
+                    <!--Habilitar la parte de formulario para ingresar los valores-->
+                <div>
+            <!--Contenedor para ingresar el valor de modulo de Young junto con sus respectivas unidades de medida-->
+            <div class="container" id="MYInput" style="display: none;">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-12 mb-2 text-center">
+                            <label for="" class="form-label text-center">Modulo de Young</label>
+                        </div>
+                        <!--Contenedor del input (Modulo de young)-->
+                        <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorMY" class="form-control text-center" placeholder="Modulo de Young" id="valorInputMY" step="0.0000000001">
+                        </div>
+                        <!--Primera unidad de medida-->
+                         <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaMY1" name="unidadMedidaMY1" class="form-select text-center">
+                                <option value="N" class="text-center">Newton(s)</option>
+                            </select>
+                        </div>
+                        <!--label que contiene el divisor--> 
+                        <div class="col-1 col-sm-1 mb-2 text-center">
+                            <label for="">/</label>
+                        </div>
+                        <!--Segunda unidad de medida-->
+                        <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaMY2" name="unidadMedidaME2" class="form-select text-center">
+                                <option value="M" class="text-center">Metros(s)²</option>
+                                <option value="Km" class="text-center">Kilometro(s)²</option>
+                                <option value="Cm" class="text-center">Centimetro(s)²</option>
+                                <option value="Mm" class="text-center">Milimetro(s)²</option>
+                                <option value="Ft" class="text-center">Pie(s)²</option>
+                                <option value="In" class="text-center">Pulgada(s)²</option>
+                            </select>
+                        </div> 
+                    </div>
+                    <br>
+            </div>
+            <!--Contenedor para ingresar el valor de FUERZA junto con sus unidades de medidas-->
+            <div class="container" id="FuerzaInput" style="display: none;">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-12 mb-2 text-center">
+                            <label for="" class="form-label text-center">Fuerza:</label>
+                        </div>
+                            <!--Contenedor del input(Fuerza)-->
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                            <input type="number" name="valorFueza" class="form-control text-center"  placeholder="Fuerza" step="0.0000000001" id="valorInputFuerza">
+                            </div>
+                            <!--Unidad de medida-->
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                            <select id="unidadMedidaFuerza" class="form-select text-center" >
+                                <option value="N" disabled selected class="text-center">Newton(s)</option>
+                            </select>
+                            </div>
+                    </div>
+            </div>
+            <!--Contenedor para ingresar el valor de decremento o incremento junto con sus unidades de medidas-->
+            <div class="container" id="DOIInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Decremento o incremento</label>
+                    </div>
+                        <!--Contenedor del input(Decremento o incremento)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorDOI" class="form-control text-center"  placeholder="Decremento o incremento" step="0.0000000001" id="valorInputDOI">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaDOI" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M" class="text-center">Metros(s)</option>
+                            <option value="Km" class="text-center">Kilometro(s)</option>
+                            <option value="Cm" class="text-center">Centimetro(s)</option>
+                            <option value="Mm" class="text-center">Milimetro(s)</option>
+                            <option value="Ft" class="text-center">Pie(s)</option>
+                            <option value="In" class="text-center">Pulgada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de la masa-->
+            <div class="container" id="MasaInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Masa</label>
+                    </div>
+                        <!--Contenedor del input(Masa)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorMasa" class="form-control text-center"  placeholder="Masa" step="0.0000000001" id="valorInputMasa">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaMasa" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="Kg" class="text-center">Kilogramo(s)</option>
+                            <option value="Lb" class="text-center">Libra(s)</option>
+                            <option value="G" class="text-center">Gramo(s)</option>
+                            <option value="T" class="text-center">Tonelada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de deformacion junto con sus unidades de medidas-->
+            <div class="container" id="DeformacionInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Deformacion:</label>
+                    </div>
+                        <!--Contenedor del input(Deformacion)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorDeformacion" class="form-control text-center"  placeholder="Deformacion" step="0.0000000001" id="valorInputDeformacion">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaDeformacion" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M" class="text-center">Metros(s)</option>
+                            <option value="Km" class="text-center">Kilometro(s)</option>
+                            <option value="Cm" class="text-center">Centimetro(s)</option>
+                            <option value="Mm" class="text-center">Milimetro(s)</option>
+                            <option value="Ft" class="text-center">Pie(s)</option>
+                            <option value="In" class="text-center">Pulgada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de Longitud junto con sus unidades de medidas-->
+            <div class="container" id="LongitudInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Longitud:</label>
+                    </div>
+                        <!--Contenedor del input(Deformacion)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorDeformacion" class="form-control text-center"  placeholder="Longitud" step="0.0000000001" id="valorInputLongitud">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaLongitud" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M" class="text-center">Metros(s)</option>
+                            <option value="Km" class="text-center">Kilometro(s)</option>
+                            <option value="Cm" class="text-center">Centimetro(s)</option>
+                            <option value="Mm" class="text-center">Milimetro(s)</option>
+                            <option value="Ft" class="text-center">Pie(s)</option>
+                            <option value="In" class="text-center">Pulgada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de AREA junto con sus unidades de medidas-->
+            <div class="container" id="AreaInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Área:</label>
+                    </div>
+                        <!--Contenedor del input(Area)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorArea" class="form-control text-center"  placeholder="Área" step="0.0000000001" id="valorInputArea">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaArea" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M2" class="text-center">Metros(s)²</option>
+                            <option value="Km2" class="text-center">Kilometro(s)²</option>
+                            <option value="Cm2" class="text-center">Centimetro(s)²</option>
+                            <option value="Mm2" class="text-center">Milimetro(s)²</option>
+                            <option value="Ft2" class="text-center">Pie(s)²</option>
+                            <option value="In2" class="text-center">Pulgada(s)²</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de Esfuerzo junto con sus respectivas unidades de medida-->
+            <div class="container" id="EsfuerzoInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Esfuerzo</label>
+                    </div>
+                    <!--Contenedor del input (Esfuerzo)-->
+                    <div class="col-12 col-sm-8 col-md-2 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                    <input type="number" name="valorEsfuerzo" class="form-control text-center" placeholder="Esfuerzo" id="valorInputEsfuerzo" step="0.0000000001">
+                    </div>
+                    <!--Primera unidad de medida-->
+                     <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaEsfuerzo1" name="unidadMedidaEsfuerzo1" class="form-select text-center">
+                            <option value="N" class="text-center">Newton(s)</option>
+                        </select>
+                    </div>
+                    <!--label que contiene el divisor--> 
+                    <div class="col-1 col-sm-1 mb-2 text-center">
+                        <label for="">/</label>
+                    </div>
+                    <!--Segunda unidad de medida-->
+                    <div class="col-5 col-sm-5 col-md-3 col-lg-4 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaEsfuerzo2" name="unidadMedidaEsfuerzo2" class="form-select text-center">
+                            <option value="M" class="text-center">Metros(s)²</option>
+                            <option value="Km" class="text-center">Kilometro(s)²</option>
+                            <option value="Cm" class="text-center">Centimetro(s)²</option>
+                            <option value="Mm" class="text-center">Milimetro(s)²</option>
+                            <option value="Ft" class="text-center">Pie(s)²</option>
+                            <option value="In" class="text-center">Pulgada(s)²</option>
+                        </select>
+                    </div> 
+                </div>
+                <br>
+            </div>
+            <!--Contenedor para ingresar el valor de Diametro junto con sus unidades de medidas-->
+            <div class="container" id="DiametroInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Diametro:</label>
+                    </div>
+                        <!--Contenedor del input(Diametro)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorDiametro" class="form-control text-center"  placeholder="Diametro" step="0.0000000001" id="valorInputDiametro">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaDiametro" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M" class="text-center">Metros(s)</option>
+                            <option value="Km" class="text-center">Kilometro(s)</option>
+                            <option value="Cm" class="text-center">Centimetro(s)</option>
+                            <option value="Mm" class="text-center">Milimetro(s)</option>
+                            <option value="Ft" class="text-center">Pie(s)</option>
+                            <option value="In" class="text-center">Pulgada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <!--Contenedor para ingresar el valor de Radio junto con sus unidades de medidas-->
+            <div class="container" id="RadioInput" style="display: none;">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 mb-2 text-center">
+                        <label for="" class="form-label text-center">Radio:</label>
+                    </div>
+                        <!--Contenedor del input(Radio)-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <input type="number" name="valorRadio" class="form-control text-center"  placeholder="Longitud" step="0.0000000001" id="valorInputRadio">
+                        </div>
+                        <!--Unidad de medida-->
+                        <div class="col-6 col-sm-6 col-md-3 col-lg-3 mb-2 d-flex justify-content-center align-items-center">
+                        <select id="unidadMedidaRadio" class="form-select text-center" >
+                            <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
+                            <option value="M" class="text-center">Metros(s)</option>
+                            <option value="Km" class="text-center">Kilometro(s)</option>
+                            <option value="Cm" class="text-center">Centimetro(s)</option>
+                            <option value="Mm" class="text-center">Milimetro(s)</option>
+                            <option value="Ft" class="text-center">Pie(s)</option>
+                            <option value="In" class="text-center">Pulgada(s)</option>
+                        </select>
+                        </div>
+                </div>
+            </div>
+                </div>
+
+                </div>
+
+                <!--Boton para enviar-->
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="col-6 col-md-auto text-center">
+                            <input type="submit" name="Enviar" class="form-control mt-2"id="botonEnviar" disabled>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div id="mostrarResultado" class="container" style="display: none;">
+                <br><br>
+                <div id="resultadoDiv" class="row d-flex align-items-center justify-content-center">
+                    <div class="text-center fw-bold">Resultado: <span id="resultado" class="bold"></span> \( \text{m}^2 \)<span></span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--Footer de la pagina-->
+    <footer class="mt-5">
+
+    </footer>
+
+    <!--Funcionamiento general de la pagina(presiones)-->
+    <script>
+        let Modulodeyoung= false;
+        let Fuerza= false;
+        let Deformacion = false;
+        let Masa = false;
+        let Esfuerzo = false;
+        let DOI = false;
+        let Area = false;
+        let Diametro= false;
+        let Radio= false;
+        let Longitud= false;
+
+        let datosCheckboxes = [];
+
+        var datosComprobar = [];
+
+        //funcion para validar el numero de datos con los que cuentas
+        document.getElementById('verificarOb').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosOb"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosOb"]');
+            const checkboxes3 = document.querySelectorAll('input[name="datosEnc"]');
+            
+            let MY = false;
+            let F = false;
+            let D = false;
+            let M = false;
+            let E = false;
+            let DI = false;
+            let A = false;
+            let Diame = false;
+            let R = false;
+            let L = false;
+
+            let contador = 0;
+            const datosCheckboxes = [];
+
+            //Cuenta el numero de checkboxs seleccionados
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+
+                    if(checkbox.value=="moduloyoung"){
+                        MY = true;
+                    }
+                    if(checkbox.value=="fuerza"){
+                        F = true;
+                    }
+                    if(checkbox.value=="deformacion"){
+                        D = true;
+                    }
+                    if(checkbox.value=="masa"){
+                        M = true;
+                    }
+                    if(checkbox.value=="esfuerzo"){
+                        E = true;
+                    }
+                    if(checkbox.value=="doi"){
+                        DI = true;
+                    }
+                    if(checkbox.value=="diametro"){
+                        Diame = true;
+                    }
+                    if(checkbox.value=="radio"){
+                        R = true;
+                    }
+                    if(checkbox.value=="longitud"){
+                        L = true;
+                    }
+                    if(checkbox.value=="area"){
+                        A = true;
+                    }
+            });
+            
+            if (contador < 2) {//revisa que se seleccionen minimo dos datos
+                alert('¡Necesitas seleccionar mínimo dos datos!');
+            } else if(contador==10){//revisa que no se selccionen todos los dato
+                alert('¡No puedes seleccionar todos los datos!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }else if(F == true && M ==true){//Revisa que no se pueda seleccionar fueza i masa a la vez
+                alert('¡No puedes seleccionar masa y fuerza a la vez!');
+            }else if(Diame == true && R ==true){//Revisa que no se pueda seleccionar diametro y el radiio a la vez
+                alert('¡No puedes seleccionar Radio y Diametro a la vez!');
+            }else if((Diame == true || R == true) && A == true){//Revisa que no se pueda seleccionar fueza i masa a la vez
+                alert('¡No puedes seleccionar Diametro o Radio si ya tienes area!');
+            }
+            else { //deshabilita los checkboxes al cumpliar las condiciones
+                checkboxes2.forEach(function(checkbox) {
+                    checkbox.disabled = true;
+            });
+            datosComprobar = [...datosCheckboxes];
+
+            checkboxes3.forEach(function(checkbox) {
+                    checkbox.disabled = false;
+            });
+
+            const botonDesactivado = document.getElementById("verificarOb");
+            botonDesactivado.disabled = true;
+            const botonDesactivado2 = document.getElementById("verificarEnc");
+            botonDesactivado2.disabled = false;
+            }
+            //console.log('Datos seleccionados:', datosComprobar);
+
+        });
+
+
+        //funcion para validar que solo se elija un dato para encontrar
+        document.getElementById('verificarEnc').addEventListener('click', function(event) {
+            event.preventDefault();
+            const checkboxes = document.querySelectorAll('input[name="datosEnc"]:checked');
+            const checkboxes2 = document.querySelectorAll('input[name="datosEnc"]');
+            let contador = 0;
+            /*const datosCheckboxes = [];*/
+
+
+            //Checa cual Dato faltante estan buscando
+            checkboxes.forEach(checkbox=>  {
+                    contador++;
+                    datosCheckboxes.push(checkbox.value); //guardar los datos seleccionados
+            });
+            
+            if (contador > 1) {//revisa que se seleccionen minimo dos datos
+                alert('¡Solo puedes buscar un dato a la vez!');
+            }else if(contador==0){
+                alert('¡Tienes que seleccionar algún dato!');
+            }
+            else{
+                let contador2 = 0;
+                let salir = false;
+                
+                //variables que van a guardar los datos que se ingresen mediante el id
+                //Modulo de elasticidad
+                const valorInput_MY = document.getElementById('valorInputMY');
+                const unidadM_MY1 = document.getElementById('unidadMedidaMY1');
+                const unidadM_MY2 = document.getElementById('unidadMedidaMY2');
+                //FUERZA
+                const valorInput_Fuerza = document.getElementById('valorInputFuerza');
+                const unidadM_Fuerza1 = document.getElementById('unidadMedidaFuerza');
+                //Deformacion
+                const valorInput_Deformacion = document.getElementById('valorInputDeformacion');
+                const unidadM_Deformacion1 = document.getElementById('unidadMedidaDeformacion');
+                //Masa
+                const valorinput_Masa = document.getElementById('valorInputMasa');
+                const unidadM_Masa1 = document.getElementById('unidadMedidaMasa');
+                //Decremento o incremento
+                const valorInput_DOI = document.getElementById('valorInputDOI');
+                const unidadM_DOI1 = document.getElementById('unidadMedidaDOI');
+                //Longitud
+                const valorInput_Longitud = document.getElementById('valorInputLongitud');
+                const unidadM_Longitud1 = document.getElementById('unidadMedidaLongitud');
+                //Area
+                const valorInput_Area = document.getElementById('valorInputArea');
+                const unidadM_Area1 = document.getElementById('unidadMedidaArea');
+                //Esfuerzo
+                const valorInput_Esfuerzo = document.getElementById('valorInputEsfuerzo');
+                const unidadM_Esfuerzo1 = document.getElementById('unidadMedidaEsfuerzo1');
+                const unidadM_Esfuerzo2 = document.getElementById('unidadMedidaEsfuerzo2');
+                //Diametro
+                const valorInput_Diametro = document.getElementById('valorInputDiametro');
+                const unidadM_Diametro1 = document.getElementById('unidadMedidaDiametro');
+                //Radio
+                const valorInput_Radio = document.getElementById('valorInputRadio');
+                const unidadM_Radio1 = document.getElementById('unidadMedidaRadio');
+
+                console.log(datosCheckboxes[0]);
+                for(var i=0; i<datosComprobar.length; i++){
+                    //if para comprobar que datos te va a proporcionar
+                    if(datosComprobar[i]=="moduloyoung"){
+                        Modulodeyoung = true;
+                    }
+                    if(datosComprobar[i]=="fuerza"){
+                        Fuerza = true;
+                    }
+                    if(datosComprobar[i]=="deformacion"){
+                        Deformacion = true;
+                    }
+                    if(datosComprobar[i]=="masa"){
+                        Masa = true;
+                    }
+                    if(datosComprobar[i]=="esfuerzo"){
+                        Esfuerzo = true;
+                    }
+                    if(datosComprobar[i]=="doi"){
+                        DOI = true;
+                    }
+                    if(datosComprobar[i]=="diametro"){
+                        Diametro = true;
+                    }
+                    if(datosComprobar[i]=="radio"){
+                        Radio = true;
+                    }
+                    if(datosComprobar[i]=="longitud"){
+                        Longitud = true;
+                    }
+                    if(datosComprobar[i]=="area"){
+                        Area = true;
+                    }
+                    for(var j=0; j<datosCheckboxes.length; j++){
+                        if(datosComprobar[i] != datosCheckboxes[j]){
+                            contador2++;
+                        }else{
+                            salir= true;
+                            break;
+                        }
+                    }
+                    if(salir==true){
+                        break;
+                    }
+                }
+                if(salir==true){
+                    alert ('¡Necesitas seleccionar datos diferentes a los proporcionados!');
+                }else{
+                     //deshabilita los checkboxes al cumpliar las condiciones
+                    checkboxes2.forEach(function(checkbox) {
+                        checkbox.disabled = true;
+                    });
+                    //desactiva el boton 
+                    const botonDesactivado = document.getElementById("verificarEnc");
+                        botonDesactivado.disabled = true;
+                    
+                    const botonEnviar = document.getElementById("botonEnviar");
+                        botonEnviar.disabled = false;
+                    
+                        //funcion que habilita el ingreso de los valores de presion en caso de ser seleccionado en los checkboxes
+                        if(Modulodeyoung){
+                            document.getElementById('MYInput').style.display = 'block';
+
+                            valorInput_MY.setAttribute('required', 'required');
+                            unidadM_MY1.setAttribute('required', 'required');
+                            unidadM_MY2.setAttribute('required', 'required');
+                        }
+                        //funcion que habilita el ingreso de los valores de fuerza en caso de ser seleccionado en los checkboxes
+                        if(Fuerza){
+                            document.getElementById('FuerzaInput').style.display = 'block';
+                            valorInput_Fuerza.setAttribute('required', 'required');
+                        }
+                        //funcion que habilita el ingreso de los valores de area en caso de ser seleccionado en los checkboxes
+                        if(Deformacion){
+                            document.getElementById('DeformacionInput').style.display = 'block';
+                            valorInput_Deformacion.setAttribute('required', 'required');
+                            unidadM_Deformacion1.setAttribute('required', 'required');
+                        }
+                        //funcion que habilita el ingreso de los valores de Esfurzo en caso de ser seleccionado en los checkboxes
+                        if(Masa){
+                            document.getElementById('MasaInput').style.display = 'block';
+                            valorinput_Masa.setAttribute('required', 'required');
+                            unidadM_Masa1.setAttribute('required', 'required');
+                        }
+                        if(DOI){
+                            document.getElementById('DOIInput').style.display = 'block';
+                            valorInput_DOI.setAttribute('required', 'required');
+                            unidadM_DOI1.setAttribute('required', 'required');
+                        }
+                        if(Longitud){
+                            document.getElementById('LongitudInput').style.display = 'block';
+                            valorInput_Longitud.setAttribute('required', 'required');
+                            unidadM_Longitud1.setAttribute('required', 'required');
+                        }
+                        if(Area){
+                            document.getElementById('AreaInput').style.display = 'block';
+                            valorInput_Area.setAttribute('required', 'required');
+                            unidadM_Area1.setAttribute('required', 'required');
+                        }
+                        if(Diametro){
+                            document.getElementById('DiametroInput').style.display = 'block';
+                            valorInput_Diametro.setAttribute('required', 'required');
+                            unidadM_Diametro1.setAttribute('required', 'required');
+                        }
+                        if(Radio){
+                            document.getElementById('RadioInput').style.display = 'block';
+                            valorInput_Radio.setAttribute('required', 'required');
+                            unidadM_Radio1.setAttribute('required', 'required');
+                        }
+                        if(Esfuerzo){
+                            document.getElementById('EsfuerzoInput').style.display = 'block';
+
+                            valorInput_Esfuerzo.setAttribute('required', 'required');
+                            unidadM_Esfuerzo1.setAttribute('required', 'required');
+                            unidadM_Esfuerzo2.setAttribute('required', 'required');
+                        }
+                    
+                }
+
+
+               
+            }
+        });
+
+        document.getElementById('formularioDatos').addEventListener("submit", function(event){
+            event.preventDefault();
+            //variable que va a retener los datos
+            let Resultado=0.0;
+            
+            //IF PARA CALCULAR EL MODULO DE ELASTICIDAD 
+            if(datosComprobar[0] == "moduloyoung"){
+
+                if((Esfuerzo == true || (Fuerza == true && Area == true)) && (Deformacion == true || (DOI == true && Longitud == true))){
+                    if(Esfuerzo == true && Deformacion == true){
+                    let valorNumfEsfuerzo = parseFloat(document.getElementById('valorInputEsfuerzo').value);
+                    let valorUnidadEsfuerzo = document.getElementById('unidadMedidaEsfuerzo2');
+                    let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                    let valorUnidadDeformacion = document.getElementById('unidadMedidaDeformacion');
+
+                    switch(valorUnidadEsfuerzo){
+                    case "M":
+                    valorNumfEsfuerzo = valorNumfEsfuerzo;
+                    break;
+                    case "Km":
+                    valorNumfEsfuerzo = valorNumfEsfuerzo * 1000000;
+                    break;
+                    case "Cm":
+                    valorNumfEsfuerzo = valorNumfEsfuerzo * 0.0001;
+                    break;
+                    case "Mm":
+                    valorNumfEsfuerzo = valorNumfEsfuerzo * 0.000001;
+                    break;
+                    case "Ft":
+                    valorNumfEsfuerzo = valorNumfEsfuerzo * 0.092903;
+                    break;
+                    case "In":
+                    valorNumfEsfuerzo = valorNumfEsfuerzo * 0.0006451597222199104;
+                    break;
+                }
+
+                switch(valorUnidadDeformacion){
+                    case "M":
+                    valorNumDeformacion = valorNumDeformacion;
+                    break;
+                    case "Km":
+                    valorNumDeformacion = valorNumDeformacion * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDeformacion = valorNumDeformacion / 100;
+                    break;
+                    case "Mm":
+                    valorNumDeformacion = valorNumDeformacion / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDeformacion = valorNumDeformacion * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDeformacion = valorNumDeformacion * 0.0254;
+                    break;
+                }
+
+                    Resultado = valorNumfEsfuerzo / valorNumDeformacion;
+                    }//FIN DE LA OBTENCION DE MY SI TENGO YA EL ESFUERZO Y LA DEFORMACION
+
+                    if((Fuerza == true || Masa == true) && (Area == true || (Radio == true || Diametro == true)) && DOI == true && Longitud == true){
+                        if(Fuerza == true && Area == true && DOI == true && Longitud){
+                            let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+
+                            let valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                            let valorUnidadArea = document.getElementById('unidadMedidaArea');
+
+                            let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                            let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+
+                            let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                            let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                            switch(valorUnidadDOI){
+                            case "M":
+                            valorNumDOI = valorNumDOI;
+                            break;
+                            case "Km":
+                            valorNumDOI = valorNumDOI * 1000;
+                            break;
+                            case "Cm":
+                            valorNumDOI = valorNumDOI / 100;
+                            break;
+                            case "Mm":
+                            valorNumDOI = valorNumDOI / 1000;
+                            break;
+                            case "Ft":
+                            valorNumDOI = valorNumDOI * 0.3048;
+                            break;
+                            case "In":
+                            valorNumDOI = valorNumDOI * 0.0254;
+                            break;
+                            }
+                
+                            switch(valorUnidadLongitud){
+                            case "M":
+                            valorNumLongitud = valorNumLongitud;
+                            break;
+                            case "Km":
+                            valorNumLongitud = valorNumLongitud * 1000;
+                            break;
+                            case "Cm":
+                            valorNumLongitud = valorNumLongitud / 100;
+                            break;
+                            case "Mm":
+                            valorNumLongitud = valorNumLongitud / 1000;
+                            break;
+                            case "Ft":
+                            valorNumLongitud = valorNumLongitud * 0.3048;
+                            break;
+                            case "In":
+                            valorNumLongitud = valorNumLongitud * 0.0254;
+                            break;
+                            }
+
+                            switch(valorUnidadArea){
+                            case "M":
+                            valorNumArea = valorNumArea;
+                            break;
+                            case "Km":
+                            valorNumArea = valorNumArea * 1000000;
+                            break;
+                            case "Cm":
+                            valorNumArea = valorNumArea * 0.0001;
+                            break;
+                            case "Mm":
+                            valorNumArea = valorNumArea * 0.000001;
+                            break;
+                            case "Ft":
+                            valorNumArea = valorNumArea * 0.092903;
+                            break;
+                            case "In":
+                            valorNumArea = valorNumArea * 0.0006451597222199104;
+                            break;
+                            }
+
+                            Resultado = (valorNumFuerza / valorNumArea) / (valorNumDOI / valorNumLongitud)
+                        }//AQUI SI TENEMOS LOS CUATRO DATOS PARA SACAR ESFUERZO Y DEFORMACION LO SACAMOS DIRECTO
+ 
+                        if(Masa == true && (Radio == true || Diametro == true) && DOI == true && Longitud == true){
+                            if(Masa == true && Radio == true && DOI == true && Longitud == true){
+                                let valorNumMasa = parseFloat(document.getElementById('valorInputMasa').value);
+                                let valorUnidadMasa = document.getElementById('unidadMedidaMasa');
+
+                                let valorNumRadio = parseFloat(document.getElementById('valorInputRadio').value);
+                                let valorUnidadRadio = document.getElementById('unidadMedidaRadio');
+                                
+                                let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                                let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+                                
+                                let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                                let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                                switch(valorUnidadMasa){
+                                case "Kg":
+                                valorNumMasa = valorNumMasa;
+                                break;
+                                case "Lb":
+                                valorNumMasa = valorNumMasa * 0.453592;
+                                break;
+                                case "G":
+                                valorNumMasa = valorNumMasa / 1000;
+                                break;
+                                case "T":
+                                valorNumMasa = valorNumMasa * 1000;
+                                break;
+                               }
+
+                               switch(valorUnidadRadio){
+                               case "M":
+                               valorNumRadio = valorNumRadio;
+                               break;
+                               case "Km":
+                               valorNumRadio = valorNumRadio * 1000;
+                               break;
+                               case "Cm":
+                               valorNumRadio = valorNumRadio * 0.01;
+                               break;
+                               case "Mm":
+                               valorNumRadio = valorNumRadio * 0.001;
+                               break;
+                               case "Ft":
+                               valorNumRadio = valorNumRadio * 0.3048;
+                               break;
+                               case "In":
+                               valorNumRadio = valorNumRadio * 0.0254;
+                               break;
+                               }
+
+                               switch(valorUnidadDOI){
+                               case "M":
+                               valorNumDOI = valorNumDOI;
+                               break;
+                               case "Km":
+                               valorNumDOI = valorNumDOI * 1000;
+                               break;
+                               case "Cm":
+                               valorNumDOI = valorNumDOI / 100;
+                               break;
+                               case "Mm":
+                               valorNumDOI = valorNumDOI / 1000;
+                               break;
+                               case "Ft":
+                               valorNumDOI = valorNumDOI * 0.3048;
+                               break;
+                               case "In":
+                               valorNumDOI = valorNumDOI * 0.0254;
+                               break;
+                               }
+                
+                               switch(valorUnidadLongitud){
+                               case "M":
+                               valorNumLongitud = valorNumLongitud;
+                               break;
+                               case "Km":
+                               valorNumLongitud = valorNumLongitud * 1000;
+                               break;
+                               case "Cm":
+                               valorNumLongitud = valorNumLongitud / 100;
+                               break;
+                               case "Mm":
+                               valorNumLongitud = valorNumLongitud / 1000;
+                               break;
+                               case "Ft":
+                               valorNumLongitud = valorNumLongitud * 0.3048;
+                               break;
+                               case "In":
+                               valorNumLongitud = valorNumLongitud * 0.0254;
+                               break;
+                               }
+
+                               Resultado == ((valorNumMasa * 9.8) / (3.1416 * (valorNumRadio * valorNumRadio))) / (valorNumDOI / valorNumLongitud);
+                            }//FIN DE COMO SACAR MODULO DE YOUNG CON MASA Y RADIO
+                            if(Masa == true && Radio == true && DOI == true && Longitud == true){
+                                let valorNumMasa = parseFloat(document.getElementById('valorInputMasa').value);
+                                let valorUnidadMasa = document.getElementById('unidadMedidaMasa');
+
+                                let valorNumDiametro = parseFloat(document.getElementById('valorInputDiametro').value);
+                                let valorUnidadDiametro = document.getElementById('unidadMedidaDiametro');
+                                
+                                let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                                let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+                                
+                                let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                                let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                                switch(valorUnidadMasa){
+                                case "Kg":
+                                valorNumMasa = valorNumMasa;
+                                break;
+                                case "Lb":
+                                valorNumMasa = valorNumMasa * 0.453592;
+                                break;
+                                case "G":
+                                valorNumMasa = valorNumMasa / 1000;
+                                break;
+                                case "T":
+                                valorNumMasa = valorNumMasa * 1000;
+                                break;
+                               }
+
+                               switch(valorUnidadDiametro){
+                               case "M":
+                               valorNumDiametro = valorNumDiametro;
+                               break;
+                               case "Km":
+                               valorNumDiametro = valorNumDiametro * 1000;
+                               break;
+                               case "Cm":
+                               valorNumDiametro = valorNumDiametro * 0.01;
+                               break;
+                               case "Mm":
+                               valorNumDiametro = valorNumDiametro * 0.001;
+                               break;
+                               case "Ft":
+                               valorNumDiametro = valorNumDiametro * 0.3048;
+                               break;
+                               case "In":
+                               valorNumDiametro = valorNumDiametro * 0.0254;
+                               break;
+                               }
+
+                               switch(valorUnidadDOI){
+                               case "M":
+                               valorNumDOI = valorNumDOI;
+                               break;
+                               case "Km":
+                               valorNumDOI = valorNumDOI * 1000;
+                               break;
+                               case "Cm":
+                               valorNumDOI = valorNumDOI / 100;
+                               break;
+                               case "Mm":
+                               valorNumDOI = valorNumDOI / 1000;
+                               break;
+                               case "Ft":
+                               valorNumDOI = valorNumDOI * 0.3048;
+                               break;
+                               case "In":
+                               valorNumDOI = valorNumDOI * 0.0254;
+                               break;
+                               }
+                
+                               switch(valorUnidadLongitud){
+                               case "M":
+                               valorNumLongitud = valorNumLongitud;
+                               break;
+                               case "Km":
+                               valorNumLongitud = valorNumLongitud * 1000;
+                               break;
+                               case "Cm":
+                               valorNumLongitud = valorNumLongitud / 100;
+                               break;
+                               case "Mm":
+                               valorNumLongitud = valorNumLongitud / 1000;
+                               break;
+                               case "Ft":
+                               valorNumLongitud = valorNumLongitud * 0.3048;
+                               break;
+                               case "In":
+                               valorNumLongitud = valorNumLongitud * 0.0254;
+                               break;
+                               }
+
+                               Resultado == ((valorNumMasa * 9.8) / (3.1416 * (valorNumDiametro * valorNumDiametro))) / (valorNumDOI / valorNumLongitud);
+                            }//FIN DE COMO SACAR MODULO DE YOUNG CON MASA Y Diametro
+                        }
+                    }
+                }//FIN DE LA PRIMERA FORMA DE SACR EL MODULO DE YOUNG
+
+                if((Fuerza == true || Masa == true) && (Longitud == true || (DOI == true && Deformacion == true)) && (Area == true || (Radio == true || Diametro == true)) && (DOI == true || (Deformacion == true && Longitud == true))){
+                    if(Fuerza == true && Longitud == true && Area == true && DOI == true){
+                        let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+                          
+                        let valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                        let valorUnidadArea = document.getElementById('unidadMedidaArea');
+                        
+                        let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                        let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+                        
+                        let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                        let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                        switch(valorUnidadDOI){
+                        case "M":
+                        valorNumDOI = valorNumDOI;
+                        break;
+                        case "Km":
+                        valorNumDOI = valorNumDOI * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDOI = valorNumDOI / 100;
+                        break;
+                        case "Mm":
+                        valorNumDOI = valorNumDOI / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDOI = valorNumDOI * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDOI = valorNumDOI * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadLongitud){
+                        case "M":
+                        valorNumLongitud = valorNumLongitud;
+                        break;
+                        case "Km":
+                        valorNumLongitud = valorNumLongitud * 1000;
+                        break;
+                        case "Cm":
+                        valorNumLongitud = valorNumLongitud / 100;
+                        break;
+                        case "Mm":
+                        valorNumLongitud = valorNumLongitud / 1000;
+                        break;
+                        case "Ft":
+                        valorNumLongitud = valorNumLongitud * 0.3048;
+                        break;
+                        case "In":
+                        valorNumLongitud = valorNumLongitud * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadArea){
+                        case "M":
+                        valorNumArea = valorNumArea;
+                        break;
+                        case "Km":
+                        valorNumArea = valorNumArea * 1000000;
+                        break;
+                        case "Cm":
+                        valorNumArea = valorNumArea * 0.0001;
+                        break;
+                        case "Mm":
+                        valorNumArea = valorNumArea * 0.000001;
+                        break;
+                        case "Ft":
+                        valorNumArea = valorNumArea * 0.092903;
+                        break;
+                        case "In":
+                        valorNumArea = valorNumArea * 0.0006451597222199104;
+                        break;
+                        }
+
+                        Resultado = (valorNumFuerza * valorNumLongitud) / (valorNumArea * valorNumDOI);
+                    }
+
+                    if(Masa == true && (DOI == true && Deformacion == true) && Radio == true  && (Deformacion == true && Longitud == true)){
+                        let valorNumMasa = parseFloat(document.getElementById('valorInputMasa').value);
+                        let valorUnidadMasa = document.getElementById('unidadMedidaMasa');
+
+                        let valorNumRadio = parseFloat(document.getElementById('valorInputRadio').value);
+                        let valorUnidadRadio = document.getElementById('unidadMedidaRadio');
+
+                        let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                        let valorUnidadDeformacion= document.getElementById('unidadMedidaDeformacion');
+                        
+                        let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                        let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+                        
+                        let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                        let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                        switch(valorUnidadMasa){
+                        case "Kg":
+                        valorNumMasa = valorNumMasa;
+                        break;
+                        case "Lb":
+                        valorNumMasa = valorNumMasa * 0.453592;
+                        break;
+                        case "G":
+                        valorNumMasa = valorNumMasa / 1000;
+                        break;
+                        case "T":
+                        valorNumMasa = valorNumMasa * 1000;
+                        break;
+                        }
+
+                        switch(valorUnidadDOI){
+                        case "M":
+                        valorNumDOI = valorNumDOI;
+                        break;
+                        case "Km":
+                        valorNumDOI = valorNumDOI * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDOI = valorNumDOI / 100;
+                        break;
+                        case "Mm":
+                        valorNumDOI = valorNumDOI / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDOI = valorNumDOI * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDOI = valorNumDOI * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadLongitud){
+                        case "M":
+                        valorNumLongitud = valorNumLongitud;
+                        break;
+                        case "Km":
+                        valorNumLongitud = valorNumLongitud * 1000;
+                        break;
+                        case "Cm":
+                        valorNumLongitud = valorNumLongitud / 100;
+                        break;
+                        case "Mm":
+                        valorNumLongitud = valorNumLongitud / 1000;
+                        break;
+                        case "Ft":
+                        valorNumLongitud = valorNumLongitud * 0.3048;
+                        break;
+                        case "In":
+                        valorNumLongitud = valorNumLongitud * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadRadio){
+                        case "M":
+                        valorNumRadio = valorNumRadio;
+                        break;
+                        case "Km":
+                        valorNumRadio = valorNumRadio * 1000;
+                        break;
+                        case "Cm":
+                        valorNumRadio = valorNumRadio / 100;
+                        break;
+                        case "Mm":
+                        valorNumRadio = valorNumRadio / 1000;
+                        break;
+                        case "Ft":
+                        valorNumRadio = valorNumRadio * 0.3048;
+                        break;
+                        case "In":
+                        valorNumRadio = valorNumRadio * 0.0254;
+                        break;
+                        }
+
+
+                        switch(valorUnidadDeformacion){
+                        case "M":
+                        valorNumDeformacion = valorNumDeformacion;
+                        break;
+                        case "Km":
+                        valorNumDeformacion = valorNumDeformacion * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDeformacion = valorNumDeformacion / 100;
+                        break;
+                        case "Mm":
+                        valorNumDeformacion = valorNumDeformacion / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDeformacion = valorNumDeformacion * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDeformacion = valorNumDeformacion * 0.0254;
+                        break;
+                        }
+
+                        Resultado = ((valorNumMasa * 9.8) * valorNumLongitud) / ((3.1416 * (valorNumRadio * valorNumRadio)) * valorNumDOI);
+                    }
+
+                    if(Masa == true && (DOI == true && Deformacion == true) && Diametro == true  && (Deformacion == true && Longitud == true)){
+                        let valorNumMasa = parseFloat(document.getElementById('valorInputMasa').value);
+                        let valorUnidadMasa = document.getElementById('unidadMedidaArea');
+
+                        let valorNumDiametro= parseFloat(document.getElementById('valorInputDiametro').value);
+                        let valorUnidadDiametro = document.getElementById('unidadMedidaDiametro');
+
+                        let valorNumDeformacion = parseFloat(document.getElementById('valorInputMasa').value);
+                        let valorUnidadDeformacion= document.getElementById('unidadMedidaArea');
+                        
+                        let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                        let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+                        
+                        let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                        let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                        switch(valorUnidadMasa){
+                        case "Kg":
+                        valorNumMasa = valorNumMasa;
+                        break;
+                        case "Lb":
+                        valorNumMasa = valorNumMasa * 0.453592;
+                        break;
+                        case "G":
+                        valorNumMasa = valorNumMasa / 1000;
+                        break;
+                        case "T":
+                        valorNumMasa = valorNumMasa * 1000;
+                        break;
+                        }
+
+                        switch(valorUnidadDOI){
+                        case "M":
+                        valorNumDOI = valorNumDOI;
+                        break;
+                        case "Km":
+                        valorNumDOI = valorNumDOI * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDOI = valorNumDOI / 100;
+                        break;
+                        case "Mm":
+                        valorNumDOI = valorNumDOI / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDOI = valorNumDOI * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDOI = valorNumDOI * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadLongitud){
+                        case "M":
+                        valorNumLongitud = valorNumLongitud;
+                        break;
+                        case "Km":
+                        valorNumLongitud = valorNumLongitud * 1000;
+                        break;
+                        case "Cm":
+                        valorNumLongitud = valorNumLongitud / 100;
+                        break;
+                        case "Mm":
+                        valorNumLongitud = valorNumLongitud / 1000;
+                        break;
+                        case "Ft":
+                        valorNumLongitud = valorNumLongitud * 0.3048;
+                        break;
+                        case "In":
+                        valorNumLongitud = valorNumLongitud * 0.0254;
+                        break;
+                        }
+
+                        
+                        switch(valorUnidadDiametro){
+                        case "M":
+                        valorNumDiametro = valorNumDiametro;
+                        break;
+                        case "Km":
+                        valorNumDiametro = valorNumDiametro * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDiametro = valorNumDiametro / 100;
+                        break;
+                        case "Mm":
+                        valorNumDiametro = valorNumDiametro / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDiametro = valorNumDiametro * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDiametro = valorNumDiametro * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadDeformacion){
+                        case "M":
+                        valorNumDeformacion = valorNumDeformacion;
+                        break;
+                        case "Km":
+                        valorNumDeformacion = valorNumDeformacion * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDeformacion = valorNumDeformacion / 100;
+                        break;
+                        case "Mm":
+                        valorNumDeformacion = valorNumDeformacion / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDeformacion = valorNumDeformacion * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDeformacion = valorNumDeformacion * 0.0254;
+                        break;
+                        }
+
+                        Resultado = ((valorNumMasa * 9.8) * valorNumLongitud) / (((3.1416 * (valorNumDiametro * valorNumDiametro)) / 4) * valorNumDOI);
+                    }
+
+                    if(Masa == true && (DOI == true && Deformacion == true) && Radio == true  && (Deformacion == true && Longitud == true)){
+                        let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+
+                        let valorNumRadio = parseFloat(document.getElementById('valorInputRadio').value);
+                        let valorUnidadRadio = document.getElementById('unidadMedidaRadio');
+
+                        let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                        let valorUnidadDeformacion= document.getElementById('unidadMedidaDeformacion');
+                        
+                        let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                        let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+                        
+                        let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                        let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                        switch(valorUnidadDOI){
+                        case "M":
+                        valorNumDOI = valorNumDOI;
+                        break;
+                        case "Km":
+                        valorNumDOI = valorNumDOI * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDOI = valorNumDOI / 100;
+                        break;
+                        case "Mm":
+                        valorNumDOI = valorNumDOI / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDOI = valorNumDOI * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDOI = valorNumDOI * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadLongitud){
+                        case "M":
+                        valorNumLongitud = valorNumLongitud;
+                        break;
+                        case "Km":
+                        valorNumLongitud = valorNumLongitud * 1000;
+                        break;
+                        case "Cm":
+                        valorNumLongitud = valorNumLongitud / 100;
+                        break;
+                        case "Mm":
+                        valorNumLongitud = valorNumLongitud / 1000;
+                        break;
+                        case "Ft":
+                        valorNumLongitud = valorNumLongitud * 0.3048;
+                        break;
+                        case "In":
+                        valorNumLongitud = valorNumLongitud * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadRadio){
+                        case "M":
+                        valorNumRadio = valorNumRadio;
+                        break;
+                        case "Km":
+                        valorNumRadio = valorNumRadio * 1000;
+                        break;
+                        case "Cm":
+                        valorNumRadio = valorNumRadio / 100;
+                        break;
+                        case "Mm":
+                        valorNumRadio = valorNumRadio / 1000;
+                        break;
+                        case "Ft":
+                        valorNumRadio = valorNumRadio * 0.3048;
+                        break;
+                        case "In":
+                        valorNumRadio = valorNumRadio * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadDeformacion){
+                        case "M":
+                        valorNumDeformacion = valorNumDeformacion;
+                        break;
+                        case "Km":
+                        valorNumDeformacion = valorNumDeformacion * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDeformacion = valorNumDeformacion / 100;
+                        break;
+                        case "Mm":
+                        valorNumDeformacion = valorNumDeformacion / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDeformacion = valorNumDeformacion * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDeformacion = valorNumDeformacion * 0.0254;
+                        break;
+                        }
+
+                        Resultado = ((valorNumFuerza * 9.8) * valorNumLongitud) / ((3.1416 * (valorNumRadio * valorNumRadio)) * valorNumDOI);
+                    }
+
+                    if(Masa == true && (DOI == true && Deformacion == true) && Diametro == true  && (Deformacion == true && Longitud == true)){
+                        let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+
+                        let valorNumDiametro= parseFloat(document.getElementById('valorInputDiametro').value);
+                        let valorUnidadDiametro = document.getElementById('unidadMedidaDiametro');
+
+                        let valorNumDeformacion = parseFloat(document.getElementById('valorInputMasa').value);
+                        let valorUnidadDeformacion= document.getElementById('unidadMedidaArea');
+                        
+                        let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                        let valorUnidadDOI= document.getElementById('unidadMedidaDOI');
+                        
+                        let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                        let valorUnidadLongitud = document.getElementById('unidadMedidaLongitud');
+
+                        switch(valorUnidadDOI){
+                        case "M":
+                        valorNumDOI = valorNumDOI;
+                        break;
+                        case "Km":
+                        valorNumDOI = valorNumDOI * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDOI = valorNumDOI / 100;
+                        break;
+                        case "Mm":
+                        valorNumDOI = valorNumDOI / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDOI = valorNumDOI * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDOI = valorNumDOI * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadLongitud){
+                        case "M":
+                        valorNumLongitud = valorNumLongitud;
+                        break;
+                        case "Km":
+                        valorNumLongitud = valorNumLongitud * 1000;
+                        break;
+                        case "Cm":
+                        valorNumLongitud = valorNumLongitud / 100;
+                        break;
+                        case "Mm":
+                        valorNumLongitud = valorNumLongitud / 1000;
+                        break;
+                        case "Ft":
+                        valorNumLongitud = valorNumLongitud * 0.3048;
+                        break;
+                        case "In":
+                        valorNumLongitud = valorNumLongitud * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadDiametro){
+                        case "M":
+                        valorNumDiametro = valorNumDiametro;
+                        break;
+                        case "Km":
+                        valorNumDiametro = valorNumDiametro * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDiametro = valorNumDiametro / 100;
+                        break;
+                        case "Mm":
+                        valorNumDiametro = valorNumDiametro / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDiametro = valorNumDiametro * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDiametro = valorNumDiametro * 0.0254;
+                        break;
+                        }
+
+                        switch(valorUnidadDeformacion){
+                        case "M":
+                        valorNumDeformacion = valorNumDeformacion;
+                        break;
+                        case "Km":
+                        valorNumDeformacion = valorNumDeformacion * 1000;
+                        break;
+                        case "Cm":
+                        valorNumDeformacion = valorNumDeformacion / 100;
+                        break;
+                        case "Mm":
+                        valorNumDeformacion = valorNumDeformacion / 1000;
+                        break;
+                        case "Ft":
+                        valorNumDeformacion = valorNumDeformacion * 0.3048;
+                        break;
+                        case "In":
+                        valorNumDeformacion = valorNumDeformacion * 0.0254;
+                        break;
+                        }
+
+                        Resultado = ((valorNumFuerza * 9.8) * valorNumLongitud) / (((3.1416 * (valorNumDiametro * valorNumDiametro)) / 4) * valorNumDOI);
+                    }
+                }
+                if(Resultado == 0){
+                    alert("Se nesecitan mas datos");
+                }
+            }
+
+            //IF PARA SACAR LA ESFUERZO
+            if(datosCheckboxes[0] == "esfuerzo"){
+                if(Fuerza == true && Area == true){
+                let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+
+                let valorNumArea= parseFloat(document.getElementById('valorInputArea').value);
+                let valorUnidadArea = document.getElementById('unidadMedidaArea'); 
+
+                switch(valorUnidadArea){
+                    case "M":
+                    valorNumArea = valorNumArea;
+                    break;
+                    case "Km":
+                    valorNumArea = valorNumArea * 1000000;
+                    break;
+                    case "Cm":
+                    valorNumArea = valorNumArea * 0.0001;
+                    break;
+                    case "Mm":
+                    valorNumArea = valorNumArea * 0.000001;
+                    break;
+                    case "Ft":
+                    valorNumArea = valorNumArea * 0.092903;
+                    break;
+                    case "In":
+                    valorNumArea = valorNumArea * 0.0006451597222199104;
+                    break;
+                    }
+
+                   Resultado = valorNumFuerza / valorNumArea; 
+                }
+     
+            }//FIN DE LA BUSQUEDA DE ESFUERZO
+
+            //IF PARA SACAR FUERZA
+            if(datosCheckboxes[0] == "fuerza"){
+                if(Masa){
+                    let valorNumMasa = parseFloat(document.getElementById('valorInputMasa').value);
+                    let valorUnidadMasa = document.getElementById('unidadMedidaMasa');
+                    
+
+                        switch(valorUnidadMasa){
+                        case "Kg":
+                        valorNumMasa = valorNumMasa;
+                        break;
+                        case "Lb":
+                        valorNumMasa = valorNumMasa * 0.453592;
+                        break;
+                        case "G":
+                        valorNumMasa = valorNumMasa / 1000;
+                        break;
+                        case "T":
+                        valorNumMasa = valorNumMasa * 1000;
+                        break;
+                        }
+
+                    Resultado = valorNumMasa * 9.8;   
+                }
+            }//FIN SACAR FUERZA
+            //SACAR LA MASA
+            if(datosCheckboxes[0] == "masa"){
+                if(Fuerza){
+                    let valorNumFuerza = parseFloat(document.getElementById('valorInputFuerza').value);
+
+                    Resultado = valorNumFuerza  / 9.8;    
+                }
+            }//FIN DE SACAR MASA
+            //INICIO SACAR LONGITUD
+            if(datosCheckboxes[0] == "longitud"){
+                if(DOI == true && Deformacion == true){
+                    let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                    let valorUnidadDOI = document.getElementById('valorUnidadDOI');
+
+                    let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                    let valorUnidadDeformacion = document.getElementById('valorUnidadDeformacion');
+
+                    switch(valorUnidadDeformacion){
+                    case "M":
+                    valorNumDeformacion = valorNumDeformacion;
+                    break;
+                    case "Km":
+                    valorNumDeformacion = valorNumDeformacion * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDeformacion = valorNumDeformacion / 100;
+                    break;
+                    case "Mm":
+                    valorNumDeformacion = valorNumDeformacion / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDeformacion = valorNumDeformacion * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDeformacion = valorNumDeformacion * 0.0254;
+                    break;
+                    }
+                
+                    switch(valorUnidadDOI){
+                    case "M":
+                    valorNumDOI = valorNumDOI;
+                    break;
+                    case "Km":
+                    valorNumDOI = valorNumDOI * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDOI = valorNumDOI / 100;
+                    break;
+                    case "Mm":
+                    valorNumDOI = valorNumDOI / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDOI = valorNumDOI * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDOI = valorNumDOI * 0.0254;
+                    break;
+                    }
+
+                    Resultado = valorNumDOI / valorNumDeformacion;
+                }
+            }//FIN SACAR LONGITUD
+            //INICIO SACAR AREA
+            if(datosCheckboxes[0] == "Area"){
+                if(Radio){
+                    let valorNumRadio = parseFloat(document.getElementById('valorInputRadio').value);
+                    let valorUnidadRadio = document.getElementById('valorUnidadRadio');
+
+                    switch(valorUnidadRadio){
+                    case "M":
+                    valorNumRadio = valorNumRadio;
+                    break;
+                    case "Km":
+                    valorNumRadio = valorNumRadio * 1000;
+                    break;
+                    case "Cm":
+                    valorNumRadio = valorNumRadio / 100;
+                    break;
+                    case "Mm":
+                    valorNumRadio = valorNumRadio / 1000;
+                    break;
+                    case "Ft":
+                    valorNumRadio = valorNumRadio * 0.3048;
+                    break;
+                    case "In":
+                    valorNumRadio = valorNumRadio * 0.0254;
+                    break;
+                    }
+                    Resultado = 3.1416 * (valorNumRadio * valorNumRadio);
+                }
+                if(Diametro){
+                    let valorNumDiametro = parseFloat(document.getElementById('valorInputDiametro').value);
+                    let valorUnidadDiametro = document.getElementById('valorUnidadDiametro');
+                    
+                    switch(valorUnidadDiametro){
+                    case "M":
+                    valorNumDiametro = valorNumDiametro;
+                    break;
+                    case "Km":
+                    valorNumDiametro = valorNumDiametro * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDiametro = valorNumDiametro / 100;
+                    break;
+                    case "Mm":
+                    valorNumDiametro = valorNumDiametro / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDiametro = valorNumDiametro * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDiametro = valorNumDiametro * 0.0254;
+                    break;
+                    }
+                    
+                    Resultado = (3.1416 * (valorNumRadio * valorNumRadio)) / 4;
+                }
+            }//FIN SACAR AREA
+            //INICIO SACAR RADIO
+            if(datosCheckboxes[0] == "Radio"){
+                if(Diametro){
+                    let valorNumDiametro = parseFloat(document.getElementById('valorInputDiametro').value);
+                    let valorUnidadDiametro = document.getElementById('valorUnidadDiametro');
+                    
+                    switch(valorUnidadDiametro){
+                    case "M":
+                    valorNumDiametro = valorNumDiametro;
+                    break;
+                    case "Km":
+                    valorNumDiametro = valorNumDiametro * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDiametro = valorNumDiametro / 100;
+                    break;
+                    case "Mm":
+                    valorNumDiametro = valorNumDiametro / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDiametro = valorNumDiametro * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDiametro = valorNumDiametro * 0.0254;
+                    break;
+                    }
+
+                    Resultado = valorNumDiametro / 2;
+                }
+                if(Area){
+                    let valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                    let valorUnidadArea = document.getElementById('valorUnidadArea');
+
+                    switch(valorUnidadArea){
+                    case "M":
+                    valorNumArea = valorNumArea;
+                    break;
+                    case "Km":
+                    valorNumArea = valorNumArea * 1000000;
+                    break;
+                    case "Cm":
+                    valorNumArea = valorNumArea * 0.0001;
+                    break;
+                    case "Mm":
+                    valorNumArea = valorNumArea * 0.000001;
+                    break;
+                    case "Ft":
+                    valorNumArea = valorNumArea * 0.092903;
+                    break;
+                    case "In":
+                    valorNumArea = valorNumArea * 0.0006451597222199104;
+                    break;
+                    }
+                    
+                    Resultado = Math.sqrt((valorNumArea / 3.1416));
+                }
+            }//Fin sacar radio
+            //inicio sacar diametro
+            if(datosCheckboxes[0] == "Diametro"){
+                if(Radio){
+                    let valorNumRadio = parseFloat(document.getElementById('valorInputRadio').value);
+                    let valorUnidadRadio = document.getElementById('valorUnidadRadio');
+
+                    switch(valorUnidadRadio){
+                    case "M":
+                    valorNumRadio = valorNumRadio;
+                    break;
+                    case "Km":
+                    valorNumRadio = valorNumRadio * 1000;
+                    break;
+                    case "Cm":
+                    valorNumRadio = valorNumRadio / 100;
+                    break;
+                    case "Mm":
+                    valorNumRadio = valorNumRadio / 1000;
+                    break;
+                    case "Ft":
+                    valorNumRadio = valorNumRadio * 0.3048;
+                    break;
+                    case "In":
+                    valorNumRadio = valorNumRadio * 0.0254;
+                    break;
+                    }
+
+                    Resultado = valorNumDiametro * 2;
+                }
+                if(Area){
+                    let valorNumArea = parseFloat(document.getElementById('valorInputArea').value);
+                    let valorUnidadArea = document.getElementById('valorUnidadArea');
+
+                    switch(valorUnidadArea){
+                    case "M":
+                    valorNumArea = valorNumArea;
+                    break;
+                    case "Km":
+                    valorNumArea = valorNumArea * 1000000;
+                    break;
+                    case "Cm":
+                    valorNumArea = valorNumArea * 0.0001;
+                    break;
+                    case "Mm":
+                    valorNumArea = valorNumArea * 0.000001;
+                    break;
+                    case "Ft":
+                    valorNumArea = valorNumArea * 0.092903;
+                    break;
+                    case "In":
+                    valorNumArea = valorNumArea * 0.0006451597222199104;
+                    break;
+                    }
+                    
+                    Resultado = Math.sqrt(((valorNumArea * 4) / 3.1416));
+                }
+            }//fin sacar diametro
+            //inicio sacar Decremento o incremento
+            if(datosCheckboxes[0] == "DOI"){
+                if(Deformacion == true && Longitud == true){
+                    let valorNumDeformacion = parseFloat(document.getElementById('valorInputDeformacion').value);
+                    let valorUnidadDeformacion = document.getElementById('valorUnidadDeformacion');
+
+                    let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                    let valorUnidadLongitud = document.getElementById('valorUnidadLongitud');
+
+                    switch(valorUnidadDeformacion){
+                    case "M":
+                    valorNumDeformacion = valorNumDeformacion;
+                    break;
+                    case "Km":
+                    valorNumDeformacion = valorNumDeformacion * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDeformacion = valorNumDeformacion / 100;
+                    break;
+                    case "Mm":
+                    valorNumDeformacion = valorNumDeformacion / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDeformacion = valorNumDeformacion * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDeformacion = valorNumDeformacion * 0.0254;
+                    break;
+                    }
+
+                    switch(valorUnidadLongitud){
+                    case "M":
+                    valorNumLongitud = valorNumLongitud;
+                    break;
+                    case "Km":
+                    valorNumLongitud = valorNumLongitud * 1000;
+                    break;
+                    case "Cm":
+                    valorNumLongitud = valorNumLongitud / 100;
+                    break;
+                    case "Mm":
+                    valorNumLongitud = valorNumLongitud / 1000;
+                    break;
+                    case "Ft":
+                    valorNumLongitud = valorNumLongitud * 0.3048;
+                    break;
+                    case "In":
+                    valorNumLongitud = valorNumLongitud * 0.0254;
+                    break;
+                    }
+
+                    Resultado = valorNumDeformacion * valorNumLongitud;
+                }
+            }//fin sacar Decremento o incremento
+            //Inicio sacar deformacion
+            if(datosCheckboxes[0] == "deformacion"){
+                if(DOI == true && Longitud == true){
+                    let valorNumDOI = parseFloat(document.getElementById('valorInputDOI').value);
+                    let valorUnidadDOI = document.getElementById('valorUnidadDOI');
+
+                    let valorNumLongitud = parseFloat(document.getElementById('valorInputLongitud').value);
+                    let valorUnidadLongitud = document.getElementById('valorUnidadLongitud');
+
+                    switch(valorUnidadDOI){
+                    case "M":
+                    valorNumDOI = valorNumDOI;
+                    break;
+                    case "Km":
+                    valorNumDOI = valorNumDOI * 1000;
+                    break;
+                    case "Cm":
+                    valorNumDOI = valorNumDOI / 100;
+                    break;
+                    case "Mm":
+                    valorNumDOI = valorNumDOI / 1000;
+                    break;
+                    case "Ft":
+                    valorNumDOI = valorNumDOI * 0.3048;
+                    break;
+                    case "In":
+                    valorNumDOI = valorNumDOI * 0.0254;
+                    break;
+                    }
+
+                    switch(valorUnidadLongitud){
+                    case "M":
+                    valorNumLongitud = valorNumLongitud;
+                    break;
+                    case "Km":
+                    valorNumLongitud = valorNumLongitud * 1000;
+                    break;
+                    case "Cm":
+                    valorNumLongitud = valorNumLongitud / 100;
+                    break;
+                    case "Mm":
+                    valorNumLongitud = valorNumLongitud / 1000;
+                    break;
+                    case "Ft":
+                    valorNumLongitud = valorNumLongitud * 0.3048;
+                    break;
+                    case "In":
+                    valorNumLongitud = valorNumLongitud * 0.0254;
+                    break;
+                    }
+
+                    Resultado = valorNumDOI / valorNumLongitud;
+                }
+            }
+
+            console.log(Resultado);
+            //Mostrar el resultado en el div
+            document.getElementById('resultado').innerText = Resultado;
+            // Hacer visible el div de resultado
+            document.getElementById('mostrarResultado').style.display = 'block';
+
+        });
+    </script>
+</body>
+</html>

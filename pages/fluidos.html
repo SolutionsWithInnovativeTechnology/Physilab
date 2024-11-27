@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problemas de Fluidos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                    <img src="../img/logo.png" alt="logo" height="63" class="ms-2">
+                    <h2 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2>
+                </a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+
+    <main class="container mt-4">
+        <h1 class="text-center">Problemas de Fluidos</h1>
+        <form id="formularioFluidos" class="text-center mt-4">
+            <!-- Selección de incógnita -->
+            <label for="datoDesconocido" class="form-label">Selecciona el dato que deseas calcular:</label>
+            <select id="datoDesconocido" class="form-select mb-4" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="densidad">Densidad (ρ)</option>
+                <option value="masa">Masa (m)</option>
+                <option value="volumen">Volumen (V)</option>
+                <option value="peso">Peso (P)</option>
+                <option value="pesoEspecifico">Peso específico (PE)</option>
+            </select>
+
+            <!-- Selección de datos conocidos -->
+            <label for="datosConocidos" class="form-label">Selecciona los datos con los que cuentas:</label>
+            <div class="d-flex justify-content-center flex-wrap mb-4">
+                <div class="form-check me-3">
+                    <input type="checkbox" class="form-check-input" id="masaCheckbox" value="masa">
+                    <label class="form-check-label" for="masaCheckbox">Masa (m)</label>
+                </div>
+                <div class="form-check me-3">
+                    <input type="checkbox" class="form-check-input" id="volumenCheckbox" value="volumen">
+                    <label class="form-check-label" for="volumenCheckbox">Volumen (V)</label>
+                </div>
+                <div class="form-check me-3">
+                    <input type="checkbox" class="form-check-input" id="densidadCheckbox" value="densidad">
+                    <label class="form-check-label" for="densidadCheckbox">Densidad (ρ)</label>
+                </div>
+                <div class="form-check me-3">
+                    <input type="checkbox" class="form-check-input" id="pesoCheckbox" value="peso">
+                    <label class="form-check-label" for="pesoCheckbox">Peso (P)</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="pesoEspecificoCheckbox" value="pesoEspecifico">
+                    <label class="form-check-label" for="pesoEspecificoCheckbox">Peso específico (PE)</label>
+                </div>
+            </div>
+            <button type="button" id="verificarBoton" class="btn btn-primary mb-4">Verificar Checkboxes</button>
+
+            <!-- Campos para ingresar valores -->
+            <div id="camposEntrada" class="d-none">
+                <div id="masaInput" class="mb-3 d-none">
+                    <label for="valorMasa" class="form-label">Masa (m) [kg]:</label>
+                    <input type="number" step="0.00000001" class="form-control text-center" id="valorMasa" placeholder="Ejemplo: 0.3">
+                </div>
+                <div id="volumenInput" class="mb-3 d-none">
+                    <label for="valorVolumen" class="form-label">Volumen (V) [m³]:</label>
+                    <input type="number" step="0.00000001" class="form-control text-center" id="valorVolumen" placeholder="Ejemplo: 0.004">
+                </div>
+                <div id="densidadInput" class="mb-3 d-none">
+                    <label for="valorDensidad" class="form-label">Densidad (ρ) [kg/m³]:</label>
+                    <input type="number" step="0.00000001" class="form-control text-center" id="valorDensidad" placeholder="Ejemplo: 13600">
+                </div>
+                <div id="pesoInput" class="mb-3 d-none">
+                    <label for="valorPeso" class="form-label">Peso (P) [N]:</label>
+                    <input type="number" step="0.00000001" class="form-control text-center" id="valorPeso" placeholder="Ejemplo: 3">
+                </div>
+                <div id="pesoEspecificoInput" class="mb-3 d-none">
+                    <label for="valorPesoEspecifico" class="form-label">Peso específico (PE) [N/m³]:</label>
+                    <input type="number" step="0.00000001" class="form-control text-center" id="valorPesoEspecifico" placeholder="Ejemplo: 980">
+                </div>
+            </div>
+            <button type="submit" id="calcularBoton" class="btn btn-success d-none">Calcular</button>
+        </form>
+
+        <!-- Resultados -->
+        <div id="resultados" class="mt-4 d-none">
+            <h2 class="text-center">Resultados</h2>
+            <p id="pasosCalculo" class="text-center"></p>
+        </div>
+    </main>
+
+    <script>
+        const gravedad = 9.8; // Aceleración gravitacional
+const camposEntrada = {
+    masa: document.getElementById("masaInput"),
+    volumen: document.getElementById("volumenInput"),
+    densidad: document.getElementById("densidadInput"),
+    peso: document.getElementById("pesoInput"),
+    pesoEspecifico: document.getElementById("pesoEspecificoInput"),
+};
+
+// Mostrar las cajas de texto seleccionadas al presionar "Verificar Checkboxes"
+document.getElementById("verificarBoton").addEventListener("click", () => {
+    Object.values(camposEntrada).forEach(campo => campo.classList.add("d-none"));
+
+    const checkboxesSeleccionados = document.querySelectorAll('input[type="checkbox"]:checked');
+    if (checkboxesSeleccionados.length === 0) {
+        alert("Selecciona al menos un dato conocido.");
+        return;
+    }
+
+    checkboxesSeleccionados.forEach(checkbox => {
+        const campo = camposEntrada[checkbox.value];
+        if (campo) {
+            campo.classList.remove("d-none");
+        }
+    });
+
+    document.getElementById("camposEntrada").classList.remove("d-none");
+    document.getElementById("calcularBoton").classList.remove("d-none");
+});
+
+// Calcular y mostrar resultados
+document.getElementById("formularioFluidos").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const datoDesconocido = document.getElementById("datoDesconocido").value;
+    const masa = document.getElementById("valorMasa").value ? parseFloat(document.getElementById("valorMasa").value) : null;
+    const volumen = document.getElementById("valorVolumen").value ? parseFloat(document.getElementById("valorVolumen").value) : null;
+    const densidad = document.getElementById("valorDensidad").value ? parseFloat(document.getElementById("valorDensidad").value) : null;
+    const peso = document.getElementById("valorPeso").value ? parseFloat(document.getElementById("valorPeso").value) : null;
+    const pesoEspecifico = document.getElementById("valorPesoEspecifico").value ? parseFloat(document.getElementById("valorPesoEspecifico").value) : null;
+
+    let resultado;
+    let pasos = "";
+
+    if (datoDesconocido === "densidad" && masa !== null && volumen !== null) {
+    resultado = masa / volumen;
+    pasos = `ρ = m / V = ${masa ?? "Dato no ingresado"} kg / ${volumen ?? "Dato no ingresado"} m³ = ${resultado.toFixed(2)} kg/m³`;
+} else if (datoDesconocido === "masa" && densidad !== null && volumen !== null) {
+    resultado = densidad * volumen;
+    pasos = `m = ρ * V = ${densidad ?? "Dato no ingresado"} kg/m³ * ${volumen ?? "Dato no ingresado"} m³ = ${resultado.toFixed(2)} kg`;
+} else if (datoDesconocido === "volumen" && masa !== null && densidad !== null) {
+    resultado = masa / densidad; // Aquí debería ser una división, no multiplicación.
+    pasos = `V = m / ρ = ${masa ?? "Dato no ingresado"} kg / ${densidad ?? "Dato no ingresado"} kg/m³ = ${resultado.toFixed(4)} m³`;
+} else if (datoDesconocido === "peso" && masa !== null) {
+    resultado = masa * gravedad;
+    pasos = `P = m * g = ${masa ?? "Dato no ingresado"} kg * ${gravedad} m/s² = ${resultado.toFixed(2)} N`;
+} else if (datoDesconocido === "pesoEspecifico" && densidad !== null) {
+    resultado = densidad * gravedad;
+    pasos = `PE = ρ * g = ${densidad ?? "Dato no ingresado"} kg/m³ * ${gravedad} m/s² = ${resultado.toFixed(2)} N/m³`;
+} else {
+    pasos = "Datos insuficientes para realizar el cálculo.";
+}
+
+
+    document.getElementById("pasosCalculo").textContent = pasos;
+    document.getElementById("resultados").classList.remove("d-none");
+});
+
+// Reiniciar el formulario al cambiar el dato a calcular
+document.getElementById("datoDesconocido").addEventListener("change", () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+
+    Object.values(camposEntrada).forEach(campo => campo.classList.add("d-none"));
+    document.getElementById("camposEntrada").classList.add("d-none");
+    document.getElementById("calcularBoton").classList.add("d-none");
+    document.getElementById("resultados").classList.add("d-none");
+
+    const inputs = document.querySelectorAll(".form-control");
+    inputs.forEach(input => {
+        input.value = "";
+    });
+});
+
+    </script>
+</body>
+</html>

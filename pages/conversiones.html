@@ -5,53 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Conversiones</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>
-    <script type="text/javascript" async src="../js/mathjax/tex-mml-chtml.js"></script>
+    <script src="../js/bootstrap.bundle.min.js" defer></script> 
 </head>
 <body>
     <header>
         <nav class="navbar navbar-dark bg-dark navbar-expand-md">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="../index.html"><img src="../img/logo.png" alt="logo" height="63" class="ms-2"><h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2></a>
-          
-                <!-- Botón para mostrar el offcanvas en dispositivos pequeños -->
+                <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                    <img src="../img/logo.png" alt="logo" height="63" class="ms-2">
+                    <h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; margin-left: 8px;">PhysicLabs</h2>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            
-                <!-- El offcanvas en sí -->
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <!-- Aquí se coloca la lista de enlaces -->
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-underline">
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="../index.html">Inicio</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="temas.html">Temas</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link active text-white" aria-current="page" href="conversiones.html">Conversiones</a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
-                        </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="../index.html">Inicio</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="temas.html">Temas</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link active text-white" aria-current="page" href="conversiones.html">Conversiones</a>
+                            </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link text-secondary" href="definiciones.html">Definiciones</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-          </nav>
+        </nav>
     </header>
 
     <main>
         <div class="container">
-
             <h1 class="mt-5 text-center text-black" style="font-weight: bold;">Calculadora de Conversiones</h1>
-
             <form name="formu" action="" method="post" class="text-center mt-5">
                 <label for="unidades" class="form-label mb-2">Unidades: </label>
                 <div class="row justify-content-center">
@@ -62,527 +57,224 @@
                             <option value="Velocidad" class="text-center">Velocidad</option>
                             <option value="Volumen" class="text-center">Volumen</option>
                             <option value="Masa" class="text-center">Masa</option>
-                            <option value="Presion" class="text-center">Presión</option>   
-                            <option value="Densidad" class="text-center">Densidad</option> 
+                            <option value="Presion" class="text-center">Presión</option>
+                            <option value="Densidad" class="text-center">Densidad</option>
                             <option value="Distancia" class="text-center">Distancia</option>
-                            <option value="Area" class="text-center">Área</option>                
+                            <option value="Area" class="text-center">Área</option>
                         </select>
                     </div>
-                </div>    
+                </div>
+
                 <div class="row d-flex justify-content-center align-items-center mt-3">
                     <div class="col-5 col-md-5 col-lg-3 mb-2 mb-md-0">
-                        <input type="number" name="medida1" id="medida1" class="form-control text-center" step="0.0000000001" required placeholder="Primer Numero">
+                        <input type="number" name="medida1" id="medida1" class="form-control text-center" step="0.0000000001" required placeholder="Cantidad">
                     </div>
-                    
                 </div> 
-                           
 
-                <!--Opciones para Distancia-->
-                <div id="distancia" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 mb-2 mb-md-0">
-                                <select id="distancia_select" name="distancia_select" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="M" class="text-center">Metros(s)</option>
-                                    <option value="Km" class="text-center">Kilometro(s)</option>
-                                    <option value="Cm" class="text-center">Centimetro(s)</option>
-                                    <option value="Mm" class="text-center">Milimetro(s)</option>
-                                    <option value="Ft" class="text-center">Pie(s)</option>
-                                    <option value="In" class="text-center">Pulgada(s)</option>
-                                </select>
-                            </div>
-                            <div class="col-10 col-md-1 col-lg-1 mb-2 mb-md-0">
-                                <label for="" class="form-label">a</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 ">
-                                <select id="distancia_select2" name="distancia_select2" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="M" class="text-center">Metros(s)</option>
-                                    <option value="Km" class="text-center">Kilometro(s)</option>
-                                    <option value="Cm" class="text-center">Centimetro(s)</option>
-                                    <option value="Mm" class="text-center">Milimetro(s)</option>
-                                    <option value="Ft" class="text-center">Pie(s)</option>
-                                    <option value="In" class="text-center">Pulgada(s)</option>
-                                </select>
-                            </div> 
-                        </div> 
-                    </div>
+                <div id="opciones" class="mt-4">
+                    <!-- Opciones dinámicas aquí -->
                 </div>
 
-                <!--Opciones para Masa-->
-                <div id="masa" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="masa_select" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 mb-2 mb-md-0">
-                                <select id="masa_select" name="masa_select" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="Kg" class="text-center">Kilogramo(s)</option>
-                                    <option value="Lb" class="text-center">Libra(s)</option>
-                                    <option value="G" class="text-center">Gramo(s)</option>
-                                    <option value="T" class="text-center">Tonelada(s)</option>
-                                </select>
-                            </div>
-                            <div class="col-10 col-md-1 col-lg-1 mb-2 mb-md-0">
-                                <label for="" class="form-label">a</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 ">
-                                <select id="masa_select2" name="masa_select2" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="Kg" class="text-center">Kilogramo(s)</option>
-                                    <option value="Lb" class="text-center">Libra(s)</option>
-                                    <option value="G" class="text-center">Gramo(s)</option>
-                                    <option value="T" class="text-center">Tonelada(s)</option>
-                                </select>
-                            </div> 
-                        </div> 
-                    </div>
-                </div>
-
-                <!--Opciones para Área-->
-                <div id="area" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 mb-2 mb-md-0">
-                                <select id="area_select" name="area_select" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="M2" class="text-center">Metros(s)²</option>
-                                    <option value="Km2" class="text-center">Kilometro(s)²</option>
-                                    <option value="Cm2" class="text-center">Centimetro(s)²</option>
-                                    <option value="Mm2" class="text-center">Milimetro(s)²</option>
-                                    <option value="Ft2" class="text-center">Pie(s)²</option>
-                                    <option value="In2" class="text-center">Pulgada(s)²</option>
-                                </select>
-                            </div>
-                            <div class="col-10 col-md-1 col-lg-1 mb-2 mb-md-0">
-                                <label for="" class="form-label">a</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 ">
-                                <select id="area_select2" name="area_select2" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="M2" class="text-center">Metros(s)²</option>
-                                    <option value="Km2" class="text-center">Kilometro(s)²</option>
-                                    <option value="Cm2" class="text-center">Centimetro(s)²</option>
-                                    <option value="Mm2" class="text-center">Milimetro(s)²</option>
-                                    <option value="Ft2" class="text-center">Pie(s)²</option>
-                                    <option value="In2" class="text-center">Pulgada(s)²</option>
-                                </select>
-                            </div> 
-                        </div> 
-                    </div>
-                </div>
-
-                <!--Opciones para Tiempo-->
-                <div id="tiempo" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="tiempo_select" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 mb-2 mb-md-0">
-                                <select id="tiempo_select" name="tiempo_select" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="Seg" class="text-center">Segundo(s)</option>
-                                    <option value="Min" class="text-center">Minuto(s)</option>
-                                    <option value="Min" class="text-center">Hora(s)</option>
-                                </select>
-                            </div>
-                            <div class="col-10 col-md-1 col-lg-1 mb-2 mb-md-0">
-                                <label for="" class="form-label">a</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 ">
-                                <select id="tiempo_select2" name="tiempo_select2" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="Kg" class="text-center">Segundo(s)</option>
-                                    <option value="Lb" class="text-center">Minuto(s)</option>
-                                    <option value="Min" class="text-center">Hora(s)</option>
-                                </select>
-                            </div> 
-                        </div> 
-                    </div>
-                </div>
-
-                <!--Opciones para Velocidad-->
-                <div id="velocidad" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="velocidad_select" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="velocidad_select1A" name="velocidad_select1A" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="M" class="text-center">Metros(s)</option>
-                                        <option value="Km" class="text-center">Kilometro(s)</option>
-                                        <option value="Cm" class="text-center">Centimetro(s)</option>
-                                        <option value="Mm" class="text-center">Milimetro(s)</option>
-                                        <option value="Ft" class="text-center">Pie(s)</option>
-                                        <option value="In" class="text-center">Pulgada(s)</option>
-                                    </select>
-                                </div> 
-                                <div class="align-items-center col-1 mb-2 mb-md-0">
-                                    <label for="">/</label>
-                                </div>
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="velocidad_select1B" name="velocidad_select1B" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="Kg" class="text-center">Segundo(s)</option>
-                                        <option value="Lb" class="text-center">Minuto(s)</option>
-                                        <option value="Lb" class="text-center">Hora(s)</option>
-                                    </select>
-                                </div> 
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">                                
-                                <div class="col-10 col-md-2 col-lg-1 mb-2 mb-md-0">
-                                    <label for="" class="form-label">a</label>
-                                </div>
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="velocidad_select2A" name="velocidad_select2A" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="M" class="text-center">Metros(s)</option>
-                                        <option value="Km" class="text-center">Kilometro(s)</option>
-                                        <option value="Cm" class="text-center">Centimetro(s)</option>
-                                        <option value="Mm" class="text-center">Milimetro(s)</option>
-                                        <option value="Ft" class="text-center">Pie(s)</option>
-                                        <option value="In" class="text-center">Pulgada(s)</option>
-                                    </select>
-                                </div>     
-                                <div class="align-items-center col-1 mb-2 mb-md-0">
-                                    <label for="">/</label>
-                                </div>    
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="velocidad_select2B" name="velocidad_select2B" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="Kg" class="text-center">Segundo(s)</option>
-                                        <option value="Lb" class="text-center">Minuto(s)</option>
-                                        <option value="Lb" class="text-center">Hora(s)</option>
-                                    </select>
-                                </div> 
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-                
-                <!--Opciones para Densidad-->
-                <div id="densidad" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="densidad_select1A" name="densidad_select1A" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="Kg" class="text-center">Kilogramo(s)</option>
-                                        <option value="Lb" class="text-center">Libra(s)</option>
-                                        <option value="G" class="text-center">Gramo(s)</option>
-                                        <option value="T" class="text-center">Tonelada(s)</option>
-                                    </select>
-                                </div> 
-                                <div class="align-items-center col-1 mb-2 mb-md-0">
-                                    <label for="">/</label>
-                                </div>
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="densidad_select1B" name="densidad_select1B" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="M3" class="text-center">Metros(s)³</option>
-                                        <option value="Km3" class="text-center">Kilometro(s)³</option>
-                                        <option value="Cm3" class="text-center">Centimetro(s)³</option>
-                                        <option value="Mm3" class="text-center">Milimetro(s)³</option>
-                                        <option value="Ft3" class="text-center">Pie(s)³</option>
-                                        <option value="In3" class="text-center">Pulgada(s)³</option>
-                                    </select>
-                                </div> 
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">                                
-                                <div class="col-10 col-md-2 col-lg-1 mb-2 mb-md-0">
-                                    <label for="" class="form-label">a</label>
-                                </div>
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="densidad_select2A" name="densidad_select2A" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="Kg" class="text-center">Kilogramo(s)</option>
-                                        <option value="Lb" class="text-center">Libra(s)</option>
-                                        <option value="G" class="text-center">Gramo(s)</option>
-                                        <option value="T" class="text-center">Tonelada(s)</option>
-                                    </select>
-                                </div> 
-                                <div class="align-items-center col-1 mb-2 mb-md-0">
-                                    <label for="">/</label>
-                                </div>
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="densidad_select2B" name="densidad_select2B" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="M3" class="text-center">Metros(s)³</option>
-                                        <option value="Km3" class="text-center">Kilometro(s)³</option>
-                                        <option value="Cm3" class="text-center">Centimetro(s)³</option>
-                                        <option value="Mm3" class="text-center">Milimetro(s)³</option>
-                                        <option value="Ft3" class="text-center">Pie(s)³</option>
-                                        <option value="In3" class="text-center">Pulgada(s)³</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-
-                <!--Opciones para Presión-->
-                <div id="presion" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="presion_select1A" name="presion_select1A" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="N" class="text-center">Newton(s)</option>
-                                        <option value="Lb" class="text-center">Libra(s)</option>
-                                    </select>
-                                </div> 
-                                <div class="align-items-center col-1 mb-2 mb-md-0">
-                                    <label for="">/</label>
-                                </div>
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="presion_select1B" name="presion_select1B" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="In2" class="text-center">Pulgada(s)²</option>
-                                        <option value="M2" class="text-center">Metro(s)²</option>
-                                    </select>
-                                </div> 
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">                                
-                                <div class="col-10 col-md-2 col-lg-1 mb-2 mb-md-0">
-                                    <label for="" class="form-label">a</label>
-                                </div>
-                            </div>
-                            <div class="row d-flex align-items-center justify-content-center">
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="presion_select2A" name="presion_select2A" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="N" class="text-center">Newton(s)</option>
-                                        <option value="Lb" class="text-center">Libra(s)</option>
-                                    </select>
-                                </div>     
-                                <div class="align-items-center col-1 mb-2 mb-md-0">
-                                    <label for="">/</label>
-                                </div>    
-                                <div class="col-5 col-md-5 col-lg-4">
-                                    <select id="presion_select2B" name="presion_select2B" class="form-select">
-                                        <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                        <option value="In2" class="text-center">Pulgada(s)²</option>
-                                        <option value="M2" class="text-center">Metro(s)²</option>
-                                    </select>
-                                </div> 
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-
-                <!--Opciones para Volumen-->
-                <div id="volumen" class="conversion-opciones" style="display:none;">
-                    <div class="container">
-                        <br>
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="mb-2">
-                                <label for="" class="form-label text-center">Selecciona una conversión:</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 mb-2 mb-md-0">
-                                <select id="volumen_select" name="volumen_select" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="M3" class="text-center">Metro(s)³</option>
-                                    <option value="L" class="text-center">Litro(s)</option>
-                                    <option value="Gal" class="text-center">Galon(es)</option>
-                                    <option value="Cm3" class="text-center">Centimetro(s)³</option>
-                                    <option value="Km3" class="text-center">Kilometro(s)³</option>
-                                    <option value="Mm3" class="text-center">Milimetro(s)³</option>
-                                </select>
-                            </div>
-                            <div class="col-10 col-md-1 col-lg-1 mb-2 mb-md-0">
-                                <label for="" class="form-label">a</label>
-                            </div>
-                            <div class="col-10 col-md-5 col-lg-3 ">
-                                <select id="volumen_select1" name="volumen_select1" class="form-select">
-                                    <option value="" disabled selected class="text-center">Seleccionar conversión</option>
-                                    <option value="M3" class="text-center">Metro(s)³</option>
-                                    <option value="L" class="text-center">Litro(s)</option>
-                                    <option value="Gal" class="text-center">Galon(es)</option>
-                                    <option value="Cm3" class="text-center">Centimetro(s)³</option>
-                                    <option value="Km3" class="text-center">Kilometro(s)³</option>
-                                    <option value="Mm3" class="text-center">Milimetro(s)³</option>
-                                </select>
-                            </div> 
-                        </div> 
-                    </div>
-                </div>
-
-                <br>
-                <div class="container">
+                <div class="container mt-3">
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-4 col-md-auto text-center">
-                            <input type="submit" name="Enviar" class="form-control">
+                            <button type="submit" class="btn btn-primary">Calcular</button>
                         </div>
                     </div>
                 </div>
-                
             </form>
-
         </div>
     </main>
 
     <footer class="mt-5">
-
     </footer>
 
     <script>
-        document.getElementById('unidades').addEventListener('change', function(){
-            const categoriaSeleccionada = this.value;
+      document.addEventListener('DOMContentLoaded', () => {
+    const unidadesSelect = document.getElementById('unidades');
+    const opcionesDiv = document.getElementById('opciones');
 
-            const conversiones = document.querySelectorAll('.conversion-opciones');
+    unidadesSelect.addEventListener('change', () => {
+        const categoria = unidadesSelect.value;
+        opcionesDiv.innerHTML = '';
 
-            const masa_select = document.getElementById('masa_select');
-            const masa_select2 = document.getElementById('masa_select2');
+        switch (categoria) {
+            case 'Distancia':
+                opcionesDiv.innerHTML = generarSelects(['Metros', 'Kilómetros', 'Centímetros', 'Milímetros', 'Pies', 'Pulgadas']);
+                break;
+            case 'Masa':
+                opcionesDiv.innerHTML = generarSelects(['Kilogramos', 'Libras', 'Gramos', 'Toneladas']);
+                break;
+            case 'Tiempo':
+                opcionesDiv.innerHTML = generarSelects(['Segundos', 'Minutos', 'Horas']);
+                break;
+            case 'Velocidad':
+                opcionesDiv.innerHTML = generarVelocidadSelects();
+                break;
+            case 'Volumen':
+                opcionesDiv.innerHTML = generarSelects(['Litros', 'Mililitros', 'Galones', 'Centímetros cúbicos', 'Metros cúbicos']);
+                break;
+            case 'Presion':
+                opcionesDiv.innerHTML = generarSelects(['Pascales', 'Bar', 'PSI']);
+                break;
+            case 'Densidad':
+                opcionesDiv.innerHTML = generarSelects(['Kilogramos/m³', 'Gramos/cm³']);
+                break;
+            case 'Area':
+                opcionesDiv.innerHTML = generarSelects(['Metros cuadrados', 'Kilómetros cuadrados', 'Centímetros cuadrados', 'Milímetros cuadrados', 'Hectáreas', 'Pulgadas cuadradas']);
+                break;
+        }
+    });
 
-            const distancia_select = document.getElementById('distancia_select');
-            const distancia_select2 = document.getElementById('distancia_select2');
+    document.querySelector("form[name='formu']").addEventListener('submit', (event) => {
+        event.preventDefault();
 
-            const area_select = document.getElementById('area_select');
-            const area_select2 = document.getElementById('area_select2');
+        const medida = parseFloat(document.getElementById('medida1').value);
+        const desde = document.getElementById('select-desde')?.value;
+        const hacia = document.getElementById('select-hacia')?.value;
 
-            const tiempo_select = document.getElementById('tiempo_select');
-            const tiempo_select2 = document.getElementById('tiempo_select2');
+        if (isNaN(medida)) {
+            alert('Por favor, introduce un valor válido.');
+            return;
+        }
 
-            const velocidad_select1A = document.getElementById('velocidad_select1A');
-            const velocidad_select1B = document.getElementById('velocidad_select1B');
-            const velocidad_select2A = document.getElementById('velocidad_select2A');
-            const velocidad_select2B = document.getElementById('velocidad_select2B');
+        let resultado;
 
-            const volumen_select = document.getElementById('volumen_select');
-            const volumen_select1 = document.getElementById('volumen_select1');
+        switch (unidadesSelect.value) {
+            case 'Distancia':
+                resultado = convertir(medida, desde, hacia, obtenerFactoresDistancia());
+                break;
+            case 'Masa':
+                resultado = convertir(medida, desde, hacia, obtenerFactoresMasa());
+                break;
+            case 'Tiempo':
+                resultado = convertir(medida, desde, hacia, obtenerFactoresTiempo());
+                break;
+            case 'Velocidad':
+                const distanciaDesde = document.getElementById('select-distancia')?.value;
+                const tiempoDesde = document.getElementById('select-tiempo')?.value;
+                const distanciaHacia = document.getElementById('select-hacia-distancia')?.value;
+                const tiempoHacia = document.getElementById('select-hacia-tiempo')?.value;
+                resultado = convertirVelocidad(medida, distanciaDesde, tiempoDesde, distanciaHacia, tiempoHacia);
+                break;
+            case 'Volumen':
+                resultado = convertir(medida, desde, hacia, obtenerFactoresVolumen());
+                break;
+            case 'Presion':
+                resultado = convertir(medida, desde, hacia, obtenerFactoresPresion());
+                break;
+            case 'Densidad':
+                resultado = convertir(medida, desde, hacia, obtenerFactoresDensidad());
+                break;
+            case 'Area':
+                resultado = convertir(medida, desde, hacia, obtenerFactoresArea());
+                break;
+            default:
+                alert('Categoría no soportada.');
+                return;
+        }
 
-            const densidad_select1A = document.getElementById('densidad_select1A');
-            const densidad_select1B = document.getElementById('densidad_select1B');
-            const densidad_select2A = document.getElementById('densidad_select2A');
-            const densidad_select2B = document.getElementById('densidad_select2B');
+        if (resultado !== undefined) {
+    alert(`Resultado: ${resultado}`);
+}
 
-            const presion_select1A = document.getElementById('presion_select1A');
-            const presion_select1B = document.getElementById('presion_select1B');
-            const presion_select2A = document.getElementById('presion_select2A');
-            const presion_select2B = document.getElementById('presion_select2B');
+    });
 
-            conversiones.forEach(function(conversion){
-                conversion.style.display = 'none';
-            });
+    // Generadores de select dinámicos
+    function generarSelects(opciones) {
+        const selectDesde = generarSelect('select-desde', opciones);
+        const selectHacia = generarSelect('select-hacia', opciones);
+        return `<div class="row">
+                    <div class="col-6">${selectDesde}</div>
+                    <div class="col-6">${selectHacia}</div>
+                </div>`;
+    }
 
-            if(categoriaSeleccionada==='Masa'){
-                document.getElementById('masa').style.display = 'block';
-                masa_select.setAttribute('required', 'required');
-                masa_select2.setAttribute('required', 'required');
-            }else{
-                masa_select.removeAttribute('required');
-                masa_select2.removeAttribute('required');
-            }
-            
-            if(categoriaSeleccionada=='Tiempo'){
-                document.getElementById('tiempo').style.display = 'block';
-                tiempo_select.setAttribute('required', 'required');
-                tiempo_select2.setAttribute('required', 'required');
-            }else{
-                tiempo_select.removeAttribute('required');
-                tiempo_select2.removeAttribute('required');
-            }
-            
-            if(categoriaSeleccionada=='Velocidad'){
-                document.getElementById('velocidad').style.display = 'block';
-                velocidad_select1A.setAttribute('required', 'required');
-                velocidad_select1B.setAttribute('required', 'required');
-                velocidad_select2A.setAttribute('required', 'required');
-                velocidad_select2B.setAttribute('required', 'required');
-            }else{
-                velocidad_select1A.removeAttribute('required');
-                velocidad_select1B.removeAttribute('required');
-                velocidad_select2A.removeAttribute('required');
-                velocidad_select2B.removeAttribute('required');
-            }
-            
-            if(categoriaSeleccionada=='Volumen'){
-                document.getElementById('volumen').style.display = 'block';
-                volumen_select.setAttribute('required', 'required');
-                volumen_select1.setAttribute('required', 'required');
-            }else{
-                volumen_select.removeAttribute('required');
-                volumen_select1.removeAttribute('required');
-            }
-            
-            if(categoriaSeleccionada=='Densidad'){
-                document.getElementById('densidad').style.display = 'block';
-                densidad_select1A.setAttribute('required', 'required');
-                densidad_select1B.setAttribute('required', 'required');
-                densidad_select2A.setAttribute('required', 'required');
-                densidad_select2B.setAttribute('required', 'required');
-            }else{
-                densidad_select1A.removeAttribute('required');
-                densidad_select1B.removeAttribute('required');
-                densidad_select2A.removeAttribute('required');
-                densidad_select2B.removeAttribute('required');
-            }
-            
-            if(categoriaSeleccionada=='Presion'){
-                document.getElementById('presion').style.display = 'block';
-                presion_select1A.setAttribute('required', 'required');
-                presion_select1B.setAttribute('required', 'required');
-                presion_select2A.setAttribute('required', 'required');
-                presion_select2B.setAttribute('required', 'required');
-            }else{
-                presion_select1A.removeAttribute('required');
-                presion_select1B.removeAttribute('required');
-                presion_select2A.removeAttribute('required');
-                presion_select2B.removeAttribute('required');
-            } 
-            
-            if(categoriaSeleccionada=='Distancia'){
-                document.getElementById('distancia').style.display = 'block';
-                distancia_select.setAttribute('required', 'required');
-                distancia_select2.setAttribute('required', 'required');
-            }else{
-                distancia_select.removeAttribute('required');
-                distancia_select2.removeAttribute('required');
-            } 
-            
-            if(categoriaSeleccionada=='Area'){
-                document.getElementById('area').style.display = 'block';
-                area_select.setAttribute('required', 'required');
-                area_select2.setAttribute('required', 'required');
-            }else{
-                area_select.removeAttribute('required');
-                area_select2.removeAttribute('required');
-            }
-        });
+    function generarSelect(id, opciones) {
+        return `<select id="${id}" class="form-select">
+                    ${opciones.map(opcion => `<option value="${opcion}">${opcion}</option>`).join('')}
+                </select>`;
+    }
 
-        
+    function generarVelocidadSelects() {
+        return `<div class="row">
+                    <div class="col-6">
+                        ${generarSelect('select-distancia', ['Metros', 'Kilómetros', 'Pulgadas'])} por
+                        ${generarSelect('select-tiempo', ['Segundos', 'Minutos', 'Horas'])}
+                    </div>
+                    <div class="col-6">
+                        ${generarSelect('select-hacia-distancia', ['Metros', 'Kilómetros', 'Pulgadas'])} por
+                        ${generarSelect('select-hacia-tiempo', ['Segundos', 'Minutos', 'Horas'])}
+                    </div>
+                </div>`;
+    }
+
+    // Función genérica para convertir
+    function convertir(valor, desde, hacia, factores) {
+        if (!factores[desde] || !factores[hacia]) {
+            alert('Conversión no válida.');
+            return;
+        }
+        return (valor * factores[desde]) / factores[hacia];
+    }
+
+    // Factores de conversión
+    function obtenerFactoresDistancia() {
+        return { Metros: 1, Kilómetros: 1000, Centímetros: 0.01, Milímetros: 0.001, Pies: 0.3048, Pulgadas: 0.0254 };
+    }
+
+    function obtenerFactoresMasa() {
+        return { Kilogramos: 1, Libras: 0.453592, Gramos: 0.001, Toneladas: 1000 };
+    }
+
+    function obtenerFactoresTiempo() {
+        return { Segundos: 1, Minutos: 60, Horas: 3600 };
+    }
+
+    function obtenerFactoresVolumen() {
+        return { Litros: 1, Mililitros: 0.001, Galones: 3.78541, 'Centímetros cúbicos': 0.001, 'Metros cúbicos': 1000 };
+    }
+
+    function obtenerFactoresArea() {
+        return {
+            'Metros cuadrados': 1,
+            'Kilómetros cuadrados': 1e6,
+            'Centímetros cuadrados': 0.0001,
+            'Milímetros cuadrados': 1e-6,
+            Hectáreas: 10000,
+            'Pulgadas cuadradas': 0.00064516,
+        };
+    }
+
+    function obtenerFactoresPresion() {
+        return { Pascales: 1, Bar: 100000, PSI: 6894.76 };
+    }
+
+    function obtenerFactoresDensidad() {
+        return { 'Kilogramos/m³': 1, 'Gramos/cm³': 1000 };
+    }
+
+    // Conversión específica para velocidad
+    function convertirVelocidad(valor, distanciaDesde, tiempoDesde, distanciaHacia, tiempoHacia) {
+        const factoresDistancia = obtenerFactoresDistancia();
+        const factoresTiempo = obtenerFactoresTiempo();
+
+        if (
+            factoresDistancia[distanciaDesde] &&
+            factoresTiempo[tiempoDesde] &&
+            factoresDistancia[distanciaHacia] &&
+            factoresTiempo[tiempoHacia]
+        ) {
+            return (
+                (valor * factoresDistancia[distanciaDesde] / factoresTiempo[tiempoDesde]) /
+                (factoresDistancia[distanciaHacia] / factoresTiempo[tiempoHacia])
+            );
+        } else {
+            alert('Conversión de velocidad no válida.');
+        }
+    }
+});
+
     </script>
 </body>
 </html>
