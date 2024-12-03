@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movimiento Circular Uniformemente Acelerado</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script src="../js/bootstrap.bundle.min.js" defer></script>  
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
+    <script src="../js/bootstrap/bootstrap.bundle.min.js" defer></script>  
+    <script type="text/javascript" async src="../js/mathjax/tex-mml-chtml.js"></script>
 </head>
 <body>
     <!--header de la pagina-->
@@ -172,7 +170,7 @@
                             <option value="" disabled selected class="text-center">Seleccionar unidad de medida</option>
                             <option value="rad/s" class="text-center">Radianes sobre segundos(rad/s)</option>
                             <option value="rad/min" class="text-center">Radianes sobre minutos(rad/min)</option>
-                            <option value="rev/min" class="text-center">Revoluciones sobre minutos(rev/s)</option>
+                            <option value="rev/min" class="text-center">Revoluciones sobre minutos(rev/min)</option>
                             <option value="rev/s" class="text-center">Revoluciones sobre segundos(rev/s)</option>
                         </select>
                     </div>
@@ -540,17 +538,19 @@
             event.preventDefault();
             //variable que va a retener los datos
             var resultado=0.0;
-            
-            if(velocidad == true && distancia == true && tiempo == true){//Busca distancia
+
+            //FORMULA 1
+            if(velocidad == true && distancia == true && tiempo == true){
+                //Extraer el valor y unidad de medida de la velocidad inicial
                 var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
                 var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
-            
+                //Extraer el valor y unidad de medida de la velocidad final
                 var valorNumDistancia = parseFloat(document.getElementById('valorInputDistancia').value);
                 var valorUnidadMDistancia = document.getElementById('unidadMedidaDistancia').value;
-
+                //Extraer el valor y unidad de medida del tiempo
                 var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
                 var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
-
+                //HACER LAS CONVERSIONES
                 if(valorUnidadMVelocidad == "rad/min"){
                     valorNumVelocidad = valorNumVelocidad / 60;
                 }
@@ -561,15 +561,14 @@
                     valorNumVelocidad = valorNumVelocidad*6.2832;
                 }
 
-                
                 if(valorUnidadMDistancia == "rad/min"){
-                    valorNumDistancia = valorNumVelocidad / 60;
+                    valorNumDistancia = valorNumDistancia / 60;
                 }
                 if(valorUnidadMDistancia == "rev/min"){
-                    valorNumDistancia = (valorNumVelocidad*6.2832)/60;
+                    valorNumDistancia = (valorNumDistancia*6.2832)/60;
                 }
                 if(valorUnidadMDistancia == "rev/s"){
-                    valorNumDistancia = valorNumVelocidad*6.2832;
+                    valorNumDistancia = valorNumDistancia*6.2832;
                 }
 
                 if(valorUnidadMTiempo == "min"){
@@ -578,25 +577,26 @@
                 if(valorUnidadMTiempo == "h"){
                     valorNumTiempo = valorNumTiempo * 3600;
                 }
-
-                //Aplicar formula
-                resultado = (valorNumDistancia - valorNumVelocidad)/valorNumTiempo;
-
+                //APLICAR LA FORMULA
+                resultado = (valorNumDistancia - valorNumVelocidad)/valorNumTiempo;// ac = (wf - wi)/t
+                //MOSTRAR EL RESULTADO 
                 document.getElementById("resultado").innerHTML="La aceleracion angular es de "+resultado+" rad/s2";
                 document.getElementById('mostrarResultado').style.display = 'block';
             }
-            
-            /*if(velocidad == true && distancia == true && tiempo == true){
-                var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
-                var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
-            
-                var valorNumDistancia = parseFloat(document.getElementById('valorInputDistancia').value);
-                var valorUnidadMDistancia = document.getElementById('unidadMedidaDistancia').value;
 
-                var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
-                var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
-
-                if(valorUnidadMVelocidad == "rad/min"){
+            //FORMULA 2
+            if(velocidad == true && distancia == true && AceAn == true){
+               //Extraer el valor y unidad de medida de la velocidad inicial
+               var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
+               var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
+               //Extraer el valor y unidad de medida de la velocidad final
+               var valorNumDistancia = parseFloat(document.getElementById('valorInputDistancia').value);
+               var valorUnidadMDistancia = document.getElementById('unidadMedidaDistancia').value;
+               //Extraer el valor y unidad de medida de la aceleracion angular
+               var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+               var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+               //HACER LAS CONVERSIONES
+               if(valorUnidadMVelocidad == "rad/min"){
                     valorNumVelocidad = valorNumVelocidad / 60;
                 }
                 if(valorUnidadMVelocidad == "rev/min"){
@@ -605,85 +605,40 @@
                 if(valorUnidadMVelocidad == "rev/s"){
                     valorNumVelocidad = valorNumVelocidad*6.2832;
                 }
-
-                
-                if(valorUnidadMDistancia == "rad/min"){
-                    valorNumDistancia = valorNumVelocidad / 60;
+               
+               if(valorUnidadMDistancia == "rad/min"){
+                    valorNumDistancia = valorNumDistancia / 60;
                 }
                 if(valorUnidadMDistancia == "rev/min"){
-                    valorNumDistancia = (valorNumVelocidad*6.2832)/60;
+                    valorNumDistancia = (valorNumDistancia*6.2832)/60;
                 }
                 if(valorUnidadMDistancia == "rev/s"){
-                    valorNumDistancia = valorNumVelocidad*6.2832;
-                }
+                    valorNumDistancia = valorNumDistancia*6.2832;
+                } 
 
-                if(valorUnidadMTiempo == "min"){
-                    valorNumTiempo = valorNumTiempo * 60;
-                }
-                if(valorUnidadMTiempo == "h"){
-                    valorNumTiempo = valorNumTiempo * 3600;
-                }
-
-                //Aplicar la formula
-                resultado = ((valorNumDistancia+valorNumVelocidad)/2)*valorNumTiempo;
-
-                document.getElementById("resultado").innerHTML="El desplazamiento angular es de "+resultado+" rad/s2";
-                document.getElementById('mostrarResultado').style.display = 'block';
-            }*/
-
-            if(AceAn == true && radio == true ){
-                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
-                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
-
-                var valorNumradio = parseFloat(document.getElementById("valorInputradio").value);
-                var valorUnidadMradio = document.getElementById("unidadMedidaradio");
-
-                if(valorUnidadMAceAn == "rev/s2"){
+               if(valorUnidadMAceAn == "rev/s2"){
                     valorNumAceAn = valorNumAceAn * 6.2832;
                 }
-
-                if(valorUnidadMradio == "cm"){
-                    valorNumradio = valorNumradio/100;
-                }
-                //Aplicar formula
-                resultado = valorNumAceAn*valorNumradio;
-
-                document.getElementById("resultado").innerHTML="La aceleracion tangencial es de "+resultado+" m/s2";
-                document.getElementById('mostrarResultado').style.display = 'block';
-            }else if(AceAn == true && diam == true){
-                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
-                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
-
-                var valorNumdiam = parseFloat(document.getElementById("valorInputdiam").value);
-                var valorUnidadMdiam = document.getElementById("unidadMedidadiam");
-
-                if(valorUnidadMAceAn == "rev/s2"){
-                    valorNumAceAn = valorNumAceAn * 6.2832;
-                }
-
-                if(valorUnidadMdiam == "cm"){
-                    valorNumdiam = valorNumradio/100;
-                }
-
-                valorNumdiam = valorNumdiam/2;
-                //Aplicar formula
-                resultado = valorNumAceAn*valorNumdiam;
-
-                document.getElementById("resultado").innerHTML="La aceleracion tangencial es de "+resultado+" m/s2";
+                //APLICAR FORMULA
+                resultado = (valorNumDistancia-valorNumVelocidad)/valorNumAceAn;
+                //MOSTRAR EL RESULTADO
+                document.getElementById("resultado").innerHTML="El tiempo es de "+resultado+"s";
                 document.getElementById('mostrarResultado').style.display = 'block';
             }
 
-            if(velocidad == true && tiempo == true && AceAn == true){
-                var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
-                var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
-
-                var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
-                var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
-
-                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
-                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
-
-                if(valorUnidadMVelocidad == "rad/min"){
+            //FORMULA 3
+            if(velocidad == true && distancia == true && desAn == true){
+               //Extraer el valor y unidad de medida de la velocidad inicial
+               var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
+               var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
+               //Extraer el valor y unidad de medida de la velocidad final
+               var valorNumDistancia = parseFloat(document.getElementById('valorInputDistancia').value);
+               var valorUnidadMDistancia = document.getElementById('unidadMedidaDistancia').value;
+               //Extraer el valor y unidad de medida del desplazamiento angular
+               var valorNumdesAn = parseFloat(document.getElementById("valorInputdesAn").value);
+               var valorUnidadMdesAn = document.getElementById("unidadMedidadesAn").value;
+               //HACER LAS CONVERSIONES
+               if(valorUnidadMVelocidad == "rad/min"){
                     valorNumVelocidad = valorNumVelocidad / 60;
                 }
                 if(valorUnidadMVelocidad == "rev/min"){
@@ -692,35 +647,39 @@
                 if(valorUnidadMVelocidad == "rev/s"){
                     valorNumVelocidad = valorNumVelocidad*6.2832;
                 }
-
-                if(valorUnidadMTiempo == "min"){
-                    valorNumTiempo = valorNumTiempo * 60;
+               
+               if(valorUnidadMDistancia == "rad/min"){
+                    valorNumDistancia = valorNumDistancia / 60;
                 }
-                if(valorUnidadMTiempo == "h"){
-                    valorNumTiempo = valorNumTiempo * 3600;
+                if(valorUnidadMDistancia == "rev/min"){
+                    valorNumDistancia = (valorNumDistancia*6.2832)/60;
                 }
-
-                if(valorUnidadMAceAn == "rev/s2"){
-                    valorNumAceAn = valorNumAceAn * 6.2832;
-                }
-
-                //Aplicar formula
-                resultado = (valorNumVelocidad*valorNumTiempo)+((0.5*valorNumAceAn)*(valorNumTiempo*valorNumTiempo));
-
-                document.getElementById("resultado").innerHTML="El desplazamiento angular es de "+resultado+" rad";
+                if(valorUnidadMDistancia == "rev/s"){
+                    valorNumDistancia = valorNumDistancia*6.2832;
+                } 
+               
+                if(valorUnidadMdesAn == "rev"){
+                    valorNumdesAn = valorNumdesAn * 6.2832;
+                } 
+                //APLICAR LA FORMULA
+                resultado = (2*valorNumdesAn)/(valorNumDistancia+valorNumVelocidad);// t = 2*DES / wf+wi
+                //MOSTRAR EL RESULTADO 
+                document.getElementById("resultado").innerHTML="El tiempo es de "+resultado+"s";
                 document.getElementById('mostrarResultado').style.display = 'block';
             }
 
+            //FORMULA 4
             if(velocidad == true && AceAn == true && desAn == true){
+                //Extraer el valor y unidad de medida de la velocidad inicial
                 var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
                 var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
-
+                //Extraer el valor y unidad de medida de la aceleracion angular
                 var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
                 var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
-
+                //Extraer el valor y unidad de medida del desplazamiento angular
                 var valorNumdesAn = parseFloat(document.getElementById("valorInputdesAn").value);
                 var valorUnidadMdesAn = document.getElementById("unidadMedidadesAn").value;
-
+                //HACER LAS CONVERSIONES
                 if(valorUnidadMVelocidad == "rad/min"){
                     valorNumVelocidad = valorNumVelocidad / 60;
                 }
@@ -738,12 +697,164 @@
                 if(valorUnidadMdesAn == "rev"){
                     valorNumdesAn = valorNumdesAn * 6.2832;
                 }
-
-                //Aplicar formula
+                //APLICAR FORMULA
                 resultado = Math.sqrt(((valorNumVelocidad*valorNumVelocidad)+(2*valorNumAceAn*valorNumdesAn)));
+                //MOSTRAR EL RESULTADO
+                document.getElementById("resultado").innerHTML="La velocidad angular final es de "+resultado+" rad/s";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }
 
+            //FORMULA 5
+            if(velocidad == true && tiempo == true && AceAn == true){
+                //Extraer el valor y unidad de medida de la velocidad inicial
+                var valorNumVelocidad = parseFloat(document.getElementById('valorInputVelocidad').value);
+                var valorUnidadMVelocidad = document.getElementById('unidadMedidaVelocidad1').value;
+                //Extraer el valor y unidad de medida del tiempo
+                var valorNumTiempo = parseFloat(document.getElementById("valorInputTiempo").value);
+                var valorUnidadMTiempo = document.getElementById("unidadMedidaTiempo").value;
+                //Extraer el valor y unidad de medida del desplazamiento angular
+                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+                //HACER LAS CONVERSIONES
+                if(valorUnidadMVelocidad == "rad/min"){
+                    valorNumVelocidad = valorNumVelocidad / 60;
+                }
+                if(valorUnidadMVelocidad == "rev/min"){
+                    valorNumVelocidad = (valorNumVelocidad*6.2832)/60;
+                }
+                if(valorUnidadMVelocidad == "rev/s"){
+                    valorNumVelocidad = valorNumVelocidad*6.2832;
+                }
+
+                if(valorUnidadMTiempo == "min"){
+                    valorNumTiempo = valorNumTiempo * 60;
+                }
+                if(valorUnidadMTiempo == "h"){
+                    valorNumTiempo = valorNumTiempo * 3600;
+                }
+
+                if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceAn * 6.2832;
+                }
+                //APLICAR LA FORMULA
+                resultado = (valorNumVelocidad*valorNumTiempo)+((0.5*valorNumAceAn)*(valorNumTiempo*valorNumTiempo));
+                //MOSTRAR EL RESULTADO
                 document.getElementById("resultado").innerHTML="El desplazamiento angular es de "+resultado+" rad";
                 document.getElementById('mostrarResultado').style.display = 'block';
+            }
+
+            //FORMULA 6
+            if(AceAn == true && radio == true ){
+                //Extraer el valor y unidad de medida de la aceleracion angular
+                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+                //Extraer el valor y unidad de medida del radio
+                var valorNumradio = parseFloat(document.getElementById("valorInputradio").value);
+                var valorUnidadMradio = document.getElementById("unidadMedidaradio").value;
+                //HACER LAS CONVERSIONES
+                if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceTan * 6.2832;
+                }
+
+                if(valorUnidadMradio == "cm"){
+                    valorNumradio = valorNumradio/100;
+                }
+                console.log(valorNumradio);
+                //APLICAR LA FORMULA
+                resultado = valorNumAceAn*valorNumradio;
+                //MOSTRAR EL RESULTADO
+                document.getElementById("resultado").innerHTML="La aceleracion tangencial es de "+resultado+" m/s2";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }else if(AceAn == true && diam == true){
+                //Extraer el valor y unidad de medida de la aceleracion angular
+                var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+                var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+                //Extraer el valor y unidad de medida del diametro
+                var valorNumdiam = parseFloat(document.getElementById("valorInputdiam").value);
+                var valorUnidadMdiam = document.getElementById("unidadMedidadiam").value;
+                //HACER LAS CONVERSIONES
+                if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceAn*6.2832;
+                }
+
+                if(valorUnidadMdiam == "cm"){
+                    valorNumdiam = valorNumdiam/100;
+                }
+                valorNumdiam = valorNumdiam/2;
+                //APLICAR LA FORMULA
+                resultado = valorNumAceAn*valorNumdiam;
+                //MOSTRAR EL RESULTADO 
+                document.getElementById("resultado").innerHTML="La aceleracion tangencial es de "+resultado+" m/s2";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }
+
+            //FORMULA 7
+            if(AceTan == true && radio == true){
+               //Extraer el valor y unidad de medida de la aceleracion tangencial
+               var valorNumAceTan = parseFloat(document.getElementById("valorInputAceTan").value);
+               var valorUnidadMAceTan = document.getElementById("unidadMedidaAceTan").value;
+               //Extraer el valor y unidad de medida del radio
+               var valorNumradio = parseFloat(document.getElementById("valorInputradio").value);
+               var valorUnidadMradio = document.getElementById("unidadMedidaradio").value;
+               //HACER LAS CONVERSIONES
+               if(valorUnidadMAceTan == "cm/s2"){
+                   valorNumAceTan = valorNumAceTan/100;
+               }
+
+               if(valorUnidadMradio == "cm"){
+                    valorNumradio = valorNumradio/100;
+               }
+               console.log(valorNumAceTan);
+               console.log(valorNumradio);
+               //APLICAR LA FORMULA
+               resultado = valorNumAceTan / valorNumradio;
+               //MOSTRAR EL RESULTADO
+               document.getElementById("resultado").innerHTML="La aceleracion angular es de "+resultado+" rad/s2";
+               document.getElementById('mostrarResultado').style.display = 'block';
+            }else if(AceTan == true && diam == true){
+                //Extraer el valor y unidad de medida de la aceleracion tangencial
+                var valorNumAceTan = parseFloat(document.getElementById("valorInputAceTan").value);
+                var valorUnidadMAceTan = document.getElementById("unidadMedidaAceTan").value; 
+                //Extraer el valor y unidad de medida del diametro
+                var valorNumdiam = parseFloat(document.getElementById("valorInputdiam").value);
+                var valorUnidadMdiam = document.getElementById("unidadMedidadiam").value;
+                //HACER LAS CONVERSIONES
+                if(valorUnidadMAceTan == "cm/s2"){
+                    valorNumAceTan = valorNumAceTan/100;
+                }
+
+                if(valorUnidadMdiam == "cm"){
+                    valorNumdiam = valorNumdiam/100;
+                }
+                //APLICAR LA FORMULA
+                valorNumdiam = valorNumdiam/2;
+                resultado = valorNumAceTan/valorNumdiam;
+                //MOSTRAR EL RESULTADO
+                document.getElementById("resultado").innerHTML="La aceleracion angular es de "+resultado+" rad/s2";
+                document.getElementById('mostrarResultado').style.display = 'block';
+            }
+
+            //FORMULA 8
+            if(AceAn == true && AceTan == true){
+               //Extraer el valor y unidad de medida de la aceleracion angular
+               var valorNumAceAn = parseFloat(document.getElementById("valorInputAceAn").value);
+               var valorUnidadMAceAn = document.getElementById("unidadMedidaAceAn").value;
+               //Extraer el valor y unidad de medida de la aceleracion tangencial
+               var valorNumAceTan = parseFloat(document.getElementById("valorInputAceTan").value);
+               var valorUnidadMAceTan = document.getElementById("unidadMedidaAceTan").value; 
+               //HACER LAS CONVERSIONES
+               if(valorUnidadMAceAn == "rev/s2"){
+                    valorNumAceAn = valorNumAceAn*6.2832;
+                }
+               
+               if(valorUnidadMAceTan == "cm/s2"){
+                    valorNumAceTan = valorNumAceTan/100;
+                }
+               //APLICAR LA FORMULA
+               resultado = valorNumAceTan/valorNumAceAn;
+               //MOSTRAR EL RESULTADO
+               document.getElementById("resultado").innerHTML="El radio es de "+resultado+" m";
+               document.getElementById('mostrarResultado').style.display = 'block';
             }
         });
     </script>
